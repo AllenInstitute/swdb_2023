@@ -1,0 +1,1158 @@
+
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
+
+    <title>Getting data from a session &#8212; My sample book</title>
+    
+  <!-- Loaded before other Sphinx assets -->
+  <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+<link href="../_static/styles/pydata-sphinx-theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
+
+    
+  <link rel="stylesheet"
+    href="../_static/vendor/fontawesome/5.13.0/css/all.min.css">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-solid-900.woff2">
+  <link rel="preload" as="font" type="font/woff2" crossorigin
+    href="../_static/vendor/fontawesome/5.13.0/webfonts/fa-brands-400.woff2">
+
+    <link rel="stylesheet" type="text/css" href="../_static/pygments.css" />
+    <link rel="stylesheet" href="../_static/styles/sphinx-book-theme.css?digest=5115cc725059bd94278eecd172e13a965bf8f5a9" type="text/css" />
+    <link rel="stylesheet" type="text/css" href="../_static/togglebutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/copybutton.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/mystnb.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/sphinx-thebe.css" />
+    <link rel="stylesheet" type="text/css" href="../_static/design-style.b7bb847fb20b106c3d81b95245e65545.min.css" />
+    
+  <!-- Pre-loaded scripts that we'll load fully later -->
+  <link rel="preload" as="script" href="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf">
+
+    <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+    <script src="../_static/jquery.js"></script>
+    <script src="../_static/underscore.js"></script>
+    <script src="../_static/doctools.js"></script>
+    <script src="../_static/clipboard.min.js"></script>
+    <script src="../_static/copybutton.js"></script>
+    <script src="../_static/scripts/sphinx-book-theme.js?digest=9c920249402e914e316237a7dbc6769907cce411"></script>
+    <script>let toggleHintShow = 'Click to show';</script>
+    <script>let toggleHintHide = 'Click to hide';</script>
+    <script>let toggleOpenOnPrint = 'true';</script>
+    <script src="../_static/togglebutton.js"></script>
+    <script>var togglebuttonSelector = '.toggle, .admonition.dropdown, .tag_hide_input div.cell_input, .tag_hide-input div.cell_input, .tag_hide_output div.cell_output, .tag_hide-output div.cell_output, .tag_hide_cell.cell, .tag_hide-cell.cell';</script>
+    <script src="../_static/design-tabs.js"></script>
+    <script>const THEBE_JS_URL = "https://unpkg.com/thebe@0.8.2/lib/index.js"
+const thebe_selector = ".thebe,.cell"
+const thebe_selector_input = "pre"
+const thebe_selector_output = ".output, .cell_output"
+</script>
+    <script async="async" src="../_static/sphinx-thebe.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Dataset" href="vc2p-dataset.html" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="docsearch:language" content="None">
+    
+
+    <!-- Google Analytics -->
+    
+  </head>
+  <body data-spy="scroll" data-target="#bd-toc-nav" data-offset="60">
+<!-- Checkboxes to toggle the left sidebar -->
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation" aria-label="Toggle navigation sidebar">
+<label class="overlay overlay-navbar" for="__navigation">
+    <div class="visually-hidden">Toggle navigation sidebar</div>
+</label>
+<!-- Checkboxes to toggle the in-page toc -->
+<input type="checkbox" class="sidebar-toggle" name="__page-toc" id="__page-toc" aria-label="Toggle in-page Table of Contents">
+<label class="overlay overlay-pagetoc" for="__page-toc">
+    <div class="visually-hidden">Toggle in-page Table of Contents</div>
+</label>
+<!-- Headers at the top -->
+<div class="announcement header-item noprint"></div>
+<div class="header header-item noprint"></div>
+
+    
+    <div class="container-fluid" id="banner"></div>
+
+    
+
+    <div class="container-xl">
+      <div class="row">
+          
+<!-- Sidebar -->
+<div class="bd-sidebar noprint" id="site-navigation">
+    <div class="bd-sidebar__content">
+        <div class="bd-sidebar__top"><div class="navbar-brand-box">
+    <a class="navbar-brand text-wrap" href="../index.html">
+      
+        <!-- `logo` is deprecated in Sphinx 4.0, so remove this when we stop supporting 3 -->
+        
+      
+      
+      <img src="../_static/logo.png" class="logo" alt="logo">
+      
+      
+      <h1 class="site-logo" id="site-title">My sample book</h1>
+      
+    </a>
+</div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
+  <i class="icon fas fa-search"></i>
+  <input type="search" class="form-control" name="q" id="search-input" placeholder="Search this book..." aria-label="Search this book..." autocomplete="off" >
+</form><nav class="bd-links" id="bd-docs-nav" aria-label="Main">
+    <div class="bd-toc-item active">
+        
+        <ul class="nav bd-sidenav bd-sidenav__home-link">
+            <li class="toctree-l1">
+                <a class="reference internal" href="../intro.html">
+                    Welcome to your Jupyter Book
+                </a>
+            </li>
+        </ul>
+        <ul class="current nav bd-sidenav">
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown.html">
+   Markdown Files
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../notebooks.html">
+   Content with notebooks
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../markdown-notebooks.html">
+   Notebooks with MyST Markdown
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../anatomy.html">
+   Anatomy
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../transgenic-tools.html">
+   Transgenic tools
+  </a>
+ </li>
+ <li class="toctree-l1 current active has-children">
+  <a class="reference internal" href="vc2p-background.html">
+   Visual Coding 2-photon
+  </a>
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul class="current">
+   <li class="toctree-l2">
+    <a class="reference internal" href="vc2p-dataset.html">
+     Dataset
+    </a>
+   </li>
+   <li class="toctree-l2 current active">
+    <a class="current reference internal" href="#">
+     Getting data from a session
+    </a>
+   </li>
+  </ul>
+ </li>
+</ul>
+
+    </div>
+</nav></div>
+        <div class="bd-sidebar__bottom">
+             <!-- To handle the deprecated key -->
+            
+            <div class="navbar_extra_footer">
+            Powered by <a href="https://jupyterbook.org">Jupyter Book</a>
+            </div>
+            
+        </div>
+    </div>
+    <div id="rtd-footer-container"></div>
+</div>
+
+
+          
+
+
+          
+<!-- A tiny helper pixel to detect if we've scrolled -->
+<div class="sbt-scroll-pixel-helper"></div>
+<!-- Main content -->
+<div class="col py-0 content-container">
+    
+    <div class="header-article row sticky-top noprint">
+        
+
+
+
+<div class="col py-1 d-flex header-article-main">
+    <div class="header-article__left">
+        
+        <label for="__navigation"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="right"
+title="Toggle navigation"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-bars"></i>
+  </span>
+
+</label>
+
+        
+    </div>
+    <div class="header-article__right">
+<div class="menu-dropdown menu-dropdown-launch-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Launch interactive content">
+      <i class="fas fa-rocket"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://mybinder.org/v2/gh/executablebooks/jupyter-book/master?urlpath=tree/docs/visual-coding-2p/vc2p-session-data.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Launch on Binder"
+>
+  
+
+<span class="headerbtn__icon-container">
+  
+    <img src="../_static/images/logo_binder.svg">
+  </span>
+<span class="headerbtn__text-container">Binder</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<button onclick="toggleFullScreen()"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="bottom"
+title="Fullscreen mode"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-expand"></i>
+  </span>
+
+</button>
+
+<div class="menu-dropdown menu-dropdown-repository-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Source repositories">
+      <i class="fab fa-github"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Source repository"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fab fa-github"></i>
+  </span>
+<span class="headerbtn__text-container">repository</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="https://github.com/executablebooks/jupyter-book/issues/new?title=Issue%20on%20page%20%2Fvisual-coding-2p/vc2p-session-data.html&body=Your%20issue%20content%20here."
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Open an issue"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-lightbulb"></i>
+  </span>
+<span class="headerbtn__text-container">open issue</span>
+</a>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+
+<div class="menu-dropdown menu-dropdown-download-buttons">
+  <button class="headerbtn menu-dropdown__trigger"
+      aria-label="Download this page">
+      <i class="fas fa-download"></i>
+  </button>
+  <div class="menu-dropdown__content">
+    <ul>
+      <li>
+        <a href="../_sources/visual-coding-2p/vc2p-session-data.ipynb"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download notebook file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-code"></i>
+  </span>
+<span class="headerbtn__text-container">.ipynb</span>
+</a>
+
+      </li>
+      
+      <li>
+        <a href="../_sources/visual-coding-2p/vc2p-session-data.md"
+   class="headerbtn"
+   data-toggle="tooltip"
+data-placement="left"
+title="Download source file"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file"></i>
+  </span>
+<span class="headerbtn__text-container">.md</span>
+</a>
+
+      </li>
+      
+      <li>
+        
+<button onclick="printPdf(this)"
+  class="headerbtn"
+  data-toggle="tooltip"
+data-placement="left"
+title="Print to PDF"
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-file-pdf"></i>
+  </span>
+<span class="headerbtn__text-container">.pdf</span>
+</button>
+
+      </li>
+      
+    </ul>
+  </div>
+</div>
+<label for="__page-toc"
+  class="headerbtn headerbtn-page-toc"
+  
+>
+  
+
+<span class="headerbtn__icon-container">
+  <i class="fas fa-list"></i>
+  </span>
+
+</label>
+
+    </div>
+</div>
+
+<!-- Table of contents -->
+<div class="col-md-3 bd-toc show noprint">
+    <div class="tocsection onthispage pt-5 pb-3">
+        <i class="fas fa-list"></i> Contents
+    </div>
+    <nav id="bd-toc-nav" aria-label="Page">
+        <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-projection">
+   Maximum projection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#roi-masks">
+   ROI Masks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fluorescence-and-df-f-traces">
+   Fluorescence and DF/F traces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extracted-events">
+   Extracted events
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stimulus-epochs">
+   Stimulus epochs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-speed">
+   Running speed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cell-ids-and-indices">
+   Cell ids and indices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stimulus-table">
+   Stimulus Table
+  </a>
+ </li>
+</ul>
+
+    </nav>
+</div>
+    </div>
+    <div class="article row">
+        <div class="col pl-md-3 pl-lg-5 content-container">
+            <!-- Table of contents that is only displayed when printing the page -->
+            <div id="jb-print-docs-body" class="onlyprint">
+                <h1>Getting data from a session</h1>
+                <!-- Table of contents -->
+                <div id="print-main-content">
+                    <div id="jb-print-toc">
+                        
+                        <div>
+                            <h2> Contents </h2>
+                        </div>
+                        <nav aria-label="Page">
+                            <ul class="visible nav section-nav flex-column">
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#maximum-projection">
+   Maximum projection
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#roi-masks">
+   ROI Masks
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#fluorescence-and-df-f-traces">
+   Fluorescence and DF/F traces
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#extracted-events">
+   Extracted events
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stimulus-epochs">
+   Stimulus epochs
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#running-speed">
+   Running speed
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cell-ids-and-indices">
+   Cell ids and indices
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#stimulus-table">
+   Stimulus Table
+  </a>
+ </li>
+</ul>
+
+                        </nav>
+                    </div>
+                </div>
+            </div>
+            <main id="main-content" role="main">
+                
+              <div>
+                
+  <div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">allensdk.core.brain_observatory_cache</span> <span class="kn">import</span> <span class="n">BrainObservatoryCache</span>
+<span class="c1">#manifest_file = r&#39;/Users/saskiad/Code/brain_observatory/manifest_v1point3.json&#39;</span>
+<span class="c1">#boc = BrainObservatoryCache(manifest_file=manifest_file)</span>
+<span class="n">boc</span> <span class="o">=</span> <span class="n">BrainObservatoryCache</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section class="tex2jax_ignore mathjax_ignore" id="getting-data-from-a-session">
+<h1>Getting data from a session<a class="headerlink" href="#getting-data-from-a-session" title="Permalink to this headline">#</a></h1>
+<p>We’re going to examine the data available for a single session. First, let’s identify the session from the experiment container we explored in vc2p-dataset in which that “natural scenes” stimulus was presented.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_container_id</span> <span class="o">=</span> <span class="mi">511510736</span>
+<span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;natural_scenes&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>We can use this session_id to get all the data contained in the NWB for this session using <b>get_ophys_experiment_data</b></p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_set</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<section id="maximum-projection">
+<h2>Maximum projection<a class="headerlink" href="#maximum-projection" title="Permalink to this headline">#</a></h2>
+<p>This is the projection of the full motion corrected movie. It shows all of the cells imaged during the session.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">max_projection</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_max_projection</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">max_projection</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.5, 511.5, 511.5, -0.5)
+</pre></div>
+</div>
+<img alt="../_images/vc2p-session-data_8_1.png" src="../_images/vc2p-session-data_8_1.png" />
+</div>
+</div>
+</section>
+<section id="roi-masks">
+<h2>ROI Masks<a class="headerlink" href="#roi-masks" title="Permalink to this headline">#</a></h2>
+<p>These are all of the segmented masks for cell bodies identified in this session.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rois</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_roi_mask_array</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>What is the shape of this array? How many neurons are in this experiment?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rois</span><span class="o">.</span><span class="n">shape</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(174, 512, 512)
+</pre></div>
+</div>
+</div>
+</div>
+<p>The first dimension of this array is the number of neurons, and each element of this axis is the mask of an individual neuron</p>
+<p>Plot the masks for all the ROIs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">6</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rois</span><span class="o">.</span><span class="n">sum</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">0</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-session-data_14_0.png" src="../_images/vc2p-session-data_14_0.png" />
+</div>
+</div>
+</section>
+<section id="fluorescence-and-df-f-traces">
+<h2>Fluorescence and DF/F traces<a class="headerlink" href="#fluorescence-and-df-f-traces" title="Permalink to this headline">#</a></h2>
+<p>The NWB file contains a number of traces reflecting the processing that is done to the extracted fluorescence before we analyze it. The fluorescence traces are the mean fluorescence of all the pixels contained within a ROI mask.</p>
+<p>There are a number of activity traces accessible in the NWB file, including raw fluorescence, neuropil corrected traces, demixed traces, and DF/F traces.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timestamps</span><span class="p">,</span><span class="n">fluor</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_fluorescence_traces</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>To correct from contamination from the neuropil, we perform neuropil correction. First, we extract a local neuropil signal, by creating a neuropil mask that is an annulus around the ROI mask (without containing any pixels from nearby neurons). You can see these neuropil signals in the neuropil traces:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timestamps</span><span class="p">,</span> <span class="n">np</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_neuropil_traces</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>This neuropil trace is subtracted from the fluorescence trace, after being weighted by a factor that is computed for each neuron. The resulting corrected fluorescence trace is accessed here:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">timestamps</span><span class="p">,</span><span class="n">cor</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_corrected_fluorescence_traces</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at these traces for one cell:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span> <span class="n">fluor</span><span class="p">[</span><span class="mi">122</span><span class="p">,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span> <span class="n">np</span><span class="p">[</span><span class="mi">122</span><span class="p">,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">timestamps</span><span class="p">,</span> <span class="n">cor</span><span class="p">[</span><span class="mi">122</span><span class="p">,:])</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span><span class="mi">2200</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(1900.0, 2200.0)
+</pre></div>
+</div>
+<img alt="../_images/vc2p-session-data_22_1.png" src="../_images/vc2p-session-data_22_1.png" />
+</div>
+</div>
+<p>(demixing?)</p>
+<p>The signal we are most interested in the the DF/F - the change in fluorescence normalized by the baseline fluorescence.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts</span><span class="p">,</span> <span class="n">dff</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_dff_traces</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">dff</span><span class="p">[</span><span class="mi">122</span><span class="p">,:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span><span class="mi">2200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;DFF&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;DFF&#39;)
+</pre></div>
+</div>
+<img alt="../_images/vc2p-session-data_25_1.png" src="../_images/vc2p-session-data_25_1.png" />
+</div>
+</div>
+</section>
+<section id="extracted-events">
+<h2>Extracted events<a class="headerlink" href="#extracted-events" title="Permalink to this headline">#</a></h2>
+<p>As of the October 2018 data release, we are providing access to events extracted from the DF/F traces using the L0 method developed by Sean Jewell and Daniella Witten.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The extracted events are not stored in the NWB file, thus aren’t a function of the data_set object, but are available through the boc</p>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">events</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_events</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-06-15 21:52:23,845 allensdk.api.api.retrieve_file_over_http INFO     Downloading URL: http://api.brain-map.org/api/v2/well_known_file_download/739721211
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">8</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="n">dff</span><span class="p">[</span><span class="mi">122</span><span class="p">,:],</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts</span><span class="p">,</span> <span class="mi">2</span><span class="o">*</span><span class="n">events</span><span class="p">[</span><span class="mi">122</span><span class="p">,:]</span><span class="o">+</span><span class="mi">5</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;black&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlim</span><span class="p">(</span><span class="mi">1900</span><span class="p">,</span><span class="mi">2200</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;DFF&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;DFF&#39;)
+</pre></div>
+</div>
+<img alt="../_images/vc2p-session-data_28_1.png" src="../_images/vc2p-session-data_28_1.png" />
+</div>
+</div>
+</section>
+<section id="stimulus-epochs">
+<h2>Stimulus epochs<a class="headerlink" href="#stimulus-epochs" title="Permalink to this headline">#</a></h2>
+<p>Several stimuli are shown during each imaging session, interleaved with each other. The stimulus epoch table provides information of these interleaved stimulus epochs, revealing when each epoch begins and ends. The start and end here are provided in terms of the imaging frame of the two-photon imaging. This allows us to index directly into the dff or event traces.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stim_epoch</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_epoch_table</span><span class="p">()</span>
+<span class="n">stim_epoch</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>stimulus</th>
+      <th>start</th>
+      <th>end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>static_gratings</td>
+      <td>747</td>
+      <td>15196</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>natural_scenes</td>
+      <td>16100</td>
+      <td>30551</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>spontaneous</td>
+      <td>30701</td>
+      <td>39581</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>natural_scenes</td>
+      <td>39582</td>
+      <td>54050</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>static_gratings</td>
+      <td>54953</td>
+      <td>69403</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>natural_movie_one</td>
+      <td>70307</td>
+      <td>79338</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>natural_scenes</td>
+      <td>80241</td>
+      <td>96126</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>static_gratings</td>
+      <td>97406</td>
+      <td>113662</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Let’s plot the DFF traces of a number of cells and overlay stimulus epochs.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+
+<span class="c1">#here we plot the first 50 neurons in the session</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dff</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+    
+<span class="c1">#here we shade the plot when each stimulus is presented</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span><span class="n">stim_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">stim_epoch</span><span class="o">.</span><span class="n">stimulus</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">stim</span> <span class="o">=</span> <span class="n">stim_epoch</span><span class="p">[</span><span class="n">stim_epoch</span><span class="o">.</span><span class="n">stimulus</span><span class="o">==</span><span class="n">stim_name</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stim</span><span class="p">)):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="n">stim</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">xmax</span><span class="o">=</span><span class="n">stim</span><span class="o">.</span><span class="n">end</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-session-data_32_0.png" src="../_images/vc2p-session-data_32_0.png" />
+</div>
+</div>
+</section>
+<section id="running-speed">
+<h2>Running speed<a class="headerlink" href="#running-speed" title="Permalink to this headline">#</a></h2>
+<p>The running speed of the animal on the rotating disk during the entire session. This has been temporally aligned to the two photon imaging, so you will find that it has the same length as dff.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dxcm</span><span class="p">,</span> <span class="n">timestamps</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_running_speed</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;length of dff: &quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dff</span><span class="p">)))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;length of running speed: &quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">dxcm</span><span class="p">)))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>length of dff:  174
+length of running speed:  113888
+</pre></div>
+</div>
+</div>
+</div>
+<p>Plot the running speed.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dxcm</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;Running speed (cm/s)&quot;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">18</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;Running speed (cm/s)&#39;)
+</pre></div>
+</div>
+<img alt="../_images/vc2p-session-data_36_1.png" src="../_images/vc2p-session-data_36_1.png" />
+</div>
+</div>
+<p>Add the running speed to the neural activity and stimulus epoch figure</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">14</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+    <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dff</span><span class="p">[</span><span class="n">i</span><span class="p">,:]</span><span class="o">+</span><span class="p">(</span><span class="n">i</span><span class="o">*</span><span class="mi">2</span><span class="p">),</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">((</span><span class="mf">0.2</span><span class="o">*</span><span class="n">dxcm</span><span class="p">)</span><span class="o">-</span><span class="mi">20</span><span class="p">)</span>
+    
+<span class="c1">#for each stimulus, shade the plot when the stimulus is presented</span>
+<span class="n">colors</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;blue&#39;</span><span class="p">,</span><span class="s1">&#39;orange&#39;</span><span class="p">,</span><span class="s1">&#39;green&#39;</span><span class="p">,</span><span class="s1">&#39;red&#39;</span><span class="p">]</span>
+<span class="k">for</span> <span class="n">c</span><span class="p">,</span><span class="n">stim_name</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">stim_epoch</span><span class="o">.</span><span class="n">stimulus</span><span class="o">.</span><span class="n">unique</span><span class="p">()):</span>
+    <span class="n">stim</span> <span class="o">=</span> <span class="n">stim_epoch</span><span class="p">[</span><span class="n">stim_epoch</span><span class="o">.</span><span class="n">stimulus</span><span class="o">==</span><span class="n">stim_name</span><span class="p">]</span>
+    <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">stim</span><span class="p">)):</span>
+        <span class="n">plt</span><span class="o">.</span><span class="n">axvspan</span><span class="p">(</span><span class="n">xmin</span><span class="o">=</span><span class="n">stim</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">xmax</span><span class="o">=</span><span class="n">stim</span><span class="o">.</span><span class="n">end</span><span class="o">.</span><span class="n">iloc</span><span class="p">[</span><span class="n">j</span><span class="p">],</span> <span class="n">color</span><span class="o">=</span><span class="n">colors</span><span class="p">[</span><span class="n">c</span><span class="p">],</span> <span class="n">alpha</span><span class="o">=</span><span class="mf">0.1</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-session-data_38_0.png" src="../_images/vc2p-session-data_38_0.png" />
+</div>
+</div>
+</section>
+<section id="cell-ids-and-indices">
+<h2>Cell ids and indices<a class="headerlink" href="#cell-ids-and-indices" title="Permalink to this headline">#</a></h2>
+<p>Each neuron in the dataset has a unique id, called the <b>cell specimen id</b>. To find the neurons in this session, get the cell specimen ids. This id can also be used to identify experiment containers or sessions where a given neuron is present</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cell_ids</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_cell_specimen_ids</span><span class="p">()</span>
+<span class="n">cell_ids</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>array([517473350, 517473341, 517473313, 517473255, 517471959, 517471769,
+       517473059, 517471997, 517472716, 517471919, 517472989, 517472293,
+       517473115, 517472454, 517473020, 517472734, 517474366, 587377483,
+       517471708, 587377366, 587377223, 517474444, 517474437, 517473105,
+       517472300, 517472326, 517472708, 517472215, 517472712, 517472360,
+       517472399, 517472197, 517472582, 517472190, 517473926, 587377518,
+       517471931, 517472637, 517472416, 517471658, 517472724, 517472684,
+       517471664, 587377211, 517473947, 587377064, 517472063, 587377621,
+       517473080, 517472553, 517473001, 517474078, 517471794, 517471674,
+       517473916, 517471803, 517472592, 517473014, 517474459, 517472241,
+       517472720, 517472534, 517472054, 587377662, 517474012, 517474020,
+       517473653, 517472007, 517472645, 517472211, 517472677, 517472731,
+       517472621, 517472442, 587377204, 517473027, 517472818, 517473304,
+       517474121, 517473034, 517472909, 517473624, 517472141, 517472129,
+       517472903, 517472157, 517474423, 517474430, 517472981, 517472352,
+       517471723, 517472116, 517473957, 517472489, 517472123, 517472438,
+       517473967, 517474002, 517473991, 517472626, 517473870, 517473374,
+       587377633, 517473360, 587377495, 587377673, 517473364, 587377651,
+       587377639, 517472470, 517473110, 517473570, 517472897, 517472207,
+       517472873, 517471753, 517472563, 517472015, 517472922, 517473980,
+       517472135, 517472096, 517472913, 517472524, 517471515, 517472916,
+       517473680, 517472162, 517472388, 517474415, 587377657, 587377167,
+       517472425, 517472925, 517471912, 587376617, 517472772, 517473098,
+       517474342, 517473040, 517473369, 517472807, 587376610, 517473089,
+       517472906, 517472462, 587377108, 517472369, 517472900, 517471744,
+       517471906, 517472544, 517472503, 517473053, 517472002, 517471785,
+       517472919, 517472334, 587377507, 517473897, 517471778, 517472020,
+       517472514, 517473067, 587377006, 517471841, 517472180, 517472477,
+       587377582, 517473240, 587376723, 517472450, 517473191, 517471925])
+</pre></div>
+</div>
+</div>
+</div>
+<p>Within each individual session, a cell id is associated with an index. This index maps into the dff or event traces.  Pick one cell id from the list above and find the index for that neuron.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_set</span><span class="o">.</span><span class="n">get_cell_specimen_indices</span><span class="p">([</span><span class="mi">517473110</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[110]
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>As neurons are often matched across sessions, that neuron will have the same cell specimen id in all said sessions, but it will have a different cell specimen index in each session.</p>
+</div>
+<p>(reference exercise, plot the movie response for a cell across three different sessions)</p>
+</section>
+<section id="stimulus-table">
+<h2>Stimulus Table<a class="headerlink" href="#stimulus-table" title="Permalink to this headline">#</a></h2>
+<p>(make this a new page and look at other sessions?)
+For each stimulus there is a stimulus table with information about the condition and timing of each trial.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_scene_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;natural_scenes&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_scene_table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frame</th>
+      <th>start</th>
+      <th>end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>81</td>
+      <td>16100</td>
+      <td>16107</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>33</td>
+      <td>16108</td>
+      <td>16115</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>76</td>
+      <td>16115</td>
+      <td>16122</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13</td>
+      <td>16123</td>
+      <td>16130</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>56</td>
+      <td>16130</td>
+      <td>16137</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Get the stimulus table for static gratings. Print the top of this dataframe. What are the parameters for this stimulus?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">static_gratings_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;static_gratings&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">static_gratings_table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>orientation</th>
+      <th>spatial_frequency</th>
+      <th>phase</th>
+      <th>start</th>
+      <th>end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>90.0</td>
+      <td>0.04</td>
+      <td>0.50</td>
+      <td>747</td>
+      <td>754</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>150.0</td>
+      <td>0.04</td>
+      <td>0.50</td>
+      <td>754</td>
+      <td>761</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>30.0</td>
+      <td>0.02</td>
+      <td>0.00</td>
+      <td>762</td>
+      <td>769</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.32</td>
+      <td>0.50</td>
+      <td>769</td>
+      <td>776</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>150.0</td>
+      <td>0.16</td>
+      <td>0.75</td>
+      <td>777</td>
+      <td>784</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+</section>
+</section>
+
+    <script type="text/x-thebe-config">
+    {
+        requestKernel: true,
+        binderOptions: {
+            repo: "binder-examples/jupyter-stacks-datascience",
+            ref: "master",
+        },
+        codeMirrorConfig: {
+            theme: "abcdef",
+            mode: "python"
+        },
+        kernelOptions: {
+            name: "python3",
+            path: "./visual-coding-2p"
+        },
+        predefinedOutput: true
+    }
+    </script>
+    <script>kernelName = 'python3'</script>
+
+              </div>
+              
+            </main>
+            <footer class="footer-article noprint">
+                
+    <!-- Previous / next buttons -->
+<div class='prev-next-area'>
+    <a class='left-prev' id="prev-link" href="vc2p-dataset.html" title="previous page">
+        <i class="fas fa-angle-left"></i>
+        <div class="prev-next-info">
+            <p class="prev-next-subtitle">previous</p>
+            <p class="prev-next-title">Dataset</p>
+        </div>
+    </a>
+</div>
+            </footer>
+        </div>
+    </div>
+    <div class="footer-content row">
+        <footer class="col footer"><p>
+  
+    By The Jupyter Book Community<br/>
+  
+      &copy; Copyright 2022.<br/>
+</p>
+        </footer>
+    </div>
+    
+</div>
+
+
+      </div>
+    </div>
+  
+  <!-- Scripts loaded after <body> so the DOM is not blocked -->
+  <script src="../_static/scripts/pydata-sphinx-theme.js?digest=1999514e3f237ded88cf"></script>
+
+
+  </body>
+</html>

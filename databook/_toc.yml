@@ -1,0 +1,17 @@
+# Table of contents
+# Learn more at https://jupyterbook.org/customize/toc.html
+
+format: jb-book
+root: intro
+chapters:
+- file: background/background
+  sections:
+  - file: background/anatomy
+  - file: background/transgenic-tools
+- file: visual-coding-2p/vc2p-background
+  sections:
+  - file: visual-coding-2p/vc2p-dataset
+  - file: visual-coding-2p/vc2p-session-data
+  - file: visual-coding-2p/vc2p-stimuli
+
+
