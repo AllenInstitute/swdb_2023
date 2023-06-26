@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Visual stimuli &#8212; My sample book</title>
+    <title>Visual stimuli &#8212; SWDB 2023 DataBook</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Cross session data" href="vc2p-cross-session-data.html" />
     <link rel="prev" title="Getting data from a session" href="vc2p-session-data.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -96,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">My sample book</h1>
+      <h1 class="site-logo" id="site-title">SWDB 2023 DataBook</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -108,42 +109,39 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Welcome to your Jupyter Book
+                    Summer Workshop on the Dynamic Brain Databook
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown.html">
-   Markdown Files
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../background/background.html">
+   Background
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks.html">
-   Content with notebooks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown-notebooks.html">
-   Notebooks with MyST Markdown
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../anatomy.html">
-   Anatomy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../transgenic-tools.html">
-   Transgenic tools
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/anatomy.html">
+     Anatomy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/transgenic-tools.html">
+     Transgenic tools
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="vc2p-background.html">
    Visual Coding 2-photon
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -163,7 +161,22 @@ const thebe_selector_output = ".output, .cell_output"
      Visual stimuli
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vc2p-cross-session-data.html">
+     Cross session data
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../glossary.html">
+   Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   References
+  </a>
  </li>
 </ul>
 
@@ -402,6 +415,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#natural-scenes">
    Natural scenes
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stimulus-template">
+     Stimulus template
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#natural-movies">
@@ -451,6 +471,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#natural-scenes">
    Natural scenes
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#stimulus-template">
+     Stimulus template
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#natural-movies">
@@ -520,7 +547,8 @@ title="Print to PDF"
 <p>Here we will look at each stimulus, and what information we have about its presentation.</p>
 <section id="drifting-gratings">
 <h2>Drifting gratings<a class="headerlink" href="#drifting-gratings" title="Permalink to this headline">#</a></h2>
-<p>The drifting gratings stimulus consists of a sinusoidal grating that is presented on the monitor that moves orthogonal to the orientation of the grating, moving in one of 8 directions (called <b>orientation</b>) and at one of 5 <b>temporal frequencies</b>. The grating has a spatial frequency of 0.04 cycles per degree and a contrast of 80%.</p>
+<p>The drifting gratings stimulus consists of a sinusoidal grating that is presented on the monitor that moves orthogonal to the orientation of the grating, moving in one of 8 directions (called <b>orientation</b>) and at one of 5 <b>temporal frequencies</b>. The directions are specified in units of degrees and temporal frequency in Hz. The grating has a spatial frequency of 0.04 cycles per degree and a contrast of 80%.
+Each trial is presented for 2 seconds with 1 second of mean luminance gray in between trials.</p>
 <p>Let’s find the session in the experiment container we’re exploring that contains the drifting gratings stimulus.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -530,105 +558,587 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-06-15 22:12:37,114 allensdk.api.api.retrieve_file_over_http INFO     Downloading URL: http://api.brain-map.org/api/v2/well_known_file_download/516244841
-</pre></div>
-</div>
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">KeyboardInterrupt</span><span class="g g-Whitespace">                         </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">qh</span><span class="o">/</span><span class="mi">5</span><span class="n">lyvn7d93mzft9kchq7xsqkw0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_48100</span><span class="o">/</span><span class="mf">3656878618.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">experiment_container_id</span> <span class="o">=</span> <span class="mi">511510736</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;drifting_gratings&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">data_set</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/allensdk/core/brain_observatory_cache.py</span> in <span class="ni">get_ophys_experiment_data</span><span class="nt">(self, ophys_experiment_id, file_name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">548</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">549</span> 
-<span class="ne">--&gt; </span><span class="mi">550</span>         <span class="bp">self</span><span class="o">.</span><span class="n">api</span><span class="o">.</span><span class="n">save_ophys_experiment_data</span><span class="p">(</span>
-<span class="g g-Whitespace">    </span><span class="mi">551</span>             <span class="n">ophys_experiment_id</span><span class="p">,</span> <span class="n">file_name</span><span class="p">,</span> <span class="n">strategy</span><span class="o">=</span><span class="s2">&quot;lazy&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">552</span>         <span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/allensdk/api/warehouse_cache/cache.py</span> in <span class="ni">w</span><span class="nt">(*args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">659</span>                 <span class="n">kwargs</span><span class="p">[</span><span class="s1">&#39;post&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="n">decor</span><span class="o">.</span><span class="n">post</span>
-<span class="g g-Whitespace">    </span><span class="mi">660</span> 
-<span class="ne">--&gt; </span><span class="mi">661</span>             <span class="n">result</span> <span class="o">=</span> <span class="n">Cache</span><span class="o">.</span><span class="n">cacher</span><span class="p">(</span><span class="n">func</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">662</span>                                   <span class="o">*</span><span class="n">args</span><span class="p">,</span>
-<span class="g g-Whitespace">    </span><span class="mi">663</span>                                   <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/allensdk/api/warehouse_cache/cache.py</span> in <span class="ni">cacher</span><span class="nt">(fn, *args, **kwargs)</span>
-<span class="g g-Whitespace">    </span><span class="mi">385</span>                 <span class="n">writer</span><span class="p">(</span><span class="n">path</span><span class="p">,</span> <span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">386</span>             <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">387</span>                 <span class="n">data</span> <span class="o">=</span> <span class="n">fn</span><span class="p">(</span><span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">388</span> 
-<span class="g g-Whitespace">    </span><span class="mi">389</span>         <span class="k">if</span> <span class="n">reader</span><span class="p">:</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/allensdk/api/queries/brain_observatory_api.py</span> in <span class="ni">save_ophys_experiment_data</span><span class="nt">(self, ophys_experiment_id, file_name)</span>
-<span class="g g-Whitespace">    </span><span class="mi">436</span>         <span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">437</span> 
-<span class="ne">--&gt; </span><span class="mi">438</span>         <span class="bp">self</span><span class="o">.</span><span class="n">retrieve_file_over_http</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">api_url</span> <span class="o">+</span> <span class="n">file_url</span><span class="p">,</span> <span class="n">file_name</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">439</span> 
-<span class="g g-Whitespace">    </span><span class="mi">440</span>     <span class="nd">@cacheable</span><span class="p">(</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/allensdk/api/api.py</span> in <span class="ni">retrieve_file_over_http</span><span class="nt">(self, url, file_path, zipped)</span>
-<span class="g g-Whitespace">    </span><span class="mi">321</span>                 <span class="n">stream_zip_directory_over_http</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">os</span><span class="o">.</span><span class="n">path</span><span class="o">.</span><span class="n">dirname</span><span class="p">(</span><span class="n">file_path</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">322</span>             <span class="k">else</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">323</span>                 <span class="n">stream_file_over_http</span><span class="p">(</span><span class="n">url</span><span class="p">,</span> <span class="n">file_path</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">324</span> 
-<span class="g g-Whitespace">    </span><span class="mi">325</span>         <span class="k">except</span> <span class="n">exceptions</span><span class="o">.</span><span class="n">StreamingError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/allensdk/api/api.py</span> in <span class="ni">stream_file_over_http</span><span class="nt">(url, file_path, timeout)</span>
-<span class="g g-Whitespace">    </span><span class="mi">441</span>         <span class="n">response</span><span class="o">.</span><span class="n">raise_for_status</span><span class="p">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">442</span>         <span class="k">with</span> <span class="nb">open</span><span class="p">(</span><span class="n">file_path</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span> <span class="k">as</span> <span class="n">fil</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">443</span>             <span class="n">stream</span><span class="o">.</span><span class="n">stream_response_to_file</span><span class="p">(</span><span class="n">response</span><span class="p">,</span> <span class="n">path</span><span class="o">=</span><span class="n">fil</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/requests_toolbelt/downloadutils/stream.py</span> in <span class="ni">stream_response_to_file</span><span class="nt">(response, path, chunksize)</span>
-<span class="g g-Whitespace">    </span><span class="mi">168</span>         <span class="n">fd</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="n">filename</span><span class="p">,</span> <span class="s1">&#39;wb&#39;</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">169</span> 
-<span class="ne">--&gt; </span><span class="mi">170</span>     <span class="k">for</span> <span class="n">chunk</span> <span class="ow">in</span> <span class="n">response</span><span class="o">.</span><span class="n">iter_content</span><span class="p">(</span><span class="n">chunk_size</span><span class="o">=</span><span class="n">chunksize</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">171</span>         <span class="n">fd</span><span class="o">.</span><span class="n">write</span><span class="p">(</span><span class="n">chunk</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">172</span> 
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/requests/models.py</span> in <span class="ni">generate</span><span class="nt">()</span>
-<span class="g g-Whitespace">    </span><span class="mi">814</span>             <span class="k">if</span> <span class="nb">hasattr</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="p">,</span> <span class="s2">&quot;stream&quot;</span><span class="p">):</span>
-<span class="g g-Whitespace">    </span><span class="mi">815</span>                 <span class="k">try</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">816</span>                     <span class="k">yield from</span> <span class="bp">self</span><span class="o">.</span><span class="n">raw</span><span class="o">.</span><span class="n">stream</span><span class="p">(</span><span class="n">chunk_size</span><span class="p">,</span> <span class="n">decode_content</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">817</span>                 <span class="k">except</span> <span class="n">ProtocolError</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">818</span>                     <span class="k">raise</span> <span class="n">ChunkedEncodingError</span><span class="p">(</span><span class="n">e</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/urllib3/response.py</span> in <span class="ni">stream</span><span class="nt">(self, amt, decode_content)</span>
-<span class="g g-Whitespace">    </span><span class="mi">625</span>         <span class="k">else</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">626</span>             <span class="k">while</span> <span class="ow">not</span> <span class="n">is_fp_closed</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_fp</span><span class="p">):</span>
-<span class="ne">--&gt; </span><span class="mi">627</span>                 <span class="n">data</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">read</span><span class="p">(</span><span class="n">amt</span><span class="o">=</span><span class="n">amt</span><span class="p">,</span> <span class="n">decode_content</span><span class="o">=</span><span class="n">decode_content</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">628</span> 
-<span class="g g-Whitespace">    </span><span class="mi">629</span>                 <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/urllib3/response.py</span> in <span class="ni">read</span><span class="nt">(self, amt, decode_content, cache_content)</span>
-<span class="g g-Whitespace">    </span><span class="mi">593</span> 
-<span class="g g-Whitespace">    </span><span class="mi">594</span>         <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
-<span class="ne">--&gt; </span><span class="mi">595</span>             <span class="bp">self</span><span class="o">.</span><span class="n">_fp_bytes_read</span> <span class="o">+=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-<span class="g g-Whitespace">    </span><span class="mi">596</span>             <span class="k">if</span> <span class="bp">self</span><span class="o">.</span><span class="n">length_remaining</span> <span class="ow">is</span> <span class="ow">not</span> <span class="kc">None</span><span class="p">:</span>
-<span class="g g-Whitespace">    </span><span class="mi">597</span>                 <span class="bp">self</span><span class="o">.</span><span class="n">length_remaining</span> <span class="o">-=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
-
-<span class="ne">KeyboardInterrupt</span>: 
-</pre></div>
-</div>
-</div>
 </div>
 <p>Let’s look at the stimulus table for the drifting gratings stimulus</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">drifting_gratings_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;drifting_gratings&#39;</span><span class="p">)</span>
-<span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+<span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
 </pre></div>
 </div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>temporal_frequency</th>
+      <th>orientation</th>
+      <th>blank_sweep</th>
+      <th>start</th>
+      <th>end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>8.0</td>
+      <td>270.0</td>
+      <td>0.0</td>
+      <td>747</td>
+      <td>807</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>2.0</td>
+      <td>135.0</td>
+      <td>0.0</td>
+      <td>837</td>
+      <td>897</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2.0</td>
+      <td>315.0</td>
+      <td>0.0</td>
+      <td>927</td>
+      <td>987</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>15.0</td>
+      <td>315.0</td>
+      <td>0.0</td>
+      <td>1018</td>
+      <td>1077</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>1.0</td>
+      <td>270.0</td>
+      <td>0.0</td>
+      <td>1108</td>
+      <td>1168</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>15.0</td>
+      <td>315.0</td>
+      <td>0.0</td>
+      <td>1198</td>
+      <td>1258</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>1.0</td>
+      <td>315.0</td>
+      <td>0.0</td>
+      <td>1289</td>
+      <td>1348</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>15.0</td>
+      <td>180.0</td>
+      <td>0.0</td>
+      <td>1379</td>
+      <td>1439</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>2.0</td>
+      <td>135.0</td>
+      <td>0.0</td>
+      <td>1469</td>
+      <td>1529</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>NaN</td>
+      <td>NaN</td>
+      <td>1.0</td>
+      <td>1560</td>
+      <td>1619</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>The <b>start</b> and <b>end</b> columns provide the 2p imaging frame during which the trials starts and ends, respectively. This indexes directly into the activity traces (e.g. dff or event traces, see <a class="reference internal" href="vc2p-session-data.html"><span class="doc std std-doc">link to section</span></a>). The <b>orientation</b> and <b>temporal_frequency</b> columns provide the stimulus conditions of the trial. The trials where these are both Nan are <b>blank sweeps</b> during which no grating is presented and the monitor remains at mean luminance gray.</p>
+<p>What are the orientation and temporal frequency values used in this stimulus?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">orivals</span> <span class="o">=</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">orientation</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;orientations: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">orivals</span><span class="p">))</span>
+<span class="n">tfvals</span> <span class="o">=</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">temporal_frequency</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;temporal frequencies: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">tfvals</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>orientations:  [  0.  45.  90. 135. 180. 225. 270. 315.]
+temporal frequencies:  [ 1.  2.  4.  8. 15.]
+</pre></div>
+</div>
+</div>
+</div>
+<p>How many blank sweep trials are there?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">drifting_gratings_table</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">orientation</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>30
+</pre></div>
+</div>
+</div>
+</div>
+<p>How many trials are there for any one stimulus condition?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ori</span><span class="o">=</span><span class="mi">45</span>
+<span class="n">tf</span><span class="o">=</span><span class="mi">2</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">drifting_gratings_table</span><span class="p">[(</span><span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">orientation</span><span class="o">==</span><span class="n">ori</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">temporal_frequency</span><span class="o">==</span><span class="mi">2</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>15
+</pre></div>
+</div>
+</div>
+</div>
+<p>What is the duration of a trial? Let’s plot the first 50 trials</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">durations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">50</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+  <span class="n">durations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">end</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">durations</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-stimuli_15_0.png" src="../_images/vc2p-stimuli_15_0.png" />
+</div>
+</div>
+<p>Most trials have a duration of 60 imaging frames. As the two photon microscope we use has a frame rate of 30Hz this is 2 seconds. But you can see that there is some jitter between trials as to the precise duration.</p>
+<p>What is the inter trial interval?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intervals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">50</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+  <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">end</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-stimuli_17_0.png" src="../_images/vc2p-stimuli_17_0.png" />
 </div>
 </div>
 </section>
 <section id="static-gratings">
 <h2>Static gratings<a class="headerlink" href="#static-gratings" title="Permalink to this headline">#</a></h2>
+<p>The static gratings stimulus consists of a <b>stationary</b> sinusoidal grating that is flasshed on the monitor at one of 6 <b>orientations</b>, one of 5 <b>spatial frequencies</b>, and one of 4 <b>phases</b>. The grating has a contrast of 80%.
+Each trial is presented for 0.25 seconds and followed immediately by the next trial without any intertrial interval. There are blanksweeps, where the grating is replaced by the mean luminance gray, interleaved in among the trials.</p>
+<p>Let’s find the session in the experiment container we’re exploring that contains the static gratings stimulus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_container_id</span> <span class="o">=</span> <span class="mi">511510736</span>
+<span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;static_gratings&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+<span class="n">data_set</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>501559087
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the stimulus table for the static gratings stimulus</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">static_gratings_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;static_gratings&#39;</span><span class="p">)</span>
+<span class="n">static_gratings_table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>orientation</th>
+      <th>spatial_frequency</th>
+      <th>phase</th>
+      <th>start</th>
+      <th>end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>90.0</td>
+      <td>0.04</td>
+      <td>0.50</td>
+      <td>747</td>
+      <td>754</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>150.0</td>
+      <td>0.04</td>
+      <td>0.50</td>
+      <td>754</td>
+      <td>761</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>30.0</td>
+      <td>0.02</td>
+      <td>0.00</td>
+      <td>762</td>
+      <td>769</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>0.0</td>
+      <td>0.32</td>
+      <td>0.50</td>
+      <td>769</td>
+      <td>776</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>150.0</td>
+      <td>0.16</td>
+      <td>0.75</td>
+      <td>777</td>
+      <td>784</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>150.0</td>
+      <td>0.08</td>
+      <td>0.25</td>
+      <td>784</td>
+      <td>791</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>90.0</td>
+      <td>0.32</td>
+      <td>0.50</td>
+      <td>792</td>
+      <td>799</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>60.0</td>
+      <td>0.04</td>
+      <td>0.25</td>
+      <td>799</td>
+      <td>806</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>30.0</td>
+      <td>0.08</td>
+      <td>0.75</td>
+      <td>807</td>
+      <td>814</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>90.0</td>
+      <td>0.32</td>
+      <td>0.50</td>
+      <td>814</td>
+      <td>821</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>What are the orientation, spatial frequency, and phase values used in this stimulus?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">&quot;orientations: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">static_gratings_table</span><span class="o">.</span><span class="n">orientation</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;spatial frequencies: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">static_gratings_table</span><span class="o">.</span><span class="n">spatial_frequency</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;phases: &quot;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">sort</span><span class="p">(</span><span class="n">static_gratings_table</span><span class="o">.</span><span class="n">phase</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">unique</span><span class="p">()))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>orientations:  [  0.  30.  60.  90. 120. 150.]
+spatial frequencies:  [0.02 0.04 0.08 0.16 0.32]
+phases:  [0.   0.25 0.5  0.75]
+</pre></div>
+</div>
+</div>
+</div>
+<p>How many blank sweep trials are there?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">static_gratings_table</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">isnan</span><span class="p">(</span><span class="n">static_gratings_table</span><span class="o">.</span><span class="n">orientation</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>192
+</pre></div>
+</div>
+</div>
+</div>
+<p>How many trials are there of any one stimulus codition?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ori</span><span class="o">=</span><span class="mi">30</span>
+<span class="n">sf</span><span class="o">=</span><span class="mf">0.04</span>
+<span class="n">phase</span><span class="o">=</span><span class="mf">0.0</span>
+<span class="nb">len</span><span class="p">(</span><span class="n">static_gratings_table</span><span class="p">[(</span><span class="n">static_gratings_table</span><span class="o">.</span><span class="n">orientation</span><span class="o">==</span><span class="n">ori</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">static_gratings_table</span><span class="o">.</span><span class="n">spatial_frequency</span><span class="o">==</span><span class="n">sf</span><span class="p">)</span><span class="o">&amp;</span><span class="p">(</span><span class="n">static_gratings_table</span><span class="o">.</span><span class="n">phase</span><span class="o">==</span><span class="n">phase</span><span class="p">)])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>49
+</pre></div>
+</div>
+</div>
+</div>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>There are roughly 50 trials fo each stimulus condition, but not precisely. Some conditions have fewer than 50 trials but none have more than 50 trials.</p>
+</div>
+<p>What is the duration of a trial? Let’s plot the first 50 trials</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">durations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">50</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+  <span class="n">durations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">end</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">durations</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-stimuli_29_0.png" src="../_images/vc2p-stimuli_29_0.png" />
+</div>
+</div>
+<p>What is the inter trial interval?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intervals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">50</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+  <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">end</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-stimuli_31_0.png" src="../_images/vc2p-stimuli_31_0.png" />
+</div>
+</div>
 </section>
 <section id="natural-scenes">
 <h2>Natural scenes<a class="headerlink" href="#natural-scenes" title="Permalink to this headline">#</a></h2>
+<p>The natural scenes stimulus consists of a 118 black and whiteimages that are flashed on the monitor. Each trial is presented for 0.25 seconds and followed immediately by the next trial without any intertrial interval. There are blanksweeps, where the images are replaced by the mean luminance gray, interleaved in among the trials.
+The images are taken from three different image sets including CITATIONS HERE</p>
+<p>Let’s find the session in the experiment container we’re exploring that contains the natural scenes stimulus.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_container_id</span> <span class="o">=</span> <span class="mi">511510736</span>
+<span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;natural_scenes&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+<span class="n">data_set</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>501559087
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the stimulus table for the natural scenes stimulus</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_scenes_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;natural_scenes&#39;</span><span class="p">)</span>
+<span class="n">natural_scenes_table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frame</th>
+      <th>start</th>
+      <th>end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>81</td>
+      <td>16100</td>
+      <td>16107</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>33</td>
+      <td>16108</td>
+      <td>16115</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>76</td>
+      <td>16115</td>
+      <td>16122</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>13</td>
+      <td>16123</td>
+      <td>16130</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>56</td>
+      <td>16130</td>
+      <td>16137</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>30</td>
+      <td>16138</td>
+      <td>16145</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>44</td>
+      <td>16145</td>
+      <td>16152</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>93</td>
+      <td>16153</td>
+      <td>16160</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>65</td>
+      <td>16160</td>
+      <td>16167</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>60</td>
+      <td>16168</td>
+      <td>16175</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>Unlike the gratings stimuli, there are no stimulus parameters here. Instead there is a <b>frame</b> value that identifies which image was presented for each trial. This frame number indexes into the <b>stimulus template</b>.</p>
+<div class="admonition note">
+<p class="admonition-title">Note</p>
+<p>The blanksweeps in the natural scene stimulus table are identified by having a frame value of <b>-1</b></p>
+</div>
+<p>How many blank sweep trials are there?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">natural_scenes_table</span><span class="p">[</span><span class="n">natural_scenes_table</span><span class="o">.</span><span class="n">frame</span><span class="o">==-</span><span class="mi">1</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50
+</pre></div>
+</div>
+</div>
+</div>
+<p>How many trials are there of any one image?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">len</span><span class="p">(</span><span class="n">natural_scenes_table</span><span class="p">[</span><span class="n">natural_scenes_table</span><span class="o">.</span><span class="n">frame</span><span class="o">==</span><span class="mi">22</span><span class="p">])</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>50
+</pre></div>
+</div>
+</div>
+</div>
+<section id="stimulus-template">
+<h3>Stimulus template<a class="headerlink" href="#stimulus-template" title="Permalink to this headline">#</a></h3>
+<p>The stimulus template is an array that contains the images that were presented to the mouse. This can be accessed using <b>get_stimulus_template</b>.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_scene_template</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_template</span><span class="p">(</span><span class="s1">&#39;natural_scenes&#39;</span><span class="p">)</span>
+<span class="n">scene_number</span><span class="o">=</span><span class="mi">22</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">natural_scene_template</span><span class="p">[</span><span class="n">scene_number</span><span class="p">,:,:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f8f98bc0a00&gt;
+</pre></div>
+</div>
+<img alt="../_images/vc2p-stimuli_41_1.png" src="../_images/vc2p-stimuli_41_1.png" />
+</div>
+</div>
+</section>
 </section>
 <section id="natural-movies">
 <h2>Natural movies<a class="headerlink" href="#natural-movies" title="Permalink to this headline">#</a></h2>
@@ -675,6 +1185,13 @@ title="Print to PDF"
             <p class="prev-next-title">Getting data from a session</p>
         </div>
     </a>
+    <a class='right-next' id="next-link" href="vc2p-cross-session-data.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Cross session data</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>
@@ -682,7 +1199,7 @@ title="Print to PDF"
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By The Jupyter Book Community<br/>
+    By Saskia de Vries, Marina Garrett, Corbett Bennet, Galen Lynch, Anna Lakunina, Casey Schneider-Mizell<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

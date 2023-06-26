@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Dataset &#8212; My sample book</title>
+    <title>Dataset &#8212; SWDB 2023 DataBook</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -97,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">My sample book</h1>
+      <h1 class="site-logo" id="site-title">SWDB 2023 DataBook</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -161,7 +161,17 @@ const thebe_selector_output = ".output, .cell_output"
      Visual stimuli
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vc2p-cross-session-data.html">
+     Cross session data
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../glossary.html">
+   Glossary
+  </a>
  </li>
 </ul>
 
@@ -410,6 +420,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#experiment-containers-sessions">
    Experiment containers &amp; sessions
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-how-many-experiment-containers-were-collected-in-visp-for-each-cre-line">
+     Exercise: How many experiment containers were collected in VISp for each Cre line?
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#session-types">
@@ -459,6 +476,13 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#experiment-containers-sessions">
    Experiment containers &amp; sessions
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#exercise-how-many-experiment-containers-were-collected-in-visp-for-each-cre-line">
+     Exercise: How many experiment containers were collected in VISp for each Cre line?
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#session-types">
@@ -510,7 +534,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>We see that data was collected in six different visual areas. VISp is the primary visual cortex, also known as V1. The others are higher visual areas that surround VISp. See <span class="xref myst">visual cortical areas</span> to learn more about these areas and how we map them.</p>
+<p>We see that data was collected in six different visual areas. VISp is the primary visual cortex, also known as V1. The others are higher visual areas that surround VISp. See <a class="reference internal" href="../background/anatomy.html"><span class="doc std std-doc">visual cortical areas</span></a> to learn more about these areas and how we map them.</p>
 </section>
 <section id="cre-lines-and-reporters">
 <h2>Cre lines and reporters<a class="headerlink" href="#cre-lines-and-reporters" title="Permalink to this headline">#</a></h2>
@@ -560,7 +584,7 @@ title="Print to PDF"
 <p class="admonition-title">Note</p>
 <p>Reporter lines: All the experiments in this dataset use GCaMP6. The large majority use GCaMP6f and only a few use GCaMP6s. However, you see four different reporters listed here. Why is this? Ai93 is the GCaMP6f reporter we used with the excitatory Cre lines. However, this reporter does not work well for inhibitory Cre lines. We used Ai148, another GCaMP6f reporter, with Vip-IRES-Cre and Sst-IRES-Cre. However, this didn’t work with the Pvalb-IRES-Cre. We use Ai162, a GCaMP6s reporter with Pvalb. Additionally, to have a GCaMP6f vs GCaMP6s comparison, we collected a small number of experiments using Ai94 with the Slc17a7-IRES2-Cre. This is a GCaMP6s reporter that complements Ai93. Slc17a7-IRES2-Cre is the only Cre line that was recorded using multiple reporter types.</p>
 </div>
-<p>See <span class="xref myst">Transgenic tools</span> to learn more about these Cre lines and reporters.</p>
+<p>See <a class="reference internal" href="../background/transgenic-tools.html"><span class="doc std std-doc">Transgenic tools</span></a> to learn more about these Cre lines and reporters.</p>
 </section>
 <section id="imaging-depths">
 <h2>Imaging depths<a class="headerlink" href="#imaging-depths" title="Permalink to this headline">#</a></h2>
@@ -643,8 +667,18 @@ title="Print to PDF"
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><b>get_experiment_containers</b> returns all experiment containers that meet the conditions we have specified. If we don’t pass any parameters, it returns all experiment containers.</p>
+<p><b>get_experiment_containers</b> returns all experiment containers that meet the conditions we have specified. The parameters that we could pass this function include targeted_structures, imaging_depths, cre_lines, and reporter_lines. If we don’t pass any parameters, it returns all experiment containers.</p>
 </div>
+<p>ids=None,
+experiment_container_ids=None,
+targeted_structures=None,
+imaging_depths=None,
+cre_lines=None,
+reporter_lines=None,
+transgenic_lines=None,
+stimuli=None,
+session_types=None,
+cell_specimen_ids=None,</p>
 <p>We can make a dataframe of the list of experiment containers to see what information we get about them:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -880,6 +914,172 @@ title="Print to PDF"
 </div></div></div>
 </div>
 <p>You see there are 16 experiments for this Cre line in VISp. They all have different <b>experiment container ids</b> (called “id” here) and they mostly have different <b>donor names</b> which identify the mouse that was imaged. This Cre line was imaged at two different imaging depths, sampling both layer 2/3 and layer 4. But they all have the same Cre line, targeted structure and reporter line.</p>
+<section id="exercise-how-many-experiment-containers-were-collected-in-visp-for-each-cre-line">
+<h3>Exercise: How many experiment containers were collected in VISp for each Cre line?<a class="headerlink" href="#exercise-how-many-experiment-containers-were-collected-in-visp-for-each-cre-line" title="Permalink to this headline">#</a></h3>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cre_lines</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_all_cre_lines</span><span class="p">()</span>
+<span class="n">areas</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_all_targeted_structures</span><span class="p">()</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">columns</span><span class="o">=</span><span class="n">areas</span><span class="p">,</span> <span class="n">index</span><span class="o">=</span><span class="n">cre_lines</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">cre</span> <span class="ow">in</span> <span class="n">cre_lines</span><span class="p">:</span>
+  <span class="k">for</span> <span class="n">area</span> <span class="ow">in</span> <span class="n">areas</span><span class="p">:</span>
+    <span class="n">exps</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_experiment_containers</span><span class="p">(</span><span class="n">targeted_structures</span><span class="o">=</span><span class="p">[</span><span class="n">area</span><span class="p">],</span> <span class="n">cre_lines</span><span class="o">=</span><span class="p">[</span><span class="n">cre</span><span class="p">])</span>
+    <span class="n">df</span><span class="p">[</span><span class="n">area</span><span class="p">]</span><span class="o">.</span><span class="n">loc</span><span class="p">[</span><span class="n">cre</span><span class="p">]</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">exps</span><span class="p">)</span>
+<span class="n">df</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>VISal</th>
+      <th>VISam</th>
+      <th>VISl</th>
+      <th>VISp</th>
+      <th>VISpm</th>
+      <th>VISrl</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>Cux2-CreERT2</th>
+      <td>13</td>
+      <td>11</td>
+      <td>11</td>
+      <td>16</td>
+      <td>13</td>
+      <td>12</td>
+    </tr>
+    <tr>
+      <th>Emx1-IRES-Cre</th>
+      <td>7</td>
+      <td>3</td>
+      <td>8</td>
+      <td>10</td>
+      <td>4</td>
+      <td>9</td>
+    </tr>
+    <tr>
+      <th>Fezf2-CreER</th>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>4</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Nr5a1-Cre</th>
+      <td>6</td>
+      <td>6</td>
+      <td>6</td>
+      <td>8</td>
+      <td>7</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>Ntsr1-Cre_GN220</th>
+      <td>0</td>
+      <td>0</td>
+      <td>7</td>
+      <td>6</td>
+      <td>5</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Pvalb-IRES-Cre</th>
+      <td>0</td>
+      <td>0</td>
+      <td>5</td>
+      <td>16</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Rbp4-Cre_KL100</th>
+      <td>6</td>
+      <td>8</td>
+      <td>7</td>
+      <td>7</td>
+      <td>6</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>Rorb-IRES2-Cre</th>
+      <td>6</td>
+      <td>8</td>
+      <td>6</td>
+      <td>8</td>
+      <td>7</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>Scnn1a-Tg3-Cre</th>
+      <td>0</td>
+      <td>0</td>
+      <td>0</td>
+      <td>9</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Slc17a7-IRES2-Cre</th>
+      <td>2</td>
+      <td>2</td>
+      <td>19</td>
+      <td>60</td>
+      <td>15</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Sst-IRES-Cre</th>
+      <td>1</td>
+      <td>0</td>
+      <td>17</td>
+      <td>30</td>
+      <td>14</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>Tlx3-Cre_PL56</th>
+      <td>0</td>
+      <td>0</td>
+      <td>3</td>
+      <td>6</td>
+      <td>0</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>Vip-IRES-Cre</th>
+      <td>0</td>
+      <td>0</td>
+      <td>24</td>
+      <td>36</td>
+      <td>16</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<p>You see that not all Cre lines were imaged in all areas.</p>
+</section>
 </section>
 <section id="session-types">
 <h2>Session types<a class="headerlink" href="#session-types" title="Permalink to this headline">#</a></h2>
@@ -915,7 +1115,12 @@ title="Print to PDF"
 <p>get one container, list the sessions
 diagram of three session options from website</p>
 <p>We will explore which stimuli are part of which session in <a class="reference internal" href="vc2p-stimuli.html"><span class="doc std std-doc">Visual stimuli</span></a>.</p>
-<p>During data processing, we matched identified ROIs (REFERENCE) across each of the sessions. Approximately one third of the neurons in the dataset were matched across all three sessions, one third were matched in two of the three session, and one third were only found in one session. Neurons have unique ids, called specimen_ids, that are shared across the sessions they are found in.</p>
+<p>During data processing, we matched identified <a class="reference internal" href="../glossary.html#term-ROI"><span class="xref std std-term">ROI</span></a>s (REFERENCE) across each of the sessions within experiment containers. Approximately one third of the neurons in the dataset were matched across all three sessions, one third were matched in two of the three session, and one third were only found in one session. Neurons have unique ids, called <b>cell_specimen_ids</b>, that are shared across the sessions they are found in.</p>
+<div class="tip admonition">
+<p class="admonition-title">Why do we not match ROIs across all three session for all neurons? </p>
+<p>There are a few factors that could explain why we don’t always match ROIs across all sessions that include biological, experimental, and analytical reasons. Biologically, a neuron must be active within a session to be identifiable during segmentation. For various reasons, a neuron might not be active during some sessions while it is active during others. Experimentally, there are challenges to returning to the precise same field of view. Being at a slightly different depth, or having just a bit of tilt in the imaging plane, might result in some neurons that were in view during one session not being in view during another. Analytically, the method for identifying <a class="reference internal" href="../glossary.html#term-ROI"><span class="xref std std-term">ROI</span></a>s as well as for matching ROIs from multiple sessions can make mistakes.</p>
+</div>
+<p>We explore how to look at neurons across session in <a class="reference internal" href="vc2p-cross-session-data.html"><span class="doc std std-doc">Cross session data</span></a>.</p>
 </section>
 </section>
 
@@ -967,7 +1172,7 @@ diagram of three session options from website</p>
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By The Jupyter Book Community<br/>
+    By Saskia de Vries, Marina Garrett, Corbett Bennet, Galen Lynch, Anna Lakunina, Casey Schneider-Mizell<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

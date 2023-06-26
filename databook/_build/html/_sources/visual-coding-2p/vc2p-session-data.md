@@ -17,8 +17,6 @@ import matplotlib.pyplot as plt
 ```
 ```{code-cell} ipython3
 from allensdk.core.brain_observatory_cache import BrainObservatoryCache
-#manifest_file = r'/Users/saskiad/Code/brain_observatory/manifest_v1point3.json'
-#boc = BrainObservatoryCache(manifest_file=manifest_file)
 boc = BrainObservatoryCache()
 ```
 
@@ -51,7 +49,7 @@ plt.axis('off')
 ```
 
 ## ROI Masks
-These are all of the segmented masks for cell bodies identified in this session.
+{term}`ROI`s are all of the segmented masks for cell bodies identified in this session.
 
 ```{code-cell} ipython3
 rois = data_set.get_roi_mask_array()
@@ -142,7 +140,7 @@ plt.ylabel("DFF")
 
 ## Stimulus epochs
 
-Several stimuli are shown during each imaging session, interleaved with each other. The stimulus epoch table provides information of these interleaved stimulus epochs, revealing when each epoch begins and ends. The start and end here are provided in terms of the imaging frame of the two-photon imaging. This allows us to index directly into the dff or event traces.
+Several stimuli are shown during each imaging session, interleaved with each other. The stimulus epoch table provides information of these interleaved stimulus epochs, revealing when each epoch starts and ends. The start and end here are provided in terms of the imaging frame of the two-photon imaging. This allows us to index directly into the dff or event traces.
 
 ```{code-cell} ipython3
 stim_epoch = data_set.get_stimulus_epoch_table()
@@ -168,7 +166,7 @@ for c,stim_name in enumerate(stim_epoch.stimulus.unique()):
 
 ## Running speed
 
-The running speed of the animal on the rotating disk during the entire session. This has been temporally aligned to the two photon imaging, so you will find that it has the same length as dff.
+The running speed of the animal on the rotating disk during the entire session. This has been temporally aligned to the two photon imaging, which means that this trace has the same length as dff (etc). This also means that the same stimulus start and end information indexes directly into this running speed trace.
 
 ```{code-cell} ipython3
 dxcm, timestamps = data_set.get_running_speed()
@@ -198,6 +196,8 @@ for c,stim_name in enumerate(stim_epoch.stimulus.unique()):
     for j in range(len(stim)):
         plt.axvspan(xmin=stim.start.iloc[j], xmax=stim.end.iloc[j], color=colors[c], alpha=0.1)
 ```
+## Stimulus Table and Template
+Each stimulus that is shown has a <b>stimulus table</b> that details what each trial is and when it is presented. Additionally, the <b>natural scenes</b>, <b>natural movies</b>, and <b>locally sparse noise</b> stimuli have a <b>stimulus template</b> that shows the exact image that is presented to the mouse. We detail how to access and use these items in [Visual stimuli](vc2p-stimuli.md).
 
 ## Cell ids and indices
 
@@ -215,30 +215,7 @@ data_set.get_cell_specimen_indices([517473110])
 ```
 
 ```{note}
-As neurons are often matched across sessions, that neuron will have the same cell specimen id in all said sessions, but it will have a different cell specimen index in each session.
+As neurons are often matched across sessions, that neuron will have the same cell specimen id in all said sessions, but it will have a different cell specimen index in each session. This is explored in [Cross session data](vc2p-cross-session-data.md).
 ```
 
-(reference exercise, plot the movie response for a cell across three different sessions)
 
-
-## Stimulus Table
-(make this a new page and look at other sessions?)
-For each stimulus there is a stimulus table with information about the condition and timing of each trial. 
-
-```{code-cell} ipython3
-natural_scene_table = data_set.get_stimulus_table('natural_scenes')
-```
-
-```{code-cell} ipython3
-natural_scene_table.head()
-```
-
-Get the stimulus table for static gratings. Print the top of this dataframe. What are the parameters for this stimulus?
-
-```{code-cell} ipython3
-static_gratings_table = data_set.get_stimulus_table('static_gratings')
-```
-
-```{code-cell} ipython3
-static_gratings_table.head()
-```

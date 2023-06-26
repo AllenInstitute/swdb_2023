@@ -6,7 +6,7 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" /><meta name="generator" content="Docutils 0.17.1: http://docutils.sourceforge.net/" />
 
-    <title>Getting data from a session &#8212; My sample book</title>
+    <title>Getting data from a session &#8212; SWDB 2023 DataBook</title>
     
   <!-- Loaded before other Sphinx assets -->
   <link href="../_static/styles/theme.css?digest=1999514e3f237ded88cf" rel="stylesheet">
@@ -52,6 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Visual stimuli" href="vc2p-stimuli.html" />
     <link rel="prev" title="Dataset" href="vc2p-dataset.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -96,7 +97,7 @@ const thebe_selector_output = ".output, .cell_output"
       <img src="../_static/logo.png" class="logo" alt="logo">
       
       
-      <h1 class="site-logo" id="site-title">My sample book</h1>
+      <h1 class="site-logo" id="site-title">SWDB 2023 DataBook</h1>
       
     </a>
 </div><form class="bd-search d-flex align-items-center" action="../search.html" method="get">
@@ -108,42 +109,39 @@ const thebe_selector_output = ".output, .cell_output"
         <ul class="nav bd-sidenav bd-sidenav__home-link">
             <li class="toctree-l1">
                 <a class="reference internal" href="../intro.html">
-                    Welcome to your Jupyter Book
+                    Summer Workshop on the Dynamic Brain Databook
                 </a>
             </li>
         </ul>
         <ul class="current nav bd-sidenav">
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown.html">
-   Markdown Files
+ <li class="toctree-l1 has-children">
+  <a class="reference internal" href="../background/background.html">
+   Background
   </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../notebooks.html">
-   Content with notebooks
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../markdown-notebooks.html">
-   Notebooks with MyST Markdown
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../anatomy.html">
-   Anatomy
-  </a>
- </li>
- <li class="toctree-l1">
-  <a class="reference internal" href="../transgenic-tools.html">
-   Transgenic tools
-  </a>
+  <input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
+  <label for="toctree-checkbox-1">
+   <i class="fas fa-chevron-down">
+   </i>
+  </label>
+  <ul>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/anatomy.html">
+     Anatomy
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/transgenic-tools.html">
+     Transgenic tools
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toctree-l1 current active has-children">
   <a class="reference internal" href="vc2p-background.html">
    Visual Coding 2-photon
   </a>
-  <input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" type="checkbox"/>
-  <label for="toctree-checkbox-1">
+  <input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" type="checkbox"/>
+  <label for="toctree-checkbox-2">
    <i class="fas fa-chevron-down">
    </i>
   </label>
@@ -158,7 +156,22 @@ const thebe_selector_output = ".output, .cell_output"
      Getting data from a session
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vc2p-stimuli.html">
+     Visual stimuli
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="vc2p-cross-session-data.html">
+     Cross session data
+    </a>
+   </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../glossary.html">
+   Glossary
+  </a>
  </li>
 </ul>
 
@@ -414,13 +427,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cell-ids-and-indices">
-   Cell ids and indices
+  <a class="reference internal nav-link" href="#stimulus-table-and-template">
+   Stimulus Table and Template
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#stimulus-table">
-   Stimulus Table
+  <a class="reference internal nav-link" href="#cell-ids-and-indices">
+   Cell ids and indices
   </a>
  </li>
 </ul>
@@ -473,13 +486,13 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#cell-ids-and-indices">
-   Cell ids and indices
+  <a class="reference internal nav-link" href="#stimulus-table-and-template">
+   Stimulus Table and Template
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
-  <a class="reference internal nav-link" href="#stimulus-table">
-   Stimulus Table
+  <a class="reference internal nav-link" href="#cell-ids-and-indices">
+   Cell ids and indices
   </a>
  </li>
 </ul>
@@ -503,8 +516,6 @@ title="Print to PDF"
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">allensdk.core.brain_observatory_cache</span> <span class="kn">import</span> <span class="n">BrainObservatoryCache</span>
-<span class="c1">#manifest_file = r&#39;/Users/saskiad/Code/brain_observatory/manifest_v1point3.json&#39;</span>
-<span class="c1">#boc = BrainObservatoryCache(manifest_file=manifest_file)</span>
 <span class="n">boc</span> <span class="o">=</span> <span class="n">BrainObservatoryCache</span><span class="p">()</span>
 </pre></div>
 </div>
@@ -557,7 +568,7 @@ title="Print to PDF"
 </section>
 <section id="roi-masks">
 <h2>ROI Masks<a class="headerlink" href="#roi-masks" title="Permalink to this headline">#</a></h2>
-<p>These are all of the segmented masks for cell bodies identified in this session.</p>
+<p><a class="reference internal" href="../glossary.html#term-ROI"><span class="xref std std-term">ROI</span></a>s are all of the segmented masks for cell bodies identified in this session.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">rois</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_roi_mask_array</span><span class="p">()</span>
@@ -679,11 +690,6 @@ title="Print to PDF"
 </pre></div>
 </div>
 </div>
-<div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>2023-06-15 21:52:23,845 allensdk.api.api.retrieve_file_over_http INFO     Downloading URL: http://api.brain-map.org/api/v2/well_known_file_download/739721211
-</pre></div>
-</div>
-</div>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -706,7 +712,7 @@ title="Print to PDF"
 </section>
 <section id="stimulus-epochs">
 <h2>Stimulus epochs<a class="headerlink" href="#stimulus-epochs" title="Permalink to this headline">#</a></h2>
-<p>Several stimuli are shown during each imaging session, interleaved with each other. The stimulus epoch table provides information of these interleaved stimulus epochs, revealing when each epoch begins and ends. The start and end here are provided in terms of the imaging frame of the two-photon imaging. This allows us to index directly into the dff or event traces.</p>
+<p>Several stimuli are shown during each imaging session, interleaved with each other. The stimulus epoch table provides information of these interleaved stimulus epochs, revealing when each epoch starts and ends. The start and end here are provided in terms of the imaging frame of the two-photon imaging. This allows us to index directly into the dff or event traces.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">stim_epoch</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_epoch_table</span><span class="p">()</span>
@@ -816,7 +822,7 @@ title="Print to PDF"
 </section>
 <section id="running-speed">
 <h2>Running speed<a class="headerlink" href="#running-speed" title="Permalink to this headline">#</a></h2>
-<p>The running speed of the animal on the rotating disk during the entire session. This has been temporally aligned to the two photon imaging, so you will find that it has the same length as dff.</p>
+<p>The running speed of the animal on the rotating disk during the entire session. This has been temporally aligned to the two photon imaging, which means that this trace has the same length as dff (etc). This also means that the same stimulus start and end information indexes directly into this running speed trace.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">dxcm</span><span class="p">,</span> <span class="n">timestamps</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_running_speed</span><span class="p">()</span>
@@ -868,6 +874,10 @@ length of running speed:  113888
 <img alt="../_images/vc2p-session-data_38_0.png" src="../_images/vc2p-session-data_38_0.png" />
 </div>
 </div>
+</section>
+<section id="stimulus-table-and-template">
+<h2>Stimulus Table and Template<a class="headerlink" href="#stimulus-table-and-template" title="Permalink to this headline">#</a></h2>
+<p>Each stimulus that is shown has a <b>stimulus table</b> that details what each trial is and when it is presented. Additionally, the <b>natural scenes</b>, <b>natural movies</b>, and <b>locally sparse noise</b> stimuli have a <b>stimulus template</b> that shows the exact image that is presented to the mouse. We detail how to access and use these items in <a class="reference internal" href="vc2p-stimuli.html"><span class="doc std std-doc">Visual stimuli</span></a>.</p>
 </section>
 <section id="cell-ids-and-indices">
 <h2>Cell ids and indices<a class="headerlink" href="#cell-ids-and-indices" title="Permalink to this headline">#</a></h2>
@@ -928,170 +938,7 @@ length of running speed:  113888
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>As neurons are often matched across sessions, that neuron will have the same cell specimen id in all said sessions, but it will have a different cell specimen index in each session.</p>
-</div>
-<p>(reference exercise, plot the movie response for a cell across three different sessions)</p>
-</section>
-<section id="stimulus-table">
-<h2>Stimulus Table<a class="headerlink" href="#stimulus-table" title="Permalink to this headline">#</a></h2>
-<p>(make this a new page and look at other sessions?)
-For each stimulus there is a stimulus table with information about the condition and timing of each trial.</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_scene_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;natural_scenes&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_scene_table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>frame</th>
-      <th>start</th>
-      <th>end</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>81</td>
-      <td>16100</td>
-      <td>16107</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>33</td>
-      <td>16108</td>
-      <td>16115</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>76</td>
-      <td>16115</td>
-      <td>16122</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>13</td>
-      <td>16123</td>
-      <td>16130</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>56</td>
-      <td>16130</td>
-      <td>16137</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
-</div>
-<p>Get the stimulus table for static gratings. Print the top of this dataframe. What are the parameters for this stimulus?</p>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">static_gratings_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;static_gratings&#39;</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-</div>
-<div class="cell docutils container">
-<div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">static_gratings_table</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output text_html"><div>
-<style scoped>
-    .dataframe tbody tr th:only-of-type {
-        vertical-align: middle;
-    }
-
-    .dataframe tbody tr th {
-        vertical-align: top;
-    }
-
-    .dataframe thead th {
-        text-align: right;
-    }
-</style>
-<table border="1" class="dataframe">
-  <thead>
-    <tr style="text-align: right;">
-      <th></th>
-      <th>orientation</th>
-      <th>spatial_frequency</th>
-      <th>phase</th>
-      <th>start</th>
-      <th>end</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <th>0</th>
-      <td>90.0</td>
-      <td>0.04</td>
-      <td>0.50</td>
-      <td>747</td>
-      <td>754</td>
-    </tr>
-    <tr>
-      <th>1</th>
-      <td>150.0</td>
-      <td>0.04</td>
-      <td>0.50</td>
-      <td>754</td>
-      <td>761</td>
-    </tr>
-    <tr>
-      <th>2</th>
-      <td>30.0</td>
-      <td>0.02</td>
-      <td>0.00</td>
-      <td>762</td>
-      <td>769</td>
-    </tr>
-    <tr>
-      <th>3</th>
-      <td>0.0</td>
-      <td>0.32</td>
-      <td>0.50</td>
-      <td>769</td>
-      <td>776</td>
-    </tr>
-    <tr>
-      <th>4</th>
-      <td>150.0</td>
-      <td>0.16</td>
-      <td>0.75</td>
-      <td>777</td>
-      <td>784</td>
-    </tr>
-  </tbody>
-</table>
-</div></div></div>
+<p>As neurons are often matched across sessions, that neuron will have the same cell specimen id in all said sessions, but it will have a different cell specimen index in each session. This is explored in <a class="reference internal" href="vc2p-cross-session-data.html"><span class="doc std std-doc">Cross session data</span></a>.</p>
 </div>
 </section>
 </section>
@@ -1130,6 +977,13 @@ For each stimulus there is a stimulus table with information about the condition
             <p class="prev-next-title">Dataset</p>
         </div>
     </a>
+    <a class='right-next' id="next-link" href="vc2p-stimuli.html" title="next page">
+    <div class="prev-next-info">
+        <p class="prev-next-subtitle">next</p>
+        <p class="prev-next-title">Visual stimuli</p>
+    </div>
+    <i class="fas fa-angle-right"></i>
+    </a>
 </div>
             </footer>
         </div>
@@ -1137,7 +991,7 @@ For each stimulus there is a stimulus table with information about the condition
     <div class="footer-content row">
         <footer class="col footer"><p>
   
-    By The Jupyter Book Community<br/>
+    By Saskia de Vries, Marina Garrett, Corbett Bennet, Galen Lynch, Anna Lakunina, Casey Schneider-Mizell<br/>
   
       &copy; Copyright 2022.<br/>
 </p>

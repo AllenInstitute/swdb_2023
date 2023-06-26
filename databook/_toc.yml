@@ -13,5 +13,7 @@ chapters:
   - file: visual-coding-2p/vc2p-dataset
   - file: visual-coding-2p/vc2p-session-data
   - file: visual-coding-2p/vc2p-stimuli
-
+  - file: visual-coding-2p/vc2p-cross-session-data
+- file: glossary
+- file: bibliography
 
