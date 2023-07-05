@@ -8,6 +8,9 @@ chapters:
   sections:
   - file: background/anatomy
   - file: background/transgenic-tools
+  - file: background/Two-photon-calcium-imaging
+  - file: background/Neuropixels-electrophysiology
+  - file: background/Ophys-ephys-comparison
 - file: visual-coding-2p/vc2p-background
   sections:
   - file: visual-coding-2p/vc2p-dataset
