@@ -1,0 +1,10 @@
+version: '3'
+services:
+  dev:
+    build: .
+    environment:
+      - "JUPYTER_PASSWORD=${JUPYTER_PASSWORD:-walkerlab}"
+    ports:
+      - "${JUPYTER_IP:-127.0.0.1}:${JUPYTER_PORT:-8879}:8888"
+    volumes:
+      - .:/src/swdb_2023
