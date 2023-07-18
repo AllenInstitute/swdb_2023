@@ -2,8 +2,7 @@ FROM ghcr.io/walkerlab/docker-pytorch-jupyter-cuda:cuda-11.8.0-pytorch-1.13.0-to
 COPY . /src/swdb_2023
 
 # shared
-RUN pip install --upgrade pip
+RUN pip3 install --upgrade pip
 # specific
-RUN pip install cython allensdk
-
-RUN pip install -e /src/swdb_2023
+RUN pip3 install cython git+https://github.com/walkerlab/AllenSDK.git
+RUN pip3 install -e /src/swdb_2023
