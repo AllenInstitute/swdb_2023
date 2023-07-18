@@ -1,7 +1,7 @@
 *.DS_Store
 *.ipynb_checkpoints
 
-Day5/data/*
+Day5/data/*  
 
 # Environments
 .env
