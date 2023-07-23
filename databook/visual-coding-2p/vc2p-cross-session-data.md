@@ -44,13 +44,13 @@ As we expect, all of these sessions are from the same <b>experiment container id
 Let's explore this neuron across all three sessions. First let's get the data for all three sessions.
 
 ```{code-cell} ipython3
-#id_a = boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id], session_types=['three_session_A'])[0]['id']
-#id_b = boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id], session_types=['three_session_B'])[0]['id']
-#id_c = boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id], session_types=['three_session_C'])[0]['id']
+id_a = boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id], session_types=['three_session_A'])[0]['id']
+id_b = boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id], session_types=['three_session_B'])[0]['id']
+id_c = boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id], session_types=['three_session_C'])[0]['id']
 
-id_a = 501704220
-id_b = 501559087
-id_c = 501474098	
+#id_a = 501704220
+#id_b = 501559087
+#id_c = 501474098	
 
 data_set_a = boc.get_ophys_experiment_data(id_a)
 data_set_b = boc.get_ophys_experiment_data(id_b)
@@ -93,11 +93,11 @@ ax2.imshow(mp_c, cmap='gray')
 ```{code-cell} ipython3
 fig = plt.figure(figsize=(12,5))
 ax1 = plt.subplot(131)
-ax1.imshow(rois_a[index_a,:,:])
+ax1.imshow(rois_a[index_a,:,:][0])
 ax2 = plt.subplot(132)
-ax2.imshow(rois_a[index_b,:,:])
+ax2.imshow(rois_b[index_b,:,:][0])
 ax3 = plt.subplot(133)
-ax3.imshow(rois_a[index_c,:,:])
+ax3.imshow(rois_c[index_c,:,:][0])
 ```
 
 Each experiment session consists of a different set of stimuli, but in each session has two things: at least one epoch of <b>spontaneous activity</b> and <b>natural movie one</b>. 
