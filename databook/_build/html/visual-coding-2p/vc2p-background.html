@@ -53,7 +53,7 @@ const thebe_selector_output = ".output, .cell_output"
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
     <link rel="next" title="Dataset" href="vc2p-dataset.html" />
-    <link rel="prev" title="Transgenic tools" href="../background/transgenic-tools.html" />
+    <link rel="prev" title="Ophys ephys comparison" href="../background/Ophys-ephys-comparison.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
     
@@ -134,6 +134,21 @@ const thebe_selector_output = ".output, .cell_output"
      Transgenic tools
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Two-photon-calcium-imaging.html">
+     Two photon calcium imaging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Neuropixels-electrophysiology.html">
+     Neuropixels electrophysiology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Ophys-ephys-comparison.html">
+     Ophys ephys comparison
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -162,11 +177,21 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
    <li class="toctree-l2">
+    <a class="reference internal" href="vc2p-evoked-response.html">
+     Exercise: Evoked response
+    </a>
+   </li>
+   <li class="toctree-l2">
     <a class="reference internal" href="vc2p-cross-session-data.html">
      Cross session data
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visual-coding-np/vcnp.html">
+   Brain Observatory - Neuropixels
+  </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../glossary.html">
@@ -361,8 +386,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visual-physiology-in-mice">
+   Visual physiology in mice
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#technique">
    Technique
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#questions-to-explore">
+   Questions to explore
   </a>
  </li>
 </ul>
@@ -390,8 +425,18 @@ title="Print to PDF"
   </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#visual-physiology-in-mice">
+   Visual physiology in mice
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#technique">
    Technique
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#questions-to-explore">
+   Questions to explore
   </a>
  </li>
 </ul>
@@ -406,20 +451,39 @@ title="Print to PDF"
                 
   <section class="tex2jax_ignore mathjax_ignore" id="visual-coding-2-photon">
 <h1>Visual Coding 2-photon<a class="headerlink" href="#visual-coding-2-photon" title="Permalink to this headline">#</a></h1>
-<p>The Visual Coding 2-photon dataset is a survey of in vivo physiological activity in the awake mouse cortex. Neural activity was recorded using <a class="reference internal" href="../glossary.html#term-Two-photon-calcium-imaging"><span class="xref std std-term">Two photon calcium imaging</span></a>. We used transgenic tools to target the expression of a fluorescent calcium indicator, <a class="reference internal" href="../glossary.html#term-GCaMP"><span class="xref std std-term">GCaMP</span></a>6, to a specific population of neurons. We collected data across six different visual cortical areas, including <a class="reference internal" href="../glossary.html#term-V1"><span class="xref std std-term">V1</span></a> and five <a class="reference internal" href="../glossary.html#term-HVA"><span class="xref std std-term">HVA</span></a>s, using 14 transgenic lines, and across the cortical layers.</p>
-<p>During imaging, mice were awake, head-fixed under the microscope, and positioned on a running disk that enabled them to run at will. The mice passively viewed an assortment of visual stimuli <a class="reference internal" href="vc2p-stimuli.html"><span class="doc std std-doc">visual stimuli</span></a> presented on a monitor. Cameras recorded the eye position of the eye pointed at the monitor. Thus, in addition to the neural activity, we also have measured the mouse’s running activity, and the pupil position, and pupil area of the mouse’s eye.</p>
+<p>The Visual Coding 2-photon dataset is a survey of in vivo physiological activity in the awake mouse cortex. Neural activity was recorded using <a class="reference internal" href="../glossary.html#term-Two-photon-calcium-imaging"><span class="xref std std-term">Two-photon calcium imaging</span></a>. We used transgenic tools to target the expression of a fluorescent calcium indicator, <a class="reference internal" href="../glossary.html#term-GCaMP"><span class="xref std std-term">GCaMP</span></a>6, to a specific population of neurons. We collected data across six different visual cortical areas, including <a class="reference internal" href="../glossary.html#term-V1"><span class="xref std std-term">V1</span></a> and five <a class="reference internal" href="../glossary.html#term-HVA"><span class="xref std std-term">HVA</span></a>s, using 14 <a class="reference internal" href="../glossary.html#term-Transgenic-line"><span class="xref std std-term">Transgenic line</span></a>s, and across the cortical layers.</p>
+<p>During imaging, mice were awake, head-fixed under the microscope, and positioned on a running disk that enabled them to run at will. The mice passively viewed an assortment of visual stimuli <a class="reference internal" href="vc2p-stimuli.html"><span class="doc std std-doc">visual stimuli</span></a> presented on a monitor. Cameras recorded the eye position of the eye pointed at the monitor. Thus, in addition to the neural activity, we also have measured the mouse’s running activity, and the pupil position, and pupil area of the mouse’s eye. (Keep in mind that the pupil area is largely controlled by the amount of light, which is kept relatively constant during these experiments. Thus the dynamic range of the pupil area is likely less than in non-visual experiments.)</p>
 <section id="background">
 <h2>Background<a class="headerlink" href="#background" title="Permalink to this headline">#</a></h2>
-<p>There is a long history of studying the activity of neurons in the visual system. Some of the earliest work stems from classic experiments of David Hubel and Torsten Wiesel who had developed the tungsten electrode. Inserting the electrode in the V1 of an anasethized cat, they were able to map the <b>receptive field</b> of the neuron, the spatio-temporal feature that best drives that neuron.
-(link to video and paper)</p>
-<p>Over the last sixty years, extensive work has been done using this approach, recording from single or small groups of neurons in V1 as well as other regions of the visual system, characterizing the features that best drive neurons. …</p>
-<p>Despite decades of this research, there
-What other 85% doing?</p>
+<p>There is a long history of studying the activity of neurons in the visual system. Some of the earliest work stems from <a class="reference external" href="https://www.youtube.com/watch?v=8VdFf3egwfg">classic experiments</a> of David Hubel and Torsten Wiesel who had developed the tungsten electrode. Inserting the electrode in the V1 of an anasethized cat, they were able to determine what visual stimulus drove the activity of the neuron they were recording, and in this way they mapped the <a class="reference internal" href="../glossary.html#term-Receptive-field"><span class="xref std std-term">receptive field</span></a> of the neuron.
+(Add citation to paper)</p>
+<p>Over the last sixty years, extensive work has been done using this approach, recording from single or small groups of neurons in V1 as well as other regions of the visual system, characterizing the spatial and temporal features that best drive neurons. Despite decades of this research, there were several outstanding questions:</p>
+<p>First, stemming from that initial work of Hubel and Wiesel, the field converged on a standard model for the neurons in V1 in which each neuron’s activity is modeled by a spatiotemporal filter followed by a static nonlinearity. Yet, the reality is that such models do not predict many neurons well, particular in response to more naturalistic stimuli.
+(cite What other 85% doing, etc)</p>
+<p>Second, as neurons in different parts of the visual circuit were found to respond to different features, there were open question as to what the computations were that transformed the simple responses of the neurons in the early visual system into the more complex features.</p>
+<p>The <b>Allen Brain Observatory Visual Coding</b> datasets were collected in large part to address these questions. These are survey datasets, recording the physiological activity of neurons in the visual system of the mouse in different parts of the visual circuit in response to a variety of visual stimuli (both “artificial” and “naturalistic”).</p>
 <p>Need survey
 “what would be most helpful is to accumulate a database of single-unit or multi-unit data (stimuli and neural responses) that would allow modelers to test their best theory under ecological conditions”</p>
 </section>
+<section id="visual-physiology-in-mice">
+<h2>Visual physiology in mice<a class="headerlink" href="#visual-physiology-in-mice" title="Permalink to this headline">#</a></h2>
+<p>While much of the historical, and ongoing, work studying visual physiology was performed in cats and primates, mouse has emerged as a model organism for visual physiology in the past two decades.
+[more here, with references!]</p>
+</section>
 <section id="technique">
-<span id="section-label"></span><h2>Technique<a class="headerlink" href="#technique" title="Permalink to this headline">#</a></h2>
+<h2>Technique<a class="headerlink" href="#technique" title="Permalink to this headline">#</a></h2>
+<p>For the <b>Visual Coding 2-photon</b> dataset we used <a class="reference internal" href="../background/Two-photon-calcium-imaging.html"><span class="doc std std-doc">Two-photon calcium imaging</span></a> to record the activity of populations of neurons. We used <a class="reference internal" href="../background/transgenic-tools.html"><span class="doc std std-doc">transgenic tools</span></a> that use <a class="reference internal" href="../glossary.html#term-Cre-line"><span class="xref std std-term">Cre line</span></a>s to drive the expression of <a class="reference internal" href="../glossary.html#term-GCaMP"><span class="xref std std-term">GCaMP</span></a>6 in a specific population of neurons. These could be excitatory or inhibitory neurons, they could be broadly expressed or confined to neurons within specific layers or even subtypes within a layer. In this dataset, we performed single plane imaging such that within an experiment we collected data from a population of neurons within a single visual area at a single imaging depth.</p>
+</section>
+<section id="questions-to-explore">
+<h2>Questions to explore<a class="headerlink" href="#questions-to-explore" title="Permalink to this headline">#</a></h2>
+<p>There are many ways to explore these datasets, so these are not exhaustive by any means.</p>
+<ul class="simple">
+<li><p>Compare single cell visual responses across different types of cells (defined by Cre lines) and different areas.</p></li>
+<li><p>Look a population coding. Each imaging session includes a population of neurons. This ranges from roughly a dozen neurons for inhibitory <a class="reference internal" href="../glossary.html#term-Interneuron"><span class="xref std std-term">Interneuron</span></a>s to up to 400 neurons for denser excitatory neurons. Can you decode the stimulus from population activity? What is the structure of correlations between neurons in different populations?</p></li>
+<li><p>Compare responses to different types of stimuli. How well can you predict responses to naturalistic stimuli from the responses to artificial stimuli, or vice-versa? Do the correlation structures differ based on the stimulus that is used?</p></li>
+<li><p>Explore neural activity (single cell or population) in relation to behavioral variables such as running speed or pupil area/position. Do these differ across areas/Cre lines?</p></li>
+<li><p>Explore behavioral variables (running speed/duration or pupil area/position) by themselves. Do different transgenic lines exhibit different behaviors?</p></li>
+</ul>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -452,11 +516,11 @@ What other 85% doing?</p>
                 
     <!-- Previous / next buttons -->
 <div class='prev-next-area'>
-    <a class='left-prev' id="prev-link" href="../background/transgenic-tools.html" title="previous page">
+    <a class='left-prev' id="prev-link" href="../background/Ophys-ephys-comparison.html" title="previous page">
         <i class="fas fa-angle-left"></i>
         <div class="prev-next-info">
             <p class="prev-next-subtitle">previous</p>
-            <p class="prev-next-title">Transgenic tools</p>
+            <p class="prev-next-title">Ophys ephys comparison</p>
         </div>
     </a>
     <a class='right-next' id="next-link" href="vc2p-dataset.html" title="next page">

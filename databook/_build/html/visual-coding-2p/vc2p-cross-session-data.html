@@ -52,7 +52,7 @@ const thebe_selector_output = ".output, .cell_output"
     <script async="async" src="../_static/sphinx-thebe.js"></script>
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="Glossary" href="../glossary.html" />
+    <link rel="next" title="Brain Observatory - Neuropixels" href="../visual-coding-np/vcnp.html" />
     <link rel="prev" title="Visual stimuli" href="vc2p-stimuli.html" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="docsearch:language" content="None">
@@ -134,6 +134,21 @@ const thebe_selector_output = ".output, .cell_output"
      Transgenic tools
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Two-photon-calcium-imaging.html">
+     Two photon calcium imaging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Neuropixels-electrophysiology.html">
+     Neuropixels electrophysiology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Ophys-ephys-comparison.html">
+     Ophys ephys comparison
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -169,8 +184,18 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../visual-coding-np/vcnp.html">
+   Brain Observatory - Neuropixels
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../glossary.html">
    Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   References
   </a>
  </li>
 </ul>
@@ -427,7 +452,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>We can find the sessions for which this neuron was recorded using the <b>get_ophys_experiments</b> and passing a list that contains this cell specimen id.</p>
+<p>We can find the sessions for which this neuron was recorded using the <code class="docutils literal notranslate"><span class="pre">get_ophys_experiments()</span></code> and passing a list that contains this cell specimen id.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#pd.DataFrame(boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id]))</span>
@@ -435,17 +460,17 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>As we expect, all of these sessions are from the same <b>experiment container id</b> each from a different <b>session type</b>. If this is not clear, refer to <a class="reference internal" href="vc2p-dataset.html"><span class="doc std std-doc">Experiment containers and session</span></a>.</p>
+<p>As we expect, all of these sessions are from the same <b>experiment container id</b> each from a different <b>session type</b>. If this is not clear, refer to <a class="reference internal" href="vc2p-dataset.html#experiment-containers-sessions"><span class="std std-ref">Experiment containers and session</span></a>.</p>
 <p>Let’s explore this neuron across all three sessions. First let’s get the data for all three sessions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#id_a = boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id], session_types=[&#39;three_session_A&#39;])[0][&#39;id&#39;]</span>
-<span class="c1">#id_b = boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id], session_types=[&#39;three_session_B&#39;])[0][&#39;id&#39;]</span>
-<span class="c1">#id_c = boc.get_ophys_experiments(cell_specimen_ids=[cell_specimen_id], session_types=[&#39;three_session_C&#39;])[0][&#39;id&#39;]</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">id_a</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">cell_specimen_ids</span><span class="o">=</span><span class="p">[</span><span class="n">cell_specimen_id</span><span class="p">],</span> <span class="n">session_types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;three_session_A&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="n">id_b</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">cell_specimen_ids</span><span class="o">=</span><span class="p">[</span><span class="n">cell_specimen_id</span><span class="p">],</span> <span class="n">session_types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;three_session_B&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="n">id_c</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">cell_specimen_ids</span><span class="o">=</span><span class="p">[</span><span class="n">cell_specimen_id</span><span class="p">],</span> <span class="n">session_types</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;three_session_C&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 
-<span class="n">id_a</span> <span class="o">=</span> <span class="mi">501704220</span>
-<span class="n">id_b</span> <span class="o">=</span> <span class="mi">501559087</span>
-<span class="n">id_c</span> <span class="o">=</span> <span class="mi">501474098</span>	
+<span class="c1">#id_a = 501704220</span>
+<span class="c1">#id_b = 501559087</span>
+<span class="c1">#id_c = 501474098	</span>
 
 <span class="n">data_set_a</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">id_a</span><span class="p">)</span>
 <span class="n">data_set_b</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">id_b</span><span class="p">)</span>
@@ -454,12 +479,12 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>Let’s find the cell index for this neuron in each of these sessions</p>
+<p>Let’s find the cell index for this neuron in each of these sessions. Recall that there are different <a class="reference internal" href="vc2p-session-data.html#cell-ids-indices"><span class="std std-ref">cell indices</span></a> for each session even thought the neuron has a single cell id.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index_a</span> <span class="o">=</span> <span class="n">data_set_a</span><span class="o">.</span><span class="n">get_cell_specimen_indices</span><span class="p">([</span><span class="n">cell_specimen_id</span><span class="p">])</span>
-<span class="n">index_b</span> <span class="o">=</span> <span class="n">data_set_b</span><span class="o">.</span><span class="n">get_cell_specimen_indices</span><span class="p">([</span><span class="n">cell_specimen_id</span><span class="p">])</span>
-<span class="n">index_c</span> <span class="o">=</span> <span class="n">data_set_c</span><span class="o">.</span><span class="n">get_cell_specimen_indices</span><span class="p">([</span><span class="n">cell_specimen_id</span><span class="p">])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">index_a</span> <span class="o">=</span> <span class="n">data_set_a</span><span class="o">.</span><span class="n">get_cell_specimen_indices</span><span class="p">([</span><span class="n">cell_specimen_id</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">index_b</span> <span class="o">=</span> <span class="n">data_set_b</span><span class="o">.</span><span class="n">get_cell_specimen_indices</span><span class="p">([</span><span class="n">cell_specimen_id</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">index_c</span> <span class="o">=</span> <span class="n">data_set_c</span><span class="o">.</span><span class="n">get_cell_specimen_indices</span><span class="p">([</span><span class="n">cell_specimen_id</span><span class="p">])[</span><span class="mi">0</span><span class="p">]</span>
 
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Session A index: &quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">index_a</span><span class="p">))</span>
 <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;Session B index: &quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">index_b</span><span class="p">))</span>
@@ -468,14 +493,14 @@ title="Print to PDF"
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Session A index:  [16]
-Session B index:  [171]
-Session C index:  [1]
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Session A index:  16
+Session B index:  171
+Session C index:  1
 </pre></div>
 </div>
 </div>
 </div>
-<p>PLOT MIP WITH ROI MASK</p>
+<p>We can visualize the <a class="reference internal" href="vc2p-session-data.html#maximum-projection"><span class="std std-ref">maximum projection</span></a> for each session and see the <a class="reference internal" href="vc2p-session-data.html#roi-mask"><span class="std std-ref">ROI mask</span></a> of the neuron in each session.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">mp_a</span> <span class="o">=</span> <span class="n">data_set_a</span><span class="o">.</span><span class="n">get_max_projection</span><span class="p">()</span>
@@ -489,88 +514,129 @@ Session C index:  [1]
 <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
 <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
 <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mp_a</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
 <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mp_b</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mp_c</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">mp_c</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+
+<span class="n">fig2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
+<span class="n">ax4</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rois_a</span><span class="p">[</span><span class="n">index_a</span><span class="p">,:,:])</span>
+<span class="n">ax4</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax5</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rois_b</span><span class="p">[</span><span class="n">index_b</span><span class="p">,:,:])</span>
+<span class="n">ax5</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
+<span class="n">ax6</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rois_c</span><span class="p">[</span><span class="n">index_c</span><span class="p">,:,:])</span>
+<span class="n">ax6</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7fd580072fa0&gt;
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>(-0.5, 511.5, 511.5, -0.5)
 </pre></div>
 </div>
 <img alt="../_images/vc2p-cross-session-data_11_1.png" src="../_images/vc2p-cross-session-data_11_1.png" />
+<img alt="../_images/vc2p-cross-session-data_11_2.png" src="../_images/vc2p-cross-session-data_11_2.png" />
 </div>
 </div>
+<p>Let’s look at the activity of this neuron in each session. We’ll use the DF/F.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rois_a</span><span class="p">[</span><span class="n">index_a</span><span class="p">,:,:])</span>
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rois_a</span><span class="p">[</span><span class="n">index_b</span><span class="p">,:,:])</span>
-<span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">133</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rois_a</span><span class="p">[</span><span class="n">index_c</span><span class="p">,:,:])</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">ts_a</span><span class="p">,</span><span class="n">dff_a</span> <span class="o">=</span> <span class="n">data_set_a</span><span class="o">.</span><span class="n">get_dff_traces</span><span class="p">()</span>
+<span class="n">ts_b</span><span class="p">,</span><span class="n">dff_b</span> <span class="o">=</span> <span class="n">data_set_b</span><span class="o">.</span><span class="n">get_dff_traces</span><span class="p">()</span>
+<span class="n">ts_c</span><span class="p">,</span><span class="n">dff_c</span> <span class="o">=</span> <span class="n">data_set_c</span><span class="o">.</span><span class="n">get_dff_traces</span><span class="p">()</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">8</span><span class="p">))</span>
+<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts_a</span><span class="p">,</span><span class="n">dff_a</span><span class="p">[</span><span class="n">index_a</span><span class="p">,:])</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;DF/F (%)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts_b</span><span class="p">,</span><span class="n">dff_b</span><span class="p">[</span><span class="n">index_b</span><span class="p">,:])</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;DF/F (%)&quot;</span><span class="p">)</span>
+<span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">ts_c</span><span class="p">,</span><span class="n">dff_c</span><span class="p">[</span><span class="n">index_c</span><span class="p">,:])</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&quot;Time (s)&quot;</span><span class="p">)</span>
+<span class="n">ax3</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&quot;DF/F (%)&quot;</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output traceback highlight-ipythontb notranslate"><div class="highlight"><pre><span></span><span class="gt">---------------------------------------------------------------------------</span>
-<span class="ne">TypeError</span><span class="g g-Whitespace">                                 </span>Traceback (most recent call last)
-<span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">folders</span><span class="o">/</span><span class="n">qh</span><span class="o">/</span><span class="mi">5</span><span class="n">lyvn7d93mzft9kchq7xsqkw0000gp</span><span class="o">/</span><span class="n">T</span><span class="o">/</span><span class="n">ipykernel_73981</span><span class="o">/</span><span class="mf">2633090789.</span><span class="n">py</span> <span class="ow">in</span> <span class="o">&lt;</span><span class="n">module</span><span class="o">&gt;</span>
-<span class="g g-Whitespace">      </span><span class="mi">1</span> <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">5</span><span class="p">))</span>
-<span class="g g-Whitespace">      </span><span class="mi">2</span> <span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">131</span><span class="p">)</span>
-<span class="ne">----&gt; </span><span class="mi">3</span> <span class="n">ax1</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rois_a</span><span class="p">[</span><span class="n">index_a</span><span class="p">,:,:])</span>
-<span class="g g-Whitespace">      </span><span class="mi">4</span> <span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">132</span><span class="p">)</span>
-<span class="g g-Whitespace">      </span><span class="mi">5</span> <span class="n">ax2</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">rois_a</span><span class="p">[</span><span class="n">index_b</span><span class="p">,:,:])</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/matplotlib/__init__.py</span> in <span class="ni">inner</span><span class="nt">(ax, data, *args, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1359</span>     <span class="k">def</span> <span class="nf">inner</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="n">data</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">):</span>
-<span class="g g-Whitespace">   </span><span class="mi">1360</span>         <span class="k">if</span> <span class="n">data</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-<span class="ne">-&gt; </span><span class="mi">1361</span>             <span class="k">return</span> <span class="n">func</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="nb">map</span><span class="p">(</span><span class="n">sanitize_sequence</span><span class="p">,</span> <span class="n">args</span><span class="p">),</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">1362</span> 
-<span class="g g-Whitespace">   </span><span class="mi">1363</span>         <span class="n">bound</span> <span class="o">=</span> <span class="n">new_sig</span><span class="o">.</span><span class="n">bind</span><span class="p">(</span><span class="n">ax</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/matplotlib/axes/_axes.py</span> in <span class="ni">imshow</span><span class="nt">(self, X, cmap, norm, aspect, interpolation, alpha, vmin, vmax, origin, extent, filternorm, filterrad, resample, url, **kwargs)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5607</span>                               <span class="n">resample</span><span class="o">=</span><span class="n">resample</span><span class="p">,</span> <span class="o">**</span><span class="n">kwargs</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5608</span> 
-<span class="ne">-&gt; </span><span class="mi">5609</span>         <span class="n">im</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">X</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5610</span>         <span class="n">im</span><span class="o">.</span><span class="n">set_alpha</span><span class="p">(</span><span class="n">alpha</span><span class="p">)</span>
-<span class="g g-Whitespace">   </span><span class="mi">5611</span>         <span class="k">if</span> <span class="n">im</span><span class="o">.</span><span class="n">get_clip_path</span><span class="p">()</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-
-<span class="nn">~/opt/anaconda3/lib/python3.9/site-packages/matplotlib/image.py</span> in <span class="ni">set_data</span><span class="nt">(self, A)</span>
-<span class="g g-Whitespace">    </span><span class="mi">707</span>         <span class="k">if</span> <span class="ow">not</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">2</span>
-<span class="g g-Whitespace">    </span><span class="mi">708</span>                 <span class="ow">or</span> <span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="o">.</span><span class="n">ndim</span> <span class="o">==</span> <span class="mi">3</span> <span class="ow">and</span> <span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="o">.</span><span class="n">shape</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="ow">in</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">]):</span>
-<span class="ne">--&gt; </span><span class="mi">709</span>             <span class="k">raise</span> <span class="ne">TypeError</span><span class="p">(</span><span class="s2">&quot;Invalid shape </span><span class="si">{}</span><span class="s2"> for image data&quot;</span>
-<span class="g g-Whitespace">    </span><span class="mi">710</span>                             <span class="o">.</span><span class="n">format</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">_A</span><span class="o">.</span><span class="n">shape</span><span class="p">))</span>
-<span class="g g-Whitespace">    </span><span class="mi">711</span> 
-
-<span class="ne">TypeError</span>: Invalid shape (1, 512, 512) for image data
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;DF/F (%)&#39;)
 </pre></div>
 </div>
-<img alt="../_images/vc2p-cross-session-data_12_1.png" src="../_images/vc2p-cross-session-data_12_1.png" />
+<img alt="../_images/vc2p-cross-session-data_13_1.png" src="../_images/vc2p-cross-session-data_13_1.png" />
 </div>
 </div>
-<p>Each experiment session consists of a different set of stimuli, but in each session has two things: at least one epoch of <b>spontaneous activity</b> and <b>natural movie one</b>.</p>
+<p>Each experiment session consists of a different set of stimuli, but in each session has two things: at least one epoch of <a class="reference internal" href="vc2p-stimuli.html#spontaneous-activity"><span class="std std-ref">spontaneous activity</span></a> and <a class="reference internal" href="vc2p-stimuli.html#natural-movie"><span class="std std-ref">natural movie one</span></a>.</p>
+<p>Let’s compute the mean response of this neuron’s response to natural movie one in each session and compare them.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">_</span><span class="p">,</span><span class="n">dff_a</span> <span class="o">=</span> <span class="n">data_set_a</span><span class="o">.</span><span class="n">get_dff_traces</span><span class="p">()</span>
-<span class="n">_</span><span class="p">,</span><span class="n">dff_b</span> <span class="o">=</span> <span class="n">data_set_b</span><span class="o">.</span><span class="n">get_dff_traces</span><span class="p">()</span>
-<span class="n">_</span><span class="p">,</span><span class="n">dff_c</span> <span class="o">=</span> <span class="n">data_set_c</span><span class="o">.</span><span class="n">get_dff_traces</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">nm_stim_a</span> <span class="o">=</span> <span class="n">data_set_a</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;natural_movie_one&#39;</span><span class="p">)</span>
+<span class="n">nm_stim_b</span> <span class="o">=</span> <span class="n">data_set_b</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;natural_movie_one&#39;</span><span class="p">)</span>
+<span class="n">nm_stim_c</span> <span class="o">=</span> <span class="n">data_set_c</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;natural_movie_one&#39;</span><span class="p">)</span>
 
-<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
-<span class="n">ax1</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">311</span><span class="p">)</span>
-<span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dff_a</span><span class="p">)</span>
-<span class="n">ax2</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">312</span><span class="p">)</span>
-<span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dff_b</span><span class="p">)</span>
-<span class="n">ax3</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplot</span><span class="p">(</span><span class="mi">313</span><span class="p">)</span>
-<span class="n">ax3</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">dff_c</span><span class="p">)</span>
+<span class="n">repeat_starts_a</span> <span class="o">=</span> <span class="n">nm_stim_a</span><span class="p">[</span><span class="n">nm_stim_a</span><span class="o">.</span><span class="n">frame</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">values</span>
+<span class="n">repeat_starts_b</span> <span class="o">=</span> <span class="n">nm_stim_b</span><span class="p">[</span><span class="n">nm_stim_b</span><span class="o">.</span><span class="n">frame</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">values</span> 
+<span class="n">repeat_starts_c</span> <span class="o">=</span> <span class="n">nm_stim_c</span><span class="p">[</span><span class="n">nm_stim_c</span><span class="o">.</span><span class="n">frame</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">start</span><span class="o">.</span><span class="n">values</span>
+
+<span class="n">nm_a</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">900</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">nm_b</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">900</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="n">nm_c</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">900</span><span class="p">,</span><span class="mi">10</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+  <span class="n">start_a</span> <span class="o">=</span> <span class="n">repeat_starts_a</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">nm_a</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dff_a</span><span class="p">[</span><span class="n">index_a</span><span class="p">,</span><span class="n">start_a</span><span class="p">:</span><span class="n">start_a</span><span class="o">+</span><span class="mi">900</span><span class="p">]</span>
+  <span class="n">start_b</span> <span class="o">=</span> <span class="n">repeat_starts_b</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">nm_b</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dff_b</span><span class="p">[</span><span class="n">index_b</span><span class="p">,</span><span class="n">start_b</span><span class="p">:</span><span class="n">start_b</span><span class="o">+</span><span class="mi">900</span><span class="p">]</span>
+  <span class="n">start_c</span> <span class="o">=</span> <span class="n">repeat_starts_c</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+  <span class="n">nm_c</span><span class="p">[:,</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">dff_c</span><span class="p">[</span><span class="n">index_c</span><span class="p">,</span><span class="n">start_c</span><span class="p">:</span><span class="n">start_c</span><span class="o">+</span><span class="mi">900</span><span class="p">]</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span><span class="mi">4</span><span class="p">))</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nm_a</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Session A&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nm_b</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Session B&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">nm_c</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">label</span><span class="o">=</span><span class="s2">&quot;Session C&quot;</span><span class="p">)</span>
+
+<span class="n">plt</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">xlabel</span><span class="p">(</span><span class="s2">&quot;Time (imaging frames)&quot;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">ylabel</span><span class="p">(</span><span class="s2">&quot;DF/F (%)&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>Text(0, 0.5, &#39;DF/F (%)&#39;)
+</pre></div>
+</div>
+<img alt="../_images/vc2p-cross-session-data_15_1.png" src="../_images/vc2p-cross-session-data_15_1.png" />
+</div>
+</div>
+<p>How similar are these mean responses?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">scipy.stats</span> <span class="k">as</span> <span class="nn">st</span>
+<span class="n">r</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">nm_a</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">nm_b</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AB Correlation = &quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+
+<span class="n">r</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">nm_a</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">nm_c</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;AC Correlation = &quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+
+<span class="n">r</span><span class="p">,</span><span class="n">p</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">nm_b</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">),</span> <span class="n">nm_c</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">axis</span><span class="o">=</span><span class="mi">1</span><span class="p">))</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;BC Correlation = &quot;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">r</span><span class="p">))</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>AB Correlation =  0.6876919774041833
+AC Correlation =  0.9028353266931375
+BC Correlation =  0.8303760776176357
 </pre></div>
 </div>
 </div>
 </div>
-<p>(reference exercise, plot the movie response for a cell across three different sessions 517472450)</p>
 </section>
 
     <script type="text/x-thebe-config">
@@ -607,10 +673,10 @@ Session C index:  [1]
             <p class="prev-next-title">Visual stimuli</p>
         </div>
     </a>
-    <a class='right-next' id="next-link" href="../glossary.html" title="next page">
+    <a class='right-next' id="next-link" href="../visual-coding-np/vcnp.html" title="next page">
     <div class="prev-next-info">
         <p class="prev-next-subtitle">next</p>
-        <p class="prev-next-title">Glossary</p>
+        <p class="prev-next-title">Brain Observatory - Neuropixels</p>
     </div>
     <i class="fas fa-angle-right"></i>
     </a>

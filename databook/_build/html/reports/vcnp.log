@@ -1,0 +1,77 @@
+Traceback (most recent call last):
+  File "/Users/saskiad/opt/anaconda3/lib/python3.9/site-packages/jupyter_cache/executors/utils.py", line 51, in single_nb_execution
+    executenb(
+  File "/Users/saskiad/opt/anaconda3/lib/python3.9/site-packages/nbclient/client.py", line 1204, in execute
+    return NotebookClient(nb=nb, resources=resources, km=km, **kwargs).execute()
+  File "/Users/saskiad/opt/anaconda3/lib/python3.9/site-packages/nbclient/util.py", line 84, in wrapped
+    return just_run(coro(*args, **kwargs))
+  File "/Users/saskiad/opt/anaconda3/lib/python3.9/site-packages/nbclient/util.py", line 62, in just_run
+    return loop.run_until_complete(coro)
+  File "/Users/saskiad/opt/anaconda3/lib/python3.9/asyncio/base_events.py", line 647, in run_until_complete
+    return future.result()
+  File "/Users/saskiad/opt/anaconda3/lib/python3.9/site-packages/nbclient/client.py", line 663, in async_execute
+    await self.async_execute_cell(
+  File "/Users/saskiad/opt/anaconda3/lib/python3.9/site-packages/nbclient/client.py", line 965, in async_execute_cell
+    await self._check_raise_for_error(cell, cell_index, exec_reply)
+  File "/Users/saskiad/opt/anaconda3/lib/python3.9/site-packages/nbclient/client.py", line 862, in _check_raise_for_error
+    raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
+nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
+------------------
+f, t_spec, spec = scipy.signal.spectrogram(v, fs=fs, window='hanning',
+                            nperseg=1000, noverlap=1000-1, mode='psd')
+# Scipy assumes our signal starts at time=0, so we need to provide the offset
+t_spec = t_spec + t[0]
+------------------
+
+[0;31m---------------------------------------------------------------------------[0m
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m~/opt/anaconda3/lib/python3.9/site-packages/scipy/signal/windows/_windows.py[0m in [0;36mget_window[0;34m(window, Nx, fftbins)[0m
+[1;32m   2213[0m     [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 2214[0;31m         [0mbeta[0m [0;34m=[0m [0mfloat[0m[0;34m([0m[0mwindow[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   2215[0m     [0;32mexcept[0m [0;34m([0m[0mTypeError[0m[0;34m,[0m [0mValueError[0m[0;34m)[0m [0;32mas[0m [0me[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mValueError[0m: could not convert string to float: 'hanning'
+
+During handling of the above exception, another exception occurred:
+
+[0;31mKeyError[0m                                  Traceback (most recent call last)
+[0;32m~/opt/anaconda3/lib/python3.9/site-packages/scipy/signal/windows/_windows.py[0m in [0;36mget_window[0;34m(window, Nx, fftbins)[0m
+[1;32m   2231[0m         [0;32mtry[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 2232[0;31m             [0mwinfunc[0m [0;34m=[0m [0m_win_equiv[0m[0;34m[[0m[0mwinstr[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   2233[0m         [0;32mexcept[0m [0mKeyError[0m [0;32mas[0m [0me[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mKeyError[0m: 'hanning'
+
+The above exception was the direct cause of the following exception:
+
+[0;31mValueError[0m                                Traceback (most recent call last)
+[0;32m/var/folders/qh/5lyvn7d93mzft9kchq7xsqkw0000gp/T/ipykernel_93794/2010518480.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m f, t_spec, spec = scipy.signal.spectrogram(v, fs=fs, window='hanning',
+[0m[1;32m      2[0m                             nperseg=1000, noverlap=1000-1, mode='psd')
+[1;32m      3[0m [0;31m# Scipy assumes our signal starts at time=0, so we need to provide the offset[0m[0;34m[0m[0;34m[0m[0m
+[1;32m      4[0m [0mt_spec[0m [0;34m=[0m [0mt_spec[0m [0;34m+[0m [0mt[0m[0;34m[[0m[0;36m0[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/opt/anaconda3/lib/python3.9/site-packages/scipy/signal/_spectral_py.py[0m in [0;36mspectrogram[0;34m(x, fs, window, nperseg, noverlap, nfft, detrend, return_onesided, scaling, axis, mode)[0m
+[1;32m    742[0m [0;34m[0m[0m
+[1;32m    743[0m     [0;31m# need to set default for nperseg before setting default for noverlap below[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 744[0;31m     window, nperseg = _triage_segments(window, nperseg,
+[0m[1;32m    745[0m                                        input_length=x.shape[axis])
+[1;32m    746[0m [0;34m[0m[0m
+
+[0;32m~/opt/anaconda3/lib/python3.9/site-packages/scipy/signal/_spectral_py.py[0m in [0;36m_triage_segments[0;34m(window, nperseg, input_length)[0m
+[1;32m   2001[0m                           .format(nperseg, input_length))
+[1;32m   2002[0m             [0mnperseg[0m [0;34m=[0m [0minput_length[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 2003[0;31m         [0mwin[0m [0;34m=[0m [0mget_window[0m[0;34m([0m[0mwindow[0m[0;34m,[0m [0mnperseg[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   2004[0m     [0;32melse[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2005[0m         [0mwin[0m [0;34m=[0m [0mnp[0m[0;34m.[0m[0masarray[0m[0;34m([0m[0mwindow[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/opt/anaconda3/lib/python3.9/site-packages/scipy/signal/windows/_windows.py[0m in [0;36mget_window[0;34m(window, Nx, fftbins)[0m
+[1;32m   2232[0m             [0mwinfunc[0m [0;34m=[0m [0m_win_equiv[0m[0;34m[[0m[0mwinstr[0m[0;34m][0m[0;34m[0m[0;34m[0m[0m
+[1;32m   2233[0m         [0;32mexcept[0m [0mKeyError[0m [0;32mas[0m [0me[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m-> 2234[0;31m             [0;32mraise[0m [0mValueError[0m[0;34m([0m[0;34m"Unknown window type."[0m[0;34m)[0m [0;32mfrom[0m [0me[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m   2235[0m [0;34m[0m[0m
+[1;32m   2236[0m         [0;32mif[0m [0mwinfunc[0m [0;32mis[0m [0mdpss[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mValueError[0m: Unknown window type.
+ValueError: Unknown window type.
+

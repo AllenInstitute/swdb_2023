@@ -134,6 +134,21 @@ const thebe_selector_output = ".output, .cell_output"
      Transgenic tools
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Two-photon-calcium-imaging.html">
+     Two photon calcium imaging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Neuropixels-electrophysiology.html">
+     Neuropixels electrophysiology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Ophys-ephys-comparison.html">
+     Ophys ephys comparison
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -167,6 +182,11 @@ const thebe_selector_output = ".output, .cell_output"
     </a>
    </li>
   </ul>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../visual-coding-np/vcnp.html">
+   Brain Observatory - Neuropixels
+  </a>
  </li>
  <li class="toctree-l1">
   <a class="reference internal" href="../glossary.html">
@@ -427,11 +447,25 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#natural-movies">
    Natural movies
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nm-stimulus-template">
+     Stimulus template
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#locally-sparse-noise">
    Locally sparse noise
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lsn-stimulus-template">
+     Stimulus template
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#spontaneous-activity">
@@ -483,11 +517,25 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#natural-movies">
    Natural movies
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#nm-stimulus-template">
+     Stimulus template
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#locally-sparse-noise">
    Locally sparse noise
   </a>
+  <ul class="nav section-nav flex-column">
+   <li class="toc-h3 nav-item toc-entry">
+    <a class="reference internal nav-link" href="#lsn-stimulus-template">
+     Stimulus template
+    </a>
+   </li>
+  </ul>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#spontaneous-activity">
@@ -678,7 +726,18 @@ Each trial is presented for 2 seconds with 1 second of mean luminance gray in be
 </table>
 </div></div></div>
 </div>
-<p>The <b>start</b> and <b>end</b> columns provide the 2p imaging frame during which the trials starts and ends, respectively. This indexes directly into the activity traces (e.g. dff or event traces, see <a class="reference internal" href="vc2p-session-data.html"><span class="doc std std-doc">link to section</span></a>). The <b>orientation</b> and <b>temporal_frequency</b> columns provide the stimulus conditions of the trial. The trials where these are both Nan are <b>blank sweeps</b> during which no grating is presented and the monitor remains at mean luminance gray.</p>
+<dl class="simple myst">
+<dt>start</dt><dd><p>The 2p imaging frame during which the trial starts. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>end</dt><dd><p>The 2p imaging frame during which the trial ends. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>orientation</dt><dd><p>The direction of the drifting grating trial in degrees. Value of NaN indicates a blanksweep.</p>
+</dd>
+<dt>temporal_frequency</dt><dd><p>The temporal frequency of the drifting grating trial in Hz. This refers to how many complete periods the signal goes through for a given unit of time. Value of NaN indicates a blanksweep.</p>
+</dd>
+<dt>blank_sweep</dt><dd><p>A boolean indicating whether the trial is a blank sweep during which no grating is presented and the monitor remains at mean luminance gray.</p>
+</dd>
+</dl>
 <p>What are the orientation and temporal frequency values used in this stimulus?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -724,13 +783,12 @@ temporal frequencies:  [ 1.  2.  4.  8. 15.]
 </div>
 </div>
 </div>
-<p>What is the duration of a trial? Let’s plot the first 50 trials</p>
+<p>What is the duration of a trial?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">durations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">50</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
-  <span class="n">durations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">end</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">durations</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">durations</span> <span class="o">=</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">start</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">durations</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -738,14 +796,14 @@ temporal frequencies:  [ 1.  2.  4.  8. 15.]
 <img alt="../_images/vc2p-stimuli_15_0.png" src="../_images/vc2p-stimuli_15_0.png" />
 </div>
 </div>
-<p>Most trials have a duration of 60 imaging frames. As the two photon microscope we use has a frame rate of 30Hz this is 2 seconds. But you can see that there is some jitter between trials as to the precise duration.</p>
-<p>What is the inter trial interval?</p>
+<p>Most trials have a duration of 60 imaging frames. As the two photon microscope we use has a frame rate of 30Hz this is 2 seconds. But you can see that there is some jitter across trials as to the precise duration.</p>
+<p>What is the inter trial interval? Let’s look at the first 100 trials:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intervals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">50</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intervals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">100</span><span class="p">))</span>
+<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
   <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">drifting_gratings_table</span><span class="o">.</span><span class="n">end</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+  <span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">intervals</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -757,19 +815,12 @@ temporal frequencies:  [ 1.  2.  4.  8. 15.]
 <section id="static-gratings">
 <h2>Static gratings<a class="headerlink" href="#static-gratings" title="Permalink to this headline">#</a></h2>
 <p>The static gratings stimulus consists of a <b>stationary</b> sinusoidal grating that is flasshed on the monitor at one of 6 <b>orientations</b>, one of 5 <b>spatial frequencies</b>, and one of 4 <b>phases</b>. The grating has a contrast of 80%.
-Each trial is presented for 0.25 seconds and followed immediately by the next trial without any intertrial interval. There are blanksweeps, where the grating is replaced by the mean luminance gray, interleaved in among the trials.</p>
+Each trial is presented for 0.25 seconds and followed immediately by the next trial without any intertrial interval. There are blanksweeps, where the grating is replaced by the mean luminance gray, interleaved among the trials.</p>
 <p>Let’s find the session in the experiment container we’re exploring that contains the static gratings stimulus.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_container_id</span> <span class="o">=</span> <span class="mi">511510736</span>
-<span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;static_gratings&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;static_gratings&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 <span class="n">data_set</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>501559087
 </pre></div>
 </div>
 </div>
@@ -893,6 +944,18 @@ Each trial is presented for 0.25 seconds and followed immediately by the next tr
 </table>
 </div></div></div>
 </div>
+<dl class="simple myst">
+<dt>start</dt><dd><p>The 2p imaging frame during which the trial starts. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>end</dt><dd><p>The 2p imaging frame during which the trial ends. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>orientation</dt><dd><p>The orientation of the grating trial in degrees. Value of NaN indicates a blanksweep.</p>
+</dd>
+<dt>spatial_frequency</dt><dd><p>The spatial frequency of the grating trial in cycles per degree (cpd). This refers to how many complete periods the signal goes through for a given unit of distance. Value of NaN indicates a blanksweep.</p>
+</dd>
+<dt>phase</dt><dd><p>The phase of the grating trial, indicating the position of the grating. Value of NaN indicates a blanksweep.</p>
+</dd>
+</dl>
 <p>What are the orientation, spatial frequency, and phase values used in this stimulus?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -943,13 +1006,12 @@ phases:  [0.   0.25 0.5  0.75]
 <p class="admonition-title">Note</p>
 <p>There are roughly 50 trials fo each stimulus condition, but not precisely. Some conditions have fewer than 50 trials but none have more than 50 trials.</p>
 </div>
-<p>What is the duration of a trial? Let’s plot the first 50 trials</p>
+<p>What is the duration of a trial?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">durations</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">50</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
-  <span class="n">durations</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">end</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">durations</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">durations</span> <span class="o">=</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">start</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">durations</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
@@ -960,15 +1022,12 @@ phases:  [0.   0.25 0.5  0.75]
 <p>What is the inter trial interval?</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">intervals</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">empty</span><span class="p">((</span><span class="mi">50</span><span class="p">))</span>
-<span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">50</span><span class="p">):</span>
-  <span class="n">intervals</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">=</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">start</span><span class="p">[</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="o">-</span> <span class="n">static_gratings_table</span><span class="o">.</span><span class="n">end</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
-  <span class="n">plt</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">intervals</span><span class="p">,</span> <span class="s1">&#39;o&#39;</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1">#intervals = np.empty((50))</span>
+<span class="c1">#for i in range(50):</span>
+  <span class="c1">#intervals[i] = static_gratings_table.start[i+1] - #static_gratings_table.end[i]</span>
+  <span class="c1">#plt.hist(intervals);</span>
 </pre></div>
 </div>
-</div>
-<div class="cell_output docutils container">
-<img alt="../_images/vc2p-stimuli_31_0.png" src="../_images/vc2p-stimuli_31_0.png" />
 </div>
 </div>
 </section>
@@ -979,15 +1038,8 @@ The images are taken from three different image sets including CITATIONS HERE</p
 <p>Let’s find the session in the experiment container we’re exploring that contains the natural scenes stimulus.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_container_id</span> <span class="o">=</span> <span class="mi">511510736</span>
-<span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;natural_scenes&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
-<span class="nb">print</span><span class="p">(</span><span class="n">session_id</span><span class="p">)</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;natural_scenes&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
 <span class="n">data_set</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
-</pre></div>
-</div>
-</div>
-<div class="cell_output docutils container">
-<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>501559087
 </pre></div>
 </div>
 </div>
@@ -1089,7 +1141,14 @@ The images are taken from three different image sets including CITATIONS HERE</p
 </table>
 </div></div></div>
 </div>
-<p>Unlike the gratings stimuli, there are no stimulus parameters here. Instead there is a <b>frame</b> value that identifies which image was presented for each trial. This frame number indexes into the <b>stimulus template</b>.</p>
+<dl class="simple myst">
+<dt>start</dt><dd><p>The 2p imaging frame during which the trial starts. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>end</dt><dd><p>The 2p imaging frame during which the trial ends. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>frame</dt><dd><p>Which image was presented in the trial. This indexes into the <a class="reference internal" href="#ns-stimulus-template"><span class="std std-ref">stimulus template</span></a>.</p>
+</dd>
+</dl>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
 <p>The blanksweeps in the natural scene stimulus table are identified by having a frame value of <b>-1</b></p>
@@ -1121,33 +1180,506 @@ The images are taken from three different image sets including CITATIONS HERE</p
 </div>
 </div>
 <section id="stimulus-template">
-<h3>Stimulus template<a class="headerlink" href="#stimulus-template" title="Permalink to this headline">#</a></h3>
-<p>The stimulus template is an array that contains the images that were presented to the mouse. This can be accessed using <b>get_stimulus_template</b>.</p>
+<span id="ns-stimulus-template"></span><h3>Stimulus template<a class="headerlink" href="#stimulus-template" title="Permalink to this headline">#</a></h3>
+<p>The stimulus template is an array that contains the images that were presented to the mouse. This can be accessed using <code class="docutils literal notranslate"><span class="pre">get_stimulus_template()</span></code>.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_scene_template</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_template</span><span class="p">(</span><span class="s1">&#39;natural_scenes&#39;</span><span class="p">)</span>
 <span class="n">scene_number</span><span class="o">=</span><span class="mi">22</span>
 <span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">natural_scene_template</span><span class="p">[</span><span class="n">scene_number</span><span class="p">,:,:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>&lt;matplotlib.image.AxesImage at 0x7f8f98bc0a00&gt;
-</pre></div>
-</div>
-<img alt="../_images/vc2p-stimuli_41_1.png" src="../_images/vc2p-stimuli_41_1.png" />
+<img alt="../_images/vc2p-stimuli_41_0.png" src="../_images/vc2p-stimuli_41_0.png" />
 </div>
 </div>
 </section>
 </section>
 <section id="natural-movies">
-<h2>Natural movies<a class="headerlink" href="#natural-movies" title="Permalink to this headline">#</a></h2>
+<span id="natural-movie"></span><h2>Natural movies<a class="headerlink" href="#natural-movies" title="Permalink to this headline">#</a></h2>
+<p>There are three different natural movie stimuli:</p>
+<ul class="simple">
+<li><p>natural_movie_one</p></li>
+<li><p>natural_movie_two</p></li>
+<li><p>natural_movie_three</p></li>
+</ul>
+<p>Natural movie one is presented in every session. It is 30 seconds long and is repeated 10 times in each session.
+Natural movie two is presented in three_session_B. It is 30 seconds long and is repeated 10 times.
+Natural movie three is presented in three_session_A. It is 2 minutes long and is presented a total of 10 times, but in two epochs.
+All of these movies are from the opening scene of <b>Touch of Evil</b>, and Orson Welles film. This was selected because it is a continuous shot with no camera cuts and with a variety of different motion signals.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;natural_movie_one&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="n">data_set</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<p>Let’s look at the stimulus table for the natural movie stimulus</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_movie_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;natural_movie_one&#39;</span><span class="p">)</span>
+<span class="n">natural_movie_table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frame</th>
+      <th>start</th>
+      <th>end</th>
+      <th>repeat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>70307</td>
+      <td>70307</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>70308</td>
+      <td>70308</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>70309</td>
+      <td>70309</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>70310</td>
+      <td>70310</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>70311</td>
+      <td>70311</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>70312</td>
+      <td>70312</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>70313</td>
+      <td>70314</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>70314</td>
+      <td>70315</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>70315</td>
+      <td>70316</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>70316</td>
+      <td>70317</td>
+      <td>0</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<dl class="simple myst">
+<dt>start</dt><dd><p>The 2p imaging frame during which the trial starts. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>end</dt><dd><p>The 2p imaging frame during which the trial ends. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>frame</dt><dd><p>Which frame of the movie was presented in the trial. This indexes into the <a class="reference internal" href="#nm-stimulus-template"><span class="std std-ref">stimulus template</span></a>.</p>
+</dd>
+<dt>repeat</dt><dd><p>The number of the repeat of the movie.</p>
+</dd>
+</dl>
+<p>The movies are different from the previous stimuli where the different trials pertained to distinct images or stimulus conditions. Here each “trial” is a frame of the movie, and the trial duration closely matches the 2p imaging frames.
+But the movie is repeated 10 times, and you might want to identify the start of each repeat.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_movie_table</span><span class="p">[</span><span class="n">natural_movie_table</span><span class="o">.</span><span class="n">frame</span><span class="o">==</span><span class="mi">0</span><span class="p">]</span> 
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frame</th>
+      <th>start</th>
+      <th>end</th>
+      <th>repeat</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>70307</td>
+      <td>70307</td>
+      <td>0</td>
+    </tr>
+    <tr>
+      <th>900</th>
+      <td>0</td>
+      <td>71210</td>
+      <td>71211</td>
+      <td>1</td>
+    </tr>
+    <tr>
+      <th>1800</th>
+      <td>0</td>
+      <td>72113</td>
+      <td>72114</td>
+      <td>2</td>
+    </tr>
+    <tr>
+      <th>2700</th>
+      <td>0</td>
+      <td>73016</td>
+      <td>73017</td>
+      <td>3</td>
+    </tr>
+    <tr>
+      <th>3600</th>
+      <td>0</td>
+      <td>73919</td>
+      <td>73920</td>
+      <td>4</td>
+    </tr>
+    <tr>
+      <th>4500</th>
+      <td>0</td>
+      <td>74822</td>
+      <td>74823</td>
+      <td>5</td>
+    </tr>
+    <tr>
+      <th>5400</th>
+      <td>0</td>
+      <td>75725</td>
+      <td>75726</td>
+      <td>6</td>
+    </tr>
+    <tr>
+      <th>6300</th>
+      <td>0</td>
+      <td>76629</td>
+      <td>76630</td>
+      <td>7</td>
+    </tr>
+    <tr>
+      <th>7200</th>
+      <td>0</td>
+      <td>77532</td>
+      <td>77533</td>
+      <td>8</td>
+    </tr>
+    <tr>
+      <th>8100</th>
+      <td>0</td>
+      <td>78435</td>
+      <td>78436</td>
+      <td>9</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<section id="nm-stimulus-template">
+<span id="id1"></span><h3>Stimulus template<a class="headerlink" href="#nm-stimulus-template" title="Permalink to this headline">#</a></h3>
+<p>The stimulus template is an array that contains the images of the natural movie stimulus that were presented to the mouse. This can be accessed using <b>get_stimulus_template</b>. Let’s look at the first frame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">natural_movie_template</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_template</span><span class="p">(</span><span class="s1">&#39;natural_movie_one&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">natural_movie_template</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-stimuli_49_0.png" src="../_images/vc2p-stimuli_49_0.png" />
+</div>
+</div>
+</section>
 </section>
 <section id="locally-sparse-noise">
-<h2>Locally sparse noise<a class="headerlink" href="#locally-sparse-noise" title="Permalink to this headline">#</a></h2>
+<span id="id2"></span><h2>Locally sparse noise<a class="headerlink" href="#locally-sparse-noise" title="Permalink to this headline">#</a></h2>
+<p>The locally sparse noise stimulus is used to map the spatial receptive field of the neurons. There are three stimuli that are used. For the data published in June 2016 and October 2016, the <b>locally_sparse_noise</b> stimulus was used, and these were presented in the session called <b>three_session_C</b>. For the data published after that, both <b>locally_sparse_noise_4deg</b> and <b>locally_sparse_noise_8deg</b> were used and these were presented in <b>three_session_C2</b>.</p>
+<p>The <b>locally_sparse_noise</b> and <b>locally_sparse_noise_4deg</b> stimulus consisted of a 16 x 28 array of pixels, each 4.65 degrees on a side. Please note, while this stimulus is called <b>locally_sparse_noise_4deg</b>, the pixel size is in fact 4.65 degrees. For each frame of the stimulus a small number of pixels were white and a small number were black, while the rest were mean luminance gray. In total there were ~11 white and black spots in each frame. The white and black spots were distributed such that no two spots were within 5 pixels of each other. Each time a given pixel was occupied by a black (or white) spot, there was a different array of other pixels occupied by either black or white spots. As a result, when all of the frames when that pixel was occupied by the black spot were averaged together, there was no significant structure surrounding the specified pixel. Further, the stimulus was well balanced with regards to the contrast of the pixels, such that while there was a slightly higher probability of a pixel being occupied just outside of the 5-pixel exclusion zone, the probability was equal for pixels of both contrast. Each pixel was occupied by either a white or black spot a variable number of times.
+The only difference between <b>locally_sparse_noise</b> and <b>locally_sparse_noise_4deg</b> is that the latter is roughly half the trials as the former.</p>
+<p>The <b>locally_sparse_noise_8deg</b> stimulus consists of an 8 x 14 array made simply by scaling the 16 x 28 array used for the 4 degree stimulus. Please note, while the name of the stimulus is <b>locally_sparse_noise_4deg</b>, the actual pixel size is 9.3 degrees. The exclusions zone of 5 pixels was 46.5 degrees. This larger pixel size was found to be more effective at eliciting responses in the <a class="reference internal" href="../glossary.html#term-HVA"><span class="xref std std-term">HVA</span></a>s.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_container_id</span> <span class="o">=</span> <span class="mi">511510736</span>
+<span class="n">session_id</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">],</span> <span class="n">stimuli</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;locally_sparse_noise&#39;</span><span class="p">])[</span><span class="mi">0</span><span class="p">][</span><span class="s1">&#39;id&#39;</span><span class="p">]</span>
+<span class="n">data_set</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lsn_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;locally_sparse_noise&#39;</span><span class="p">)</span>
+<span class="n">lsn_table</span><span class="o">.</span><span class="n">head</span><span class="p">(</span><span class="n">n</span><span class="o">=</span><span class="mi">10</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>frame</th>
+      <th>start</th>
+      <th>end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>0</td>
+      <td>746</td>
+      <td>753</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>1</td>
+      <td>753</td>
+      <td>760</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>2</td>
+      <td>761</td>
+      <td>768</td>
+    </tr>
+    <tr>
+      <th>3</th>
+      <td>3</td>
+      <td>768</td>
+      <td>776</td>
+    </tr>
+    <tr>
+      <th>4</th>
+      <td>4</td>
+      <td>776</td>
+      <td>783</td>
+    </tr>
+    <tr>
+      <th>5</th>
+      <td>5</td>
+      <td>784</td>
+      <td>791</td>
+    </tr>
+    <tr>
+      <th>6</th>
+      <td>6</td>
+      <td>791</td>
+      <td>798</td>
+    </tr>
+    <tr>
+      <th>7</th>
+      <td>7</td>
+      <td>799</td>
+      <td>806</td>
+    </tr>
+    <tr>
+      <th>8</th>
+      <td>8</td>
+      <td>806</td>
+      <td>813</td>
+    </tr>
+    <tr>
+      <th>9</th>
+      <td>9</td>
+      <td>814</td>
+      <td>821</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<dl class="simple myst">
+<dt>start</dt><dd><p>The 2p imaging frame during which the trial starts. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>end</dt><dd><p>The 2p imaging frame during which the trial ends. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>frame</dt><dd><p>Which frame of the locally sparse noise movie was presented in the trial. This indexes into the <a class="reference internal" href="#lsn-stimulus-template"><span class="std std-ref">stimulus template</span></a>.</p>
+</dd>
+</dl>
+<p>What is the duration of a trial?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">plt</span><span class="o">.</span><span class="n">figure</span><span class="p">(</span><span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">durations</span> <span class="o">=</span> <span class="n">lsn_table</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">lsn_table</span><span class="o">.</span><span class="n">start</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">hist</span><span class="p">(</span><span class="n">durations</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-stimuli_54_0.png" src="../_images/vc2p-stimuli_54_0.png" />
+</div>
+</div>
+<p>The locally sparse noise stimuli have the same temporal structure as the natural scenes and static gratings. Each image is presented for 0.25s (~7 frames) and is followed immediately by the next image.</p>
+<section id="lsn-stimulus-template">
+<span id="id3"></span><h3>Stimulus template<a class="headerlink" href="#lsn-stimulus-template" title="Permalink to this headline">#</a></h3>
+<p>The stimulus template is an array that contains the images of the locally sparse noice stimulus that were presented to the mouse. This can be accessed using <code class="docutils literal notranslate"><span class="pre">get_stimulus_template()</span></code>. Let’s look at the first frame:</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">lsn_template</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_template</span><span class="p">(</span><span class="s1">&#39;locally_sparse_noise&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">imshow</span><span class="p">(</span><span class="n">lsn_template</span><span class="p">[</span><span class="mi">0</span><span class="p">,:,:],</span> <span class="n">cmap</span><span class="o">=</span><span class="s1">&#39;gray&#39;</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">axis</span><span class="p">(</span><span class="s1">&#39;off&#39;</span><span class="p">);</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="../_images/vc2p-stimuli_56_0.png" src="../_images/vc2p-stimuli_56_0.png" />
+</div>
+</div>
+</section>
 </section>
 <section id="spontaneous-activity">
-<h2>Spontaneous activity<a class="headerlink" href="#spontaneous-activity" title="Permalink to this headline">#</a></h2>
+<span id="id4"></span><h2>Spontaneous activity<a class="headerlink" href="#spontaneous-activity" title="Permalink to this headline">#</a></h2>
+<p>In each session there is at least one five-minute epoch of spontaneous activity. During this epoch the monitor is held at mean luminance gray and there is no patterned stimulus presented. This provides a valuable time that can be used as a baseline comparison for visually evoked activity.</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">spont_table</span> <span class="o">=</span> <span class="n">data_set</span><span class="o">.</span><span class="n">get_stimulus_table</span><span class="p">(</span><span class="s1">&#39;spontaneous&#39;</span><span class="p">)</span>
+<span class="n">spont_table</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>start</th>
+      <th>end</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>22575</td>
+      <td>31456</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>73155</td>
+      <td>82035</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
+</div>
+<dl class="simple myst">
+<dt>start</dt><dd><p>The 2p imaging frame during which the spontaneous activity starts. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>end</dt><dd><p>The 2p imaging frame during which the spontaneous activity ends. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+</dl>
+<p>This is a session that has two epochs of spontaneous activity. What is their duration?</p>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">durations</span> <span class="o">=</span> <span class="n">spont_table</span><span class="o">.</span><span class="n">end</span> <span class="o">-</span> <span class="n">spont_table</span><span class="o">.</span><span class="n">start</span>
+<span class="n">durations</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>0    8881
+1    8880
+dtype: int64
+</pre></div>
+</div>
+</div>
+</div>
 </section>
 </section>
 

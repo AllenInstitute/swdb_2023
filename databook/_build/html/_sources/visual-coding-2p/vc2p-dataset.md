@@ -29,7 +29,7 @@ boc = BrainObservatoryCache()
 We can use the BrainObservatoryCache to explore the parameters of the dataset. 
 
 ## Targeted structures
-What brain regions were recorded across the dataset? To determine this we use a function called <b>get_all_targeted_structures</b> to create a list of the regions.
+What brain regions were recorded across the dataset? To determine this we use a function called `get_all_targeted_structures()` to create a list of the regions.
 
 ```{code-cell} ipython3
 boc.get_all_targeted_structures()
@@ -56,6 +56,7 @@ Reporter lines: All the experiments in this dataset use GCaMP6. The large majori
 
 See [Transgenic tools](../background/transgenic-tools.md) to learn more about these Cre lines and reporters.
 
+(imaging_depths)=
 ## Imaging depths
 Each experiment was collected at a single imaging depth. 
 
@@ -74,8 +75,8 @@ boc.get_all_stimuli()
 
 These are described more extensively in [Visual stimuli](vc2p-stimuli.md).
 
+(experiment_containers_sessions)=
 ## Experiment containers & sessions
-
 The <b>experiment container</b> describes a set of 3 imaging <b>sessions</b> performed for the same field of view (ie. same targeted structure and imaging depth in the same mouse that targets the same set of neurons). Each experiment container has a unique ID number.
 
 We will identify all the experiment containers for a given stucture and Cre line:
@@ -88,19 +89,8 @@ exps = boc.get_experiment_containers(targeted_structures=[visual_area], cre_line
 ```
 
 ```{note}
-<b>get_experiment_containers</b> returns all experiment containers that meet the conditions we have specified. The parameters that we could pass this function include targeted_structures, imaging_depths, cre_lines, and reporter_lines. If we don't pass any parameters, it returns all experiment containers.
+`get_experiment_containers` returns all experiment containers that meet the conditions we have specified. The parameters that we could pass this function include targeted_structures, imaging_depths, cre_lines, reporter_lines, stimuli, session_types, and cell_specimen_ids. If we don't pass any parameters, it returns all experiment containers.
 ```
-
-ids=None,
-    experiment_container_ids=None,
-    targeted_structures=None,
-    imaging_depths=None,
-    cre_lines=None,
-    reporter_lines=None,
-    transgenic_lines=None,
-    stimuli=None,
-    session_types=None,
-    cell_specimen_ids=None,
 
 We can make a dataframe of the list of experiment containers to see what information we get about them:
 
@@ -108,10 +98,37 @@ We can make a dataframe of the list of experiment containers to see what informa
 pd.DataFrame(exps)
 ```
 
+id
+: The <b>experiment container id</b>
+
+imaging_depth
+: The [imaging depth](imaging_depths) that data was acquired at, in um from the surface of cortex.
+
+targeted_structure
+: The brain structure that was imaged in this session.
+
+cre_line	
+: The {term}`Cre line` that the mouse has.
+
+reporter_line
+: The {term}`Reporter line` that the mouse has.
+
+donor_name
+: The id of the mouse that was imaged.
+
+specimen_name
+: The full name of the mouse including its genotype and donor name.
+
+tags
+: A list of tags
+
+failed
+: Boolean indicating whether the experiment container failed QC. By default, only container that pass QC are returned. Users must specify to include failed experiment containers if looking for these. 
+
 You see there are 16 experiments for this Cre line in VISp. They all have different <b>experiment container ids</b> (called "id" here) and they mostly have different <b>donor names</b> which identify the mouse that was imaged. This Cre line was imaged at two different imaging depths, sampling both layer 2/3 and layer 4. But they all have the same Cre line, targeted structure and reporter line.
 
 
-### Exercise: How many experiment containers were collected in VISp for each Cre line?
+## Exercise: How many experiment containers were collected in each cortical visual area for each Cre line?
 
 ```{code-cell} ipython3
 cre_lines = boc.get_all_cre_lines()
@@ -128,17 +145,54 @@ You see that not all Cre lines were imaged in all areas.
 ## Session types
 The responses to this full set of visual stimuli were recorded across three imaging sessions. We returned to the same targeted structure and same imaging depth in the same mouse to recorded the same group of neurons across three different days. 
 
+Let's look at all of the sessions in a single experiment container.
+
 ```{code-cell} ipython3
-boc.get_all_session_types()
+experiment_container_id = 511510736
+sessions = boc.get_ophys_experiments(experiment_container_ids=[experiment_container_id])
+pd.DataFrame(sessions)
 ```
 
-get one container, list the sessions
-diagram of three session options from website
+id
+: The <b>session id</b> for the session. 
 
+imaging_depth
+: The [imaging depth](imaging_depths) that data was acquired at, in um from the surface of cortex.
 
+targeted_structure
+: The brain structure that was imaged in this session.
 
-We will explore which stimuli are part of which session in [Visual stimuli](vc2p-stimuli.md). 
+cre_line	
+: The {term}`Cre line` that the mouse has.
 
+reporter_line
+: The {term}`Reporter line` that the mouse has.
+
+acquisition_age_days
+: The age of the mouse when this session was recorded, in days.
+
+experiment_container_id
+: The id of the experiment container that this session belongs to.
+
+session_type	
+: The name of the session, this describes the set of stimuli that are presented during the experiment.
+
+donor_name
+: The id of the mouse that was imaged.
+
+specimen_name
+: The full name of the mouse including its genotype and donor name.
+
+fail_eye_tracking
+: Boolean marking which sessions had successful eye tracking. This might be obsolete.
+
+When looking at all of the sessions in a single experiment container, as we have done above, you will notice that the experiment container id, cre line, reporter line, donor name, specimen name, imaging depth, targeted structure are all the same while the id, acquisition age, and session type must be different.
+
+As you see, each experiment container has three different session types. For the data published in June 2016 and October 2016, the last session is <b>three_session_C</b<> while the data published after this were collected using <b>three_session_C2</b>. The key difference between these sessions is a change in the [locally sparse noise](locally_sparse_noise) stimulus.
+
+![containers](/images/VC2p-sessions.png)
+
+## Cell specimen ids
 During data processing, we matched identified {term}`ROI`s (REFERENCE) across each of the sessions within experiment containers. Approximately one third of the neurons in the dataset were matched across all three sessions, one third were matched in two of the three session, and one third were only found in one session. Neurons have unique ids, called <b>cell_specimen_ids</b>, that are shared across the sessions they are found in.
 
 ```{admonition} Why do we not match ROIs across all three session for all neurons? 

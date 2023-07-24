@@ -29,12 +29,13 @@ experiment_container_id = 511510736
 session_id = boc.get_ophys_experiments(experiment_container_ids=[experiment_container_id], stimuli=['natural_scenes'])[0]['id']
 ```
 
-We can use this session_id to get all the data contained in the NWB for this session using <b>get_ophys_experiment_data</b>
+We can use this session_id to get all the data contained in the NWB for this session using `get_ophys_experiment_data`
 
 ```{code-cell} ipython3
 data_set = boc.get_ophys_experiment_data(ophys_experiment_id=session_id)
 ```
 
+(maximum_projection)=
 ## Maximum projection
 This is the projection of the full motion corrected movie. It shows all of the cells imaged during the session.
 
@@ -48,6 +49,7 @@ plt.imshow(max_projection, cmap='gray')
 plt.axis('off')
 ```
 
+(roi_mask)=
 ## ROI Masks
 {term}`ROI`s are all of the segmented masks for cell bodies identified in this session.
 
@@ -119,10 +121,11 @@ plt.xlim(1900,2200)
 plt.ylabel("DFF")
 ```
 
+(extracted_events)=
 ## Extracted events
 As of the October 2018 data release, we are providing access to events extracted from the DF/F traces using the L0 method developed by Sean Jewell and Daniella Witten. 
 ```{note} 
-The extracted events are not stored in the NWB file, thus aren't a function of the data_set object, but are available through the boc
+The extracted events are not stored in the NWB file, thus aren't a function of the data_set object, but are available through the boc using `boc.get_ophys_experiment_events()`.
 ```
 
 ```{code-cell} ipython3
@@ -139,13 +142,21 @@ plt.ylabel("DFF")
 ```
 
 ## Stimulus epochs
-
 Several stimuli are shown during each imaging session, interleaved with each other. The stimulus epoch table provides information of these interleaved stimulus epochs, revealing when each epoch starts and ends. The start and end here are provided in terms of the imaging frame of the two-photon imaging. This allows us to index directly into the dff or event traces.
 
 ```{code-cell} ipython3
 stim_epoch = data_set.get_stimulus_epoch_table()
 stim_epoch
 ```
+
+stimulus
+: The name of the stimulus during the epoch
+
+start
+: The 2p imaging frame during which the epoch starts. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).
+
+end
+: The 2p imaging frame during which the epoch ends. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).
 
 Let's plot the DFF traces of a number of cells and overlay stimulus epochs.  
 
@@ -164,8 +175,8 @@ for c,stim_name in enumerate(stim_epoch.stimulus.unique()):
         plt.axvspan(xmin=stim.start.iloc[j], xmax=stim.end.iloc[j], color=colors[c], alpha=0.1)
 ```
 
+(running_speed)=
 ## Running speed
-
 The running speed of the animal on the rotating disk during the entire session. This has been temporally aligned to the two photon imaging, which means that this trace has the same length as dff (etc). This also means that the same stimulus start and end information indexes directly into this running speed trace.
 
 ```{code-cell} ipython3
@@ -196,11 +207,12 @@ for c,stim_name in enumerate(stim_epoch.stimulus.unique()):
     for j in range(len(stim)):
         plt.axvspan(xmin=stim.start.iloc[j], xmax=stim.end.iloc[j], color=colors[c], alpha=0.1)
 ```
+
 ## Stimulus Table and Template
 Each stimulus that is shown has a <b>stimulus table</b> that details what each trial is and when it is presented. Additionally, the <b>natural scenes</b>, <b>natural movies</b>, and <b>locally sparse noise</b> stimuli have a <b>stimulus template</b> that shows the exact image that is presented to the mouse. We detail how to access and use these items in [Visual stimuli](vc2p-stimuli.md).
 
+(cell_ids_indices)=
 ## Cell ids and indices
-
 Each neuron in the dataset has a unique id, called the <b>cell specimen id</b>. To find the neurons in this session, get the cell specimen ids. This id can also be used to identify experiment containers or sessions where a given neuron is present
 
 ```{code-cell} ipython3

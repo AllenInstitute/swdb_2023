@@ -134,6 +134,21 @@ const thebe_selector_output = ".output, .cell_output"
      Transgenic tools
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Two-photon-calcium-imaging.html">
+     Two photon calcium imaging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Neuropixels-electrophysiology.html">
+     Neuropixels electrophysiology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Ophys-ephys-comparison.html">
+     Ophys ephys comparison
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -169,8 +184,18 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../visual-coding-np/vcnp.html">
+   Brain Observatory - Neuropixels
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../glossary.html">
    Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   References
   </a>
  </li>
 </ul>
@@ -420,17 +445,20 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#experiment-containers-sessions">
    Experiment containers &amp; sessions
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-how-many-experiment-containers-were-collected-in-visp-for-each-cre-line">
-     Exercise: How many experiment containers were collected in VISp for each Cre line?
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-how-many-experiment-containers-were-collected-in-each-cortical-visual-area-for-each-cre-line">
+   Exercise: How many experiment containers were collected in each cortical visual area for each Cre line?
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#session-types">
    Session types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cell-specimen-ids">
+   Cell specimen ids
   </a>
  </li>
 </ul>
@@ -476,17 +504,20 @@ title="Print to PDF"
   <a class="reference internal nav-link" href="#experiment-containers-sessions">
    Experiment containers &amp; sessions
   </a>
-  <ul class="nav section-nav flex-column">
-   <li class="toc-h3 nav-item toc-entry">
-    <a class="reference internal nav-link" href="#exercise-how-many-experiment-containers-were-collected-in-visp-for-each-cre-line">
-     Exercise: How many experiment containers were collected in VISp for each Cre line?
-    </a>
-   </li>
-  </ul>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#exercise-how-many-experiment-containers-were-collected-in-each-cortical-visual-area-for-each-cre-line">
+   Exercise: How many experiment containers were collected in each cortical visual area for each Cre line?
+  </a>
  </li>
  <li class="toc-h2 nav-item toc-entry">
   <a class="reference internal nav-link" href="#session-types">
    Session types
+  </a>
+ </li>
+ <li class="toc-h2 nav-item toc-entry">
+  <a class="reference internal nav-link" href="#cell-specimen-ids">
+   Cell specimen ids
   </a>
  </li>
 </ul>
@@ -521,7 +552,7 @@ title="Print to PDF"
 <p>We can use the BrainObservatoryCache to explore the parameters of the dataset.</p>
 <section id="targeted-structures">
 <h2>Targeted structures<a class="headerlink" href="#targeted-structures" title="Permalink to this headline">#</a></h2>
-<p>What brain regions were recorded across the dataset? To determine this we use a function called <b>get_all_targeted_structures</b> to create a list of the regions.</p>
+<p>What brain regions were recorded across the dataset? To determine this we use a function called <code class="docutils literal notranslate"><span class="pre">get_all_targeted_structures()</span></code> to create a list of the regions.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boc</span><span class="o">.</span><span class="n">get_all_targeted_structures</span><span class="p">()</span>
@@ -587,7 +618,7 @@ title="Print to PDF"
 <p>See <a class="reference internal" href="../background/transgenic-tools.html"><span class="doc std std-doc">Transgenic tools</span></a> to learn more about these Cre lines and reporters.</p>
 </section>
 <section id="imaging-depths">
-<h2>Imaging depths<a class="headerlink" href="#imaging-depths" title="Permalink to this headline">#</a></h2>
+<span id="id1"></span><h2>Imaging depths<a class="headerlink" href="#imaging-depths" title="Permalink to this headline">#</a></h2>
 <p>Each experiment was collected at a single imaging depth.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -652,7 +683,7 @@ title="Print to PDF"
 <p>These are described more extensively in <a class="reference internal" href="vc2p-stimuli.html"><span class="doc std std-doc">Visual stimuli</span></a>.</p>
 </section>
 <section id="experiment-containers-sessions">
-<h2>Experiment containers &amp; sessions<a class="headerlink" href="#experiment-containers-sessions" title="Permalink to this headline">#</a></h2>
+<span id="id2"></span><h2>Experiment containers &amp; sessions<a class="headerlink" href="#experiment-containers-sessions" title="Permalink to this headline">#</a></h2>
 <p>The <b>experiment container</b> describes a set of 3 imaging <b>sessions</b> performed for the same field of view (ie. same targeted structure and imaging depth in the same mouse that targets the same set of neurons). Each experiment container has a unique ID number.</p>
 <p>We will identify all the experiment containers for a given stucture and Cre line:</p>
 <div class="cell docutils container">
@@ -667,18 +698,8 @@ title="Print to PDF"
 </div>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p><b>get_experiment_containers</b> returns all experiment containers that meet the conditions we have specified. The parameters that we could pass this function include targeted_structures, imaging_depths, cre_lines, and reporter_lines. If we don’t pass any parameters, it returns all experiment containers.</p>
+<p><code class="docutils literal notranslate"><span class="pre">get_experiment_containers</span></code> returns all experiment containers that meet the conditions we have specified. The parameters that we could pass this function include targeted_structures, imaging_depths, cre_lines, reporter_lines, stimuli, session_types, and cell_specimen_ids. If we don’t pass any parameters, it returns all experiment containers.</p>
 </div>
-<p>ids=None,
-experiment_container_ids=None,
-targeted_structures=None,
-imaging_depths=None,
-cre_lines=None,
-reporter_lines=None,
-transgenic_lines=None,
-stimuli=None,
-session_types=None,
-cell_specimen_ids=None,</p>
 <p>We can make a dataframe of the list of experiment containers to see what information we get about them:</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -913,9 +934,30 @@ cell_specimen_ids=None,</p>
 </table>
 </div></div></div>
 </div>
+<dl class="simple myst">
+<dt>id</dt><dd><p>The <b>experiment container id</b></p>
+</dd>
+<dt>imaging_depth</dt><dd><p>The <a class="reference internal" href="#imaging-depths"><span class="std std-ref">imaging depth</span></a> that data was acquired at, in um from the surface of cortex.</p>
+</dd>
+<dt>targeted_structure</dt><dd><p>The brain structure that was imaged in this session.</p>
+</dd>
+<dt>cre_line</dt><dd><p>The <a class="reference internal" href="../glossary.html#term-Cre-line"><span class="xref std std-term">Cre line</span></a> that the mouse has.</p>
+</dd>
+<dt>reporter_line</dt><dd><p>The <span class="xref std std-term">Reporter line</span> that the mouse has.</p>
+</dd>
+<dt>donor_name</dt><dd><p>The id of the mouse that was imaged.</p>
+</dd>
+<dt>specimen_name</dt><dd><p>The full name of the mouse including its genotype and donor name.</p>
+</dd>
+<dt>tags</dt><dd><p>A list of tags</p>
+</dd>
+<dt>failed</dt><dd><p>Boolean indicating whether the experiment container failed QC. By default, only container that pass QC are returned. Users must specify to include failed experiment containers if looking for these.</p>
+</dd>
+</dl>
 <p>You see there are 16 experiments for this Cre line in VISp. They all have different <b>experiment container ids</b> (called “id” here) and they mostly have different <b>donor names</b> which identify the mouse that was imaged. This Cre line was imaged at two different imaging depths, sampling both layer 2/3 and layer 4. But they all have the same Cre line, targeted structure and reporter line.</p>
-<section id="exercise-how-many-experiment-containers-were-collected-in-visp-for-each-cre-line">
-<h3>Exercise: How many experiment containers were collected in VISp for each Cre line?<a class="headerlink" href="#exercise-how-many-experiment-containers-were-collected-in-visp-for-each-cre-line" title="Permalink to this headline">#</a></h3>
+</section>
+<section id="exercise-how-many-experiment-containers-were-collected-in-each-cortical-visual-area-for-each-cre-line">
+<h2>Exercise: How many experiment containers were collected in each cortical visual area for each Cre line?<a class="headerlink" href="#exercise-how-many-experiment-containers-were-collected-in-each-cortical-visual-area-for-each-cre-line" title="Permalink to this headline">#</a></h2>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">cre_lines</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_all_cre_lines</span><span class="p">()</span>
@@ -1080,41 +1122,127 @@ cell_specimen_ids=None,</p>
 </div>
 <p>You see that not all Cre lines were imaged in all areas.</p>
 </section>
-</section>
 <section id="session-types">
 <h2>Session types<a class="headerlink" href="#session-types" title="Permalink to this headline">#</a></h2>
 <p>The responses to this full set of visual stimuli were recorded across three imaging sessions. We returned to the same targeted structure and same imaging depth in the same mouse to recorded the same group of neurons across three different days.</p>
+<p>Let’s look at all of the sessions in a single experiment container.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
-<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">boc</span><span class="o">.</span><span class="n">get_all_session_types</span><span class="p">()</span>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">experiment_container_id</span> <span class="o">=</span> <span class="mi">511510736</span>
+<span class="n">sessions</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiments</span><span class="p">(</span><span class="n">experiment_container_ids</span><span class="o">=</span><span class="p">[</span><span class="n">experiment_container_id</span><span class="p">])</span>
+<span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">sessions</span><span class="p">)</span>
 </pre></div>
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output text_plain highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>[&#39;OPHYS_1_images_A&#39;,
- &#39;OPHYS_1_images_B&#39;,
- &#39;OPHYS_2_images_A_passive&#39;,
- &#39;OPHYS_2_images_B_passive&#39;,
- &#39;OPHYS_3_images_A&#39;,
- &#39;OPHYS_3_images_B&#39;,
- &#39;OPHYS_4_images_A&#39;,
- &#39;OPHYS_4_images_B&#39;,
- &#39;OPHYS_5_images_A_passive&#39;,
- &#39;OPHYS_5_images_B_passive&#39;,
- &#39;OPHYS_6_images_A&#39;,
- &#39;OPHYS_6_images_B&#39;,
- &#39;OPHYS_7_receptive_field_mapping&#39;,
- &#39;three_session_A&#39;,
- &#39;three_session_B&#39;,
- &#39;three_session_C&#39;,
- &#39;three_session_C2&#39;]
-</pre></div>
+<div class="output text_html"><div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>id</th>
+      <th>imaging_depth</th>
+      <th>targeted_structure</th>
+      <th>cre_line</th>
+      <th>reporter_line</th>
+      <th>acquisition_age_days</th>
+      <th>experiment_container_id</th>
+      <th>session_type</th>
+      <th>donor_name</th>
+      <th>specimen_name</th>
+      <th>fail_eye_tracking</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>0</th>
+      <td>501559087</td>
+      <td>175</td>
+      <td>VISp</td>
+      <td>Cux2-CreERT2</td>
+      <td>Ai93(TITL-GCaMP6f)</td>
+      <td>103</td>
+      <td>511510736</td>
+      <td>three_session_B</td>
+      <td>222426</td>
+      <td>Cux2-CreERT2;Camk2a-tTA;Ai93-222426</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>1</th>
+      <td>501704220</td>
+      <td>175</td>
+      <td>VISp</td>
+      <td>Cux2-CreERT2</td>
+      <td>Ai93(TITL-GCaMP6f)</td>
+      <td>104</td>
+      <td>511510736</td>
+      <td>three_session_A</td>
+      <td>222426</td>
+      <td>Cux2-CreERT2;Camk2a-tTA;Ai93-222426</td>
+      <td>True</td>
+    </tr>
+    <tr>
+      <th>2</th>
+      <td>501474098</td>
+      <td>175</td>
+      <td>VISp</td>
+      <td>Cux2-CreERT2</td>
+      <td>Ai93(TITL-GCaMP6f)</td>
+      <td>102</td>
+      <td>511510736</td>
+      <td>three_session_C</td>
+      <td>222426</td>
+      <td>Cux2-CreERT2;Camk2a-tTA;Ai93-222426</td>
+      <td>True</td>
+    </tr>
+  </tbody>
+</table>
+</div></div></div>
 </div>
-</div>
-</div>
-<p>get one container, list the sessions
-diagram of three session options from website</p>
-<p>We will explore which stimuli are part of which session in <a class="reference internal" href="vc2p-stimuli.html"><span class="doc std std-doc">Visual stimuli</span></a>.</p>
+<dl class="simple myst">
+<dt>id</dt><dd><p>The <b>session id</b> for the session.</p>
+</dd>
+<dt>imaging_depth</dt><dd><p>The <a class="reference internal" href="#imaging-depths"><span class="std std-ref">imaging depth</span></a> that data was acquired at, in um from the surface of cortex.</p>
+</dd>
+<dt>targeted_structure</dt><dd><p>The brain structure that was imaged in this session.</p>
+</dd>
+<dt>cre_line</dt><dd><p>The <a class="reference internal" href="../glossary.html#term-Cre-line"><span class="xref std std-term">Cre line</span></a> that the mouse has.</p>
+</dd>
+<dt>reporter_line</dt><dd><p>The <span class="xref std std-term">Reporter line</span> that the mouse has.</p>
+</dd>
+<dt>acquisition_age_days</dt><dd><p>The age of the mouse when this session was recorded, in days.</p>
+</dd>
+<dt>experiment_container_id</dt><dd><p>The id of the experiment container that this session belongs to.</p>
+</dd>
+<dt>session_type</dt><dd><p>The name of the session, this describes the set of stimuli that are presented during the experiment.</p>
+</dd>
+<dt>donor_name</dt><dd><p>The id of the mouse that was imaged.</p>
+</dd>
+<dt>specimen_name</dt><dd><p>The full name of the mouse including its genotype and donor name.</p>
+</dd>
+<dt>fail_eye_tracking</dt><dd><p>Boolean marking which sessions had successful eye tracking. This might be obsolete.</p>
+</dd>
+</dl>
+<p>When looking at all of the sessions in a single experiment container, as we have done above, you will notice that the experiment container id, cre line, reporter line, donor name, specimen name, imaging depth, targeted structure are all the same while the id, acquisition age, and session type must be different.</p>
+<p>As you see, each experiment container has three different session types. For the data published in June 2016 and October 2016, the last session is <b>three_session_C&lt;/b&lt;&gt; while the data published after this were collected using <b>three_session_C2</b>. The key difference between these sessions is a change in the <a class="reference internal" href="vc2p-stimuli.html#locally-sparse-noise"><span class="std std-ref">locally sparse noise</span></a> stimulus.</p>
+<p><img alt="containers" src="../_images/VC2p-sessions.png" /></p>
+</section>
+<section id="cell-specimen-ids">
+<h2>Cell specimen ids<a class="headerlink" href="#cell-specimen-ids" title="Permalink to this headline">#</a></h2>
 <p>During data processing, we matched identified <a class="reference internal" href="../glossary.html#term-ROI"><span class="xref std std-term">ROI</span></a>s (REFERENCE) across each of the sessions within experiment containers. Approximately one third of the neurons in the dataset were matched across all three sessions, one third were matched in two of the three session, and one third were only found in one session. Neurons have unique ids, called <b>cell_specimen_ids</b>, that are shared across the sessions they are found in.</p>
 <div class="tip admonition">
 <p class="admonition-title">Why do we not match ROIs across all three session for all neurons? </p>

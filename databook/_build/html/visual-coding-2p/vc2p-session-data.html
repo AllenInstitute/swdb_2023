@@ -134,6 +134,21 @@ const thebe_selector_output = ".output, .cell_output"
      Transgenic tools
     </a>
    </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Two-photon-calcium-imaging.html">
+     Two photon calcium imaging
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Neuropixels-electrophysiology.html">
+     Neuropixels electrophysiology
+    </a>
+   </li>
+   <li class="toctree-l2">
+    <a class="reference internal" href="../background/Ophys-ephys-comparison.html">
+     Ophys ephys comparison
+    </a>
+   </li>
   </ul>
  </li>
  <li class="toctree-l1 current active has-children">
@@ -169,8 +184,18 @@ const thebe_selector_output = ".output, .cell_output"
   </ul>
  </li>
  <li class="toctree-l1">
+  <a class="reference internal" href="../visual-coding-np/vcnp.html">
+   Brain Observatory - Neuropixels
+  </a>
+ </li>
+ <li class="toctree-l1">
   <a class="reference internal" href="../glossary.html">
    Glossary
+  </a>
+ </li>
+ <li class="toctree-l1">
+  <a class="reference internal" href="../bibliography.html">
+   References
   </a>
  </li>
 </ul>
@@ -532,7 +557,7 @@ title="Print to PDF"
 </div>
 </div>
 </div>
-<p>We can use this session_id to get all the data contained in the NWB for this session using <b>get_ophys_experiment_data</b></p>
+<p>We can use this session_id to get all the data contained in the NWB for this session using <code class="docutils literal notranslate"><span class="pre">get_ophys_experiment_data</span></code></p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">data_set</span> <span class="o">=</span> <span class="n">boc</span><span class="o">.</span><span class="n">get_ophys_experiment_data</span><span class="p">(</span><span class="n">ophys_experiment_id</span><span class="o">=</span><span class="n">session_id</span><span class="p">)</span>
@@ -541,7 +566,7 @@ title="Print to PDF"
 </div>
 </div>
 <section id="maximum-projection">
-<h2>Maximum projection<a class="headerlink" href="#maximum-projection" title="Permalink to this headline">#</a></h2>
+<span id="id1"></span><h2>Maximum projection<a class="headerlink" href="#maximum-projection" title="Permalink to this headline">#</a></h2>
 <p>This is the projection of the full motion corrected movie. It shows all of the cells imaged during the session.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -567,7 +592,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="roi-masks">
-<h2>ROI Masks<a class="headerlink" href="#roi-masks" title="Permalink to this headline">#</a></h2>
+<span id="roi-mask"></span><h2>ROI Masks<a class="headerlink" href="#roi-masks" title="Permalink to this headline">#</a></h2>
 <p><a class="reference internal" href="../glossary.html#term-ROI"><span class="xref std std-term">ROI</span></a>s are all of the segmented masks for cell bodies identified in this session.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -678,11 +703,11 @@ title="Print to PDF"
 </div>
 </section>
 <section id="extracted-events">
-<h2>Extracted events<a class="headerlink" href="#extracted-events" title="Permalink to this headline">#</a></h2>
+<span id="id2"></span><h2>Extracted events<a class="headerlink" href="#extracted-events" title="Permalink to this headline">#</a></h2>
 <p>As of the October 2018 data release, we are providing access to events extracted from the DF/F traces using the L0 method developed by Sean Jewell and Daniella Witten.</p>
 <div class="admonition note">
 <p class="admonition-title">Note</p>
-<p>The extracted events are not stored in the NWB file, thus aren’t a function of the data_set object, but are available through the boc</p>
+<p>The extracted events are not stored in the NWB file, thus aren’t a function of the data_set object, but are available through the boc using <code class="docutils literal notranslate"><span class="pre">boc.get_ophys_experiment_events()</span></code>.</p>
 </div>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -797,6 +822,14 @@ title="Print to PDF"
 </table>
 </div></div></div>
 </div>
+<dl class="simple myst">
+<dt>stimulus</dt><dd><p>The name of the stimulus during the epoch</p>
+</dd>
+<dt>start</dt><dd><p>The 2p imaging frame during which the epoch starts. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+<dt>end</dt><dd><p>The 2p imaging frame during which the epoch ends. This indexes directly into the activity traces (e.g. dff or extracted events) and behavior traces (e.g. running speed).</p>
+</dd>
+</dl>
 <p>Let’s plot the DFF traces of a number of cells and overlay stimulus epochs.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -821,7 +854,7 @@ title="Print to PDF"
 </div>
 </section>
 <section id="running-speed">
-<h2>Running speed<a class="headerlink" href="#running-speed" title="Permalink to this headline">#</a></h2>
+<span id="id3"></span><h2>Running speed<a class="headerlink" href="#running-speed" title="Permalink to this headline">#</a></h2>
 <p>The running speed of the animal on the rotating disk during the entire session. This has been temporally aligned to the two photon imaging, which means that this trace has the same length as dff (etc). This also means that the same stimulus start and end information indexes directly into this running speed trace.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
@@ -880,7 +913,7 @@ length of running speed:  113888
 <p>Each stimulus that is shown has a <b>stimulus table</b> that details what each trial is and when it is presented. Additionally, the <b>natural scenes</b>, <b>natural movies</b>, and <b>locally sparse noise</b> stimuli have a <b>stimulus template</b> that shows the exact image that is presented to the mouse. We detail how to access and use these items in <a class="reference internal" href="vc2p-stimuli.html"><span class="doc std std-doc">Visual stimuli</span></a>.</p>
 </section>
 <section id="cell-ids-and-indices">
-<h2>Cell ids and indices<a class="headerlink" href="#cell-ids-and-indices" title="Permalink to this headline">#</a></h2>
+<span id="cell-ids-indices"></span><h2>Cell ids and indices<a class="headerlink" href="#cell-ids-and-indices" title="Permalink to this headline">#</a></h2>
 <p>Each neuron in the dataset has a unique id, called the <b>cell specimen id</b>. To find the neurons in this session, get the cell specimen ids. This id can also be used to identify experiment containers or sessions where a given neuron is present</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">

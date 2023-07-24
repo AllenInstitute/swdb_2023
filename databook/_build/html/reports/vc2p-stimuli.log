@@ -17,14 +17,30 @@ Traceback (most recent call last):
     raise CellExecutionError.from_cell_and_msg(cell, exec_reply_content)
 nbclient.exceptions.CellExecutionError: An error occurred while executing the following cell:
 ------------------
-len(static_gratings_table[np.isnan(static_grating_table.orientation)])
+spont_table = data_set.get_stimulus_table('spontaneous_activity')
+spont_table
 ------------------
 
 [0;31m---------------------------------------------------------------------------[0m
-[0;31mNameError[0m                                 Traceback (most recent call last)
-[0;32m/var/folders/qh/5lyvn7d93mzft9kchq7xsqkw0000gp/T/ipykernel_58354/1188629694.py[0m in [0;36m<module>[0;34m[0m
-[0;32m----> 1[0;31m [0mlen[0m[0;34m([0m[0mstatic_gratings_table[0m[0;34m[[0m[0mnp[0m[0;34m.[0m[0misnan[0m[0;34m([0m[0mstatic_grating_table[0m[0;34m.[0m[0morientation[0m[0;34m)[0m[0;34m][0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
-[0m
-[0;31mNameError[0m: name 'static_grating_table' is not defined
-NameError: name 'static_grating_table' is not defined
+[0;31mMissingStimulusException[0m                  Traceback (most recent call last)
+[0;32m/var/folders/qh/5lyvn7d93mzft9kchq7xsqkw0000gp/T/ipykernel_96259/1780469827.py[0m in [0;36m<module>[0;34m[0m
+[0;32m----> 1[0;31m [0mspont_table[0m [0;34m=[0m [0mdata_set[0m[0;34m.[0m[0mget_stimulus_table[0m[0;34m([0m[0;34m'spontaneous_activity'[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m      2[0m [0mspont_table[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/opt/anaconda3/lib/python3.9/site-packages/allensdk/core/brain_observatory_nwb_data_set.py[0m in [0;36mget_stimulus_table[0;34m(self, stimulus_name)[0m
+[1;32m    559[0m         [0;32mwith[0m [0mh5py[0m[0;34m.[0m[0mFile[0m[0;34m([0m[0mself[0m[0;34m.[0m[0mnwb_file[0m[0;34m,[0m [0;34m'r'[0m[0;34m)[0m [0;32mas[0m [0mnwb_file[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    560[0m [0;34m[0m[0m
+[0;32m--> 561[0;31m             [0mstimulus_group[0m [0;34m=[0m [0m_find_stimulus_presentation_group[0m[0;34m([0m[0mnwb_file[0m[0;34m,[0m [0mstimulus_name[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+[0m[1;32m    562[0m [0;34m[0m[0m
+[1;32m    563[0m             [0;32mif[0m [0mstimulus_name[0m [0;32min[0m [0mself[0m[0;34m.[0m[0mSTIMULUS_TABLE_TYPES[0m[0;34m[[0m[0;34m'abstract_feature_series'[0m[0;34m][0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+
+[0;32m~/opt/anaconda3/lib/python3.9/site-packages/allensdk/core/brain_observatory_nwb_data_set.py[0m in [0;36m_find_stimulus_presentation_group[0;34m(nwb_file, stimulus_name, base_path, group_patterns)[0m
+[1;32m    978[0m [0;34m[0m[0m
+[1;32m    979[0m     [0;32mif[0m [0mlen[0m[0;34m([0m[0mmatches[0m[0;34m)[0m [0;34m==[0m [0;36m0[0m[0;34m:[0m[0;34m[0m[0;34m[0m[0m
+[0;32m--> 980[0;31m         raise MissingStimulusException(
+[0m[1;32m    981[0m             [0;34m'Unable to locate stimulus: {}. '[0m[0;34m[0m[0;34m[0m[0m
+[1;32m    982[0m             [0;34m'Looked for this stimulus under the names: {} '[0m[0;34m.[0m[0mformat[0m[0;34m([0m[0mstimulus_name[0m[0;34m,[0m [0mgroup_candidates[0m[0;34m)[0m[0;34m[0m[0;34m[0m[0m
+
+[0;31mMissingStimulusException[0m: Unable to locate stimulus: spontaneous_activity. Looked for this stimulus under the names: ['spontaneous_activity', 'spontaneous_activity_stimulus'] 
+MissingStimulusException: Unable to locate stimulus: spontaneous_activity. Looked for this stimulus under the names: ['spontaneous_activity', 'spontaneous_activity_stimulus'] 
 
