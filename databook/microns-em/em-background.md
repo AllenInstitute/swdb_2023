@@ -51,6 +51,8 @@ Many people are interested in studying the relationship between these cells and 
 
 ## The MICrONs dataset
 
+*buNote: For more complete details about the generation of the volume, please see [the preprint](https://www.biorxiv.org/content/10.1101/2021.07.28.454025v3).*
+
 The MICrONs dataset is an EM volume of mouse visual cortex that spans all cortical layers, and extends approximately 1 mm in width by 0.5 mm in depth, collected as a collaboration between the Allen Institute for Brain Science, Baylor College of Medicine, and Princeton University.
 The goal of this dataset was to produce a so-called "functional connectomics" volume, where the same population of neurons could be measured with both calcium imaging to record functional properties and EM to describe synapse-resolution structural properties.
 
@@ -65,4 +67,3 @@ The result is a cubic millimeter scale dataset with a rich collection of informa
 
 The next sections of the databook will introduce how to access the various parts of the dataset and give some guidance about how to use them.
 
-For more complete details about the generation of the volume, please see [the preprint](https://www.biorxiv.org/content/10.1101/2021.07.28.454025v3).

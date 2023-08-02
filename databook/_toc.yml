@@ -20,6 +20,7 @@ chapters:
 - file: microns-em/em-background
   sections:
   - file: microns-em/structural-data.md
+  - file: microns-em/caveclient-setup.md
   - file: microns-em/ultrastructure.md
 - file: visual-coding-np/vcnp
 - file: glossary
