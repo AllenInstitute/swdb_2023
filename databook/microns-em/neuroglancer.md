@@ -93,5 +93,3 @@ The number at the end of the URL is used to uniquely identify the state and can 
 If a URL contains `?local_id=` instead of `?json_url`, that means that it cannot be viewed by anyone else or even in another browser on your own computer.
 ```
 
-
-
