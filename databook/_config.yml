@@ -9,6 +9,11 @@ logo: logo.png
 # See https://jupyterbook.org/content/execute.html
 execute:
   execute_notebooks: force
+  exclude_patterns:
+    - 'visual-coding-2p'
+    - 'vc2p*'
+    - 'vcnp*'
+
 
 # Define the name of the latex output file for PDF builds
 latex:

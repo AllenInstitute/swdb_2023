@@ -12,6 +12,6 @@ kernelspec:
   name: python3
 ---
 
-# Ultrastructure
+# Ultrastructure Gallery
 
 This is what the data looks like.
