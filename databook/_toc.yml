@@ -30,5 +30,27 @@ chapters:
   - file: microns-em/volume-data.md
   - file: microns-em/ultrastructure.md
 - file: visual-coding-np/vcnp
+- file: visual-behavior/vb-background
+  sections:
+  - file: visual-behavior/ChangeDetectionTask
+    sections:
+      - file: visual-behavior/TaskStructure
+      - file: visual-behavior/BehaviorTraining
+      - file: visual-behavior/BehaviorSessionData
+  - file: visual-behavior/VB-Ophys
+    sections:
+    - file: visual-behavior/VBO-Dataset
+    - file: visual-behavior/VBO-SessionData
+    - file: visual-behavior/VBO-AcrossSessionData
+  - file: visual-behavior/VB-Neuropixels
+    sections:
+    - file: visual-behavior/VBN-Dataset
+    - file: visual-behavior/VBN-SessionData
+    - file: visual-behavior/VBN-Tutorial-Quality_Metrics
+      title: Tutorial Using Unit Quality and Waveform Metrics
+    - file: visual-behavior/VBN-Tutorial-Aligning_Neural_Data_to_Stimuli.ipynb
+      title: Tutorial Aligning Neural Data to Stimuli
+    - file: visual-behavior/VBN-Tutorial-Aligning_Behavior_Data_to_Task_Events.ipynb
+      title: Tutorial Aligning Behavioral Data to Task Events
 - file: glossary
 - file: bibliography
