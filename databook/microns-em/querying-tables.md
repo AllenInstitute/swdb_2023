@@ -88,6 +88,8 @@ cell_type_df = client.materialize.query_table('nucleus_detection_v0', split_posi
 cell_type_df
 ```
 
+## Key Tables 
+
 ## Querying Synapses
 
 While synapses are stored as any other table in the database, in this case `synapses_pni_2`, this table is much larger than any other table at more than 337 million rows, and it works best when queried in a different way.
@@ -103,8 +105,7 @@ print(f"Total number of output synapses for {my_root_id}: {len(syn_df)}")
 syn_df.head()
 ```
 
-The columns from a synapse query are listed here.
-Unless otherwise specificied (i.e. via `desired_resolution`), positions are in units of 4,4,40 nm/voxel resolution.
+The columns from a synapse query are:
 ```{list-table}
 :header-rows: 1
 
@@ -128,8 +129,22 @@ Unless otherwise specificied (i.e. via `desired_resolution`), positions are in u
   - The size of the synapse in voxels. This correlates well, but not perfectly, with the surface area of synapse.
 * - `ctr_pt_position`
   - The position of the center of the synapse. This is usually closest to the surface (and thus mesh) of both neurons.
+```
+Unless otherwise specificied (i.e. via `desired_resolution`), positions are in units of 4,4,40 nm/voxel resolution.
 
+Note that synapse queries always return the list of every synapse between the neurons in the query, even if there are multiple synapses between the same pair of neurons.
 
+A common pattern to generate a list of connections between unique pairs of neurons is to group by the root ids of the presynaptic and postsynaptic neurons and then count the number of synapses between them.
+For example, to get the number of synapses from this neuron onto every other neuron, ordered
 
+```{code-cell}
+syn_df.groupby(
+  ['pre_pt_root_id', 'post_pt_root_id']
+).count()[['id']].sort_values(
+  by='id',
+  ascending=False,
+)
+# Note that the [['id']] part here is just a way to quickly extract one column.
+# This could be any of the remaining column names.
 
 ```
