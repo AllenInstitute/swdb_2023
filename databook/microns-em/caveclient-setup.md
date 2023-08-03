@@ -12,6 +12,7 @@ kernelspec:
   name: python3
 ---
 
+(em-content:cave-setup)=
 # Setting up CAVEclient
 
 The CAVEclient is the main way to programmatically access the MICrONS data using Python.

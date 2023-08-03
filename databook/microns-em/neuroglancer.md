@@ -50,6 +50,9 @@ The basic controls for navigation are:
 * `control-scrool` zooms the view under the cursor in or out.
 * `z` snaps the view to the closest right angle.
 
+You can paste a position into Neuroglancer by clicking the x, y, z coordinate in the upper left corner and pasting a space or comma-separated list of numbers and hitting enter.
+Note that Neuroglancer always works in voxel units, and you can see the resolution of the voxels in the extreme upper left corner.
+
 ## Selecting objects
 
 The most direct way to select a neuron is to double click in the imagery to select the object under your cursor.
