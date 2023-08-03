@@ -10,11 +10,5 @@ kernelspec:
   language: python
   name: allensdk
 ---
-```{image} ../../resources/cropped-SummerWorkshop_Header.png
-:name: workshop-header
-```
 
-# Visual Coding — Neuropixels
-
-This notebook will introduce you to the Neuropixel dataset and SDK functions.
-
+# Quick start guide
