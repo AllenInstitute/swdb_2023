@@ -43,6 +43,12 @@ Somatostatin cell
 Martinotti cell
   A Martinotti cell is a particular subtype of SST cell that targets the apical dendrites of pyramidal cells in layer 1. Martinotti cells are found in layer 2/3 and layer 5.
 
+Minnie Column
+  A colloquial name for the 100 micron by 100 micron square column of cortex targeted for the census across layers. This column is a particularly well proofread collection of cells.
+
+Minnie Dataset
+  A colloquial name for the millimeter-scale MICrONs electron microscopy dataset.
+
 VIP cell
   A type of interneuron expressing the molecular marker VIP. VIP cells tend to target other interneurons rather than excitatory neurons. This role as a "disinhibitory specialist" is thought to be important for \ context-dependent modulation of cortical activity. Many VIP cells have a characteristic bipolar axon that points along the axis of the cortical column and are thus often called "bipolar cells".
 
