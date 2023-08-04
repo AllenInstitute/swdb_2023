@@ -8,13 +8,17 @@ logo: logo.png
 # Force re-execution of notebooks on each build.
 # See https://jupyterbook.org/content/execute.html
 execute:
-  timeout: 600
+  timeout: -1
   execute_notebooks: force
-  # exclude_patterns:
-  #   - 'visual-coding-2p'
-  #   - 'vc2p*'
-  #   - 'vcnp*'
-
+  exclude_patterns:
+    - 'microns-em'
+    - 'em*'
+    - 'vcnp*'
+    - 'vbn*'
+    - 'VBO*'
+    - 'VB*'
+    - 'VBN*'
+    - 'ctlut*'
 
 # Define the name of the latex output file for PDF builds
 latex:

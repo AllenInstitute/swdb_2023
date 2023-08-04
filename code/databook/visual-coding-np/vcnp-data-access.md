@@ -40,6 +40,9 @@ preloaded onto your Workshop hard drives. Make sure that `drive_path` is set
 correctly for your platform. (See the first cell in this notebook.)
 
 ```{code-cell} ipython3
+#cache = EcephysProjectCache.from_warehouse(manifest=manifest_path)
+manifest_path = '/data/allen-brain-observatory/visual-coding-neuropixels/ecephys-cache/manifest.json' 
+
 cache = EcephysProjectCache.from_warehouse(manifest=manifest_path)
 ```
 

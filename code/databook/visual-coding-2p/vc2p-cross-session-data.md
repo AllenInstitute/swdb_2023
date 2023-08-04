@@ -18,7 +18,8 @@ import matplotlib.pyplot as plt
 ```
 ```{code-cell} ipython3
 from allensdk.core.brain_observatory_cache import BrainObservatoryCache
-boc = BrainObservatoryCache()
+manifest_file = '../data/allen-brain-observatory/visual-coding-2p/manifest.json'
+boc = BrainObservatoryCache(manifest_file=manifest_file)
 ```
 
 # Cross session data
