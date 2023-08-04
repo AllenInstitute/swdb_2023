@@ -23,7 +23,7 @@ First we need to access the dataset. We will use the AllenSDK and the BrainObser
 
 ```{code-cell} ipython3
 from allensdk.core.brain_observatory_cache import BrainObservatoryCache
-manifest_file = '../data/allen-brain-observatory/visual-coding-2p/manifest.json'
+manifest_file = '../../../data/allen-brain-observatory/visual-coding-2p/manifest.json'
 boc = BrainObservatoryCache(manifest_file=manifest_file)
 ```
 
