@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
 set -e
 
-pip install allensdk --ignore-installed ruamel.yaml
+pip install allensdk==2.14.1 --ignore-installed ruamel.yaml
 
