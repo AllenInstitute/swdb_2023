@@ -60,9 +60,10 @@ Rather than describe these for every table, they will just be mentioned briefly 
 
 Table name: `pni_synapses_v2`
 
-The only synapse table is `pni_synapses_v2`. This is by far the largets table in the dataset, and is used to get neuronal connectiivty.
+The only synapse table is `pni_synapses_v2`. This is by far the largest table in the dataset with 337 million entries, one for each synapse.
 It contains the following columns (in addition to the bookkeeping columns):
 
+```{dropdown} Column Definitions
 ```{list-table}
 :header-rows: 1
 
@@ -91,7 +92,7 @@ For the purposes of analysis, we recommend using the `nucleus_ref_neuron_svm` ta
 
 The key columns of `nucleus_ref_neuron_svm` are:
 
-```{dorpdown} Column Definitions
+```{dropdown} Column Definitions
 ```{list-table} 
 :header-rows: 1
 :name: Nucleus Table
@@ -357,6 +358,7 @@ The key columns are:
 
 
 ---
+(em:functional-coreg)=
 ## Functional Coregistration Tables
 
 To relate the structural data to functional data, cell bodies must be coregistered between the functional imaging and EM volumes.
