@@ -18,7 +18,12 @@ The `minnie65_public` data release includes a number of annotation tables that h
 This section describes the content of each of these tables — [see here for instructions for how to query and filter tables](em:query-tables).
 Unless otherwise specificied (i.e. via `desired_resolution`), all positions are in units of 4,4,40 nm/voxel resolution.
 
-## Spatial Points
+## Common Fields
+
+Several fields (or column names) are common to many tables.
+These fall into two main classes: the spatial point columns that are how we assign annotations to cells via points in the 3d space and book-keeping columns, that are used internally to track the state of the data.
+
+### Spatial Point Columns
 
 Most tables have one or more **Bound Spatial Points**, which is a location in the 3d space that tells the annotation to remain associated with the root id at that location.
 Bound spatial points have will have one prefix, usually `pt` (i.e. "point") and three associated columns with different suffixes: `_position`, `_supervoxel_id`, and `_root_id`.
@@ -29,9 +34,9 @@ For a given prefix `{pt}`, the three columns are as follows:
 * The `{pt}_supervoxel_id` indicates a unique identifier in the segmentation, and is mostly internal bookkeeping.
 * The `{pt}_root_id` indicates the root id of the annotation at that location.
 
-## Bookkeeping Columns
+### Book-keeping Columns
 
-Several columns are common to many or all tables, and mostly used as internal booking.
+Several columns are common to many or all tables, and mostly used as internal book-keeping.
 Rather than describe these for every table, they will just be mentioned briefly here:
 
 ```{list-table}
@@ -53,7 +58,8 @@ Rather than describe these for every table, they will just be mentioned briefly 
 
 ## Synapse Table
 
-### `pni_synapses_v2`
+Table name: `pni_synapses_v2`
+
 The only synapse table is `pni_synapses_v2`. This is by far the largets table in the dataset, and is used to get neuronal connectiivty.
 It contains the following columns (in addition to the bookkeeping columns):
 
@@ -74,7 +80,7 @@ It contains the following columns (in addition to the bookkeeping columns):
 
 ## Nucleus Table
 
-### `nucleus_ref_neuron_svm`
+Table name: `nucleus_ref_neuron_svm`
 
 Nucleus detection has been used to define unique cells in the dataset.
 Distinct from the neuronal segmentation, a convolutional neural network was trained to segment nuclei.
@@ -85,11 +91,14 @@ For the purposes of analysis, we recommend using the `nucleus_ref_neuron_svm` ta
 
 The key columns of `nucleus_ref_neuron_svm` are:
 
-```{list-table}
+```{dorpdown} Column Definitions
+```{list-table} 
 :header-rows: 1
 :name: Nucleus Table
 * - Column
   - Description
+* - `id`
+  - Soma ID for the cell.
 * - `pt_position` \ `pt_supervoxel_id` \ `pt_root_id`
   - Bound spatial point columns associated with the centroid of the nucleus.
 * - `classification-system`
@@ -107,16 +116,21 @@ Because each method requires a different kind of information, not all cells are 
 Each of the cell types tables has the same format and in all cases the `id` column references the nucleus id of the cell in question.
 
 ---
-### `aibs_soma_nuc_metamodel_preds_v117`
+### Predictions from soma/nucleus features
+
+Table name: `aibs_soma_nuc_metamodel_preds_v117`
 
 This table contains the results of a hierarchical classifier trained on features of the cell body and nucleus of cells. This was applied to most cells in the dataset that had complete cell bodies (e.g. not cut off by the edge of the data). For more details, see [Elabbady et al. 2022](https://www.biorxiv.org/content/10.1101/2022.07.20.499976v1). In general, this does a good job, but sometimes confuses layer 5 inhibitory neurons as being excitatory: 
 The key columns are:
-```{dropdown} Column Details
+
+```{dropdown} Column Definitions
 ```{list-table}
 :header-rows: 1
 :name: AIBS Soma Nuc Metamodel Table
 * - Column
   - Description
+* - `id`
+  - Soma ID for the cell.
 * - `pt_position` \ `pt_supervoxel_id` \ `pt_root_id`
   - Bound spatial point columns associated with the centroid of the cell nucleus.
 * - `classification-system`
@@ -180,18 +194,21 @@ The key columns are:
 ```
 
 ---
-### `baylor_log_reg_cell_type_coarse_v1`
+### Coarse prediction from spine detection
+Table name: `baylor_log_reg_cell_type_coarse_v1`
 
 This table contains the results of a logistic regression classifier trained on properties of neuronal dendrites. This was applied to many cells in the dataset, but required more data than soma and nucleus features alone and thus more cells did not complete the pipeline. It has very good performance on excitatory vs inhibitory neurons because it focuses on dendritic spines, a characteristic property of excitatory neurons. It is a good table to double check E/I classifications if in doubt.
 
 The key columns are:
 
-```{dropdown} Column Details
+```{dropdown} Column Definitions
 ```{list-table}
 :header-rows: 1
 :name: AIBS Soma Nuc Metamodel Table
 * - Column
   - Description
+* - `id`
+  - Soma ID for the cell.
 * - `pt_position` \ `pt_supervoxel_id` \ `pt_root_id`
   - Bound spatial point columns associated with the centroid of the cell nucleus.
 * - `classification-system`
@@ -201,19 +218,29 @@ The key columns are:
 ```
 
 ---
-### `allen_column_mtypes_v1`
+### Fine prediction from dendritic features
+
+Table name: `allen_column_mtypes_v1`
 
 This table contains all neurons within a well-proofread 100 micron square column in {term}`VISp` spanning all layers.
 Excitatory neurons and inhibitory neurons were distinguished manually, and subclasses were assigned based on a data-driven clustering of the neuronal features.
 Inhibitory neurons were classified based on how they distributed they synaptic outputs onto target cells, while exictatory neurons were classified based on a collection of dendritic features.
 For more details, see the section on the [Minnie Column](em:minnie-column) or read the preprint [Schneider-Mizell et al. 2023](https://www.biorxiv.org/content/10.1101/2023.01.23.525290v2).
+Note that all cell type labels in this column come from a clustering specific to this paper, and while they are intended to align with the broader literature they are not a direct mapping or a well-established convention.
+For a more conventional set of labels on the same set of cells, look at the table `allen_v1_column_types_slanted_ref`.
+Cell types in that table align with those in `aibs_soma_nuc_metamodel_preds_v117` above.
 
-```{dropdown} Column Details
+The key columns are:
+
+
+```{dropdown} Column Definitions
 ```{list-table}
 :header-rows: 1
 :name: AIBS Soma Nuc Metamodel Table
 * - Column
   - Description
+* - `id`
+  - Soma ID for the cell.
 * - `pt_position` \ `pt_supervoxel_id` \ `pt_root_id`
   - Bound spatial point columns associated with the centroid of the cell nucleus.
 * - `classification-system`
@@ -287,7 +314,7 @@ For more details, see the section on the [Minnie Column](em:minnie-column) or re
       - Sparsely targeting cells, a cluster of inhibitory neurons that don't concentrate multiple synapses onto the same target neurons. Many neurogliaform cells and layer 1 interneurons fall into this category.  
     * - `ITC`
       - Inhibitory
-      - Inhibitory targeting cells, a cluster of inhibitory neurons that preferntially target other inhibitory neurons. Most VIP cells would be ITCs.
+      - Inhibitory targeting cells, a cluster of inhibitory neurons that preferntially target other inhibitory neurons. Most {term}`VIP cell`s would be ITCs.
     ```
 ```
 
@@ -295,13 +322,81 @@ For more details, see the section on the [Minnie Column](em:minnie-column) or re
 
 ## Proofreading Tables
 
-Tables that describe the state of proofreading.
+Table name: `proofreading_status_public_release`
+
+The table `proofreading_status_public_release` describes the status of cells selected for manual proofreading.
+Because of the inherent difference in the challenge and time required for different kinds of proofreading, we describe the status of axons and dendrites separately.
+Further, we distinguish three different categories of proofreading:
+
+* `non`: No proofreading has been comprehensively performed.
+* `clean`: Proofreading has comprehensively removed false merges, but not necessarily added missing parts.
+* `extended`: Proofreading has comprehensively removed false merges and attempted to add all or most missing parts.
+
+Note that many cells not in this table have been edited in some places, but not comprehensively worked on.
+For more information, please see [Proofreading and Data Quality](em:proofreading-data-quality).
+
+The key columns are:
+
+```{dropdown}  Column Definitions
+```{list-table} 
+:header-rows: 1
+
+* - Column
+  - Description
+* - `id`
+  - ID within the proofreading table (not cell id).
+* - `pt_position` \ `pt_supervoxel_id` \ `pt_root_id`
+  - Bound spatial point columns associated with the centroid of the cell nucleus being proofread.
+* - `valid_id`
+  - The root id of the neuron when it the proofreading assessment was made.
+* - `status_dendrite`
+  - The status of the dendrite proofreading. One of the three categories described above.
+* - `status_axon`
+  - The status of the axon proofreading. One of the three categories described above.
+```
+
 
 ---
-
 ## Functional Coregistration Tables
 
-Tables that how to associate neurons with functional traces.
+To relate the structural data to functional data, cell bodies must be coregistered between the functional imaging and EM volumes.
+The results of this coregistration are stored in two tables with the same columns:
+
+* `coregistration_manual_v3` : The results of manually verified coregistration. This table is well-verified, but contains fewer {term}`ROI`s (N=12,052 root ids, 13,925 ROIs).
+* `apl_functional_coreg_forward_v5` : The results of automated functional matching between the EM and 2-p functional data. This table is not manually verified, but contains more {term}`ROI`s (N=36,078 root ids, 68,873 ROIs).
+
+Please see the [Functional Data](em:functional-data) section for more information about using this data.
+
+The column descriptions are:
+
+```{dropdown}  Column Definitions
+```{list-table} 
+:header-rows: 1
+
+* - Column
+  - Description
+* - `id`
+  - Soma ID for the cell.
+* - `pt_position` \ `pt_supervoxel_id` \ `pt_root_id`
+  - Bound spatial point columns associated with the centroid of the cell nucleus being proofread.
+* - `session`
+  - The session index from functional imaging.
+* - `scan_idx`
+  - The scan index from functional imaging.
+* - `unit_id`
+  - The ROI index from functional imaging. Only unique within scan and session.
+* - `field`
+  - The field index from functional imaging.
+* - `residual`
+  - The residual distance between the functional and the assigned structural points after transformation, in microns.
+  Smaller values indicate a closer match.
+* - `score`
+  - A separation score, measuring the difference between the residual distance to the assigned neuron and the distance to the nearest non-assigned neuron, in microns.
+  This can be negative if the non-assigned neuron is closer than the assigned neuron.
+  Larger values indicate fewer nearby neurons that could be confused with the assigned neuron.
+```
+
+
 
 ---
 
