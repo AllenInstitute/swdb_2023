@@ -112,7 +112,7 @@ cre_line
 : The {term}`Cre line` that the mouse has.
 
 reporter_line
-: The {term}`Reporter line` that the mouse has.
+: The {term}`Reporter` line that the mouse has.
 
 donor_name
 : The id of the mouse that was imaged.
@@ -167,7 +167,7 @@ cre_line
 : The {term}`Cre line` that the mouse has.
 
 reporter_line
-: The {term}`Reporter line` that the mouse has.
+: The {term}`Reporter` line that the mouse has.
 
 acquisition_age_days
 : The age of the mouse when this session was recorded, in days.

@@ -6,7 +6,7 @@ root: intro
 chapters:
 - file: background/background
   sections:
-  - file: background/anatomy
+  - file: background/Mouse-visual-system
   - file: background/transgenic-tools
   - file: background/Two-photon-calcium-imaging
   - file: background/Neuropixels-electrophysiology
@@ -16,20 +16,20 @@ chapters:
   - file: visual-coding-2p/vc2p-dataset
   - file: visual-coding-2p/vc2p-session-data
   - file: visual-coding-2p/vc2p-stimuli
-  - file: visual-coding-2p/evoked-response
+  - file: visual-coding-2p/vc2p-evoked-response
   - file: visual-coding-2p/vc2p-cross-session-data
 - file: microns-em/em-background
   sections:
-  - file: microns-em/structural-data.md
-  - file: microns-em/caveclient-setup.md
-  - file: microns-em/neuroglancer.md
-  - file: microns-em/dash-apps.md
-  - file: microns-em/querying-tables.md
-  - file: microns-em/skeletons.md
-  - file: microns-em/meshes.md
-  - file: microns-em/functional_data.md
-  - file: microns-em/volume-data.md
-  - file: microns-em/ultrastructure.md
+  - file: microns-em/em-structural-data.md
+  - file: microns-em/em-caveclient-setup.md
+  - file: microns-em/em-neuroglancer.md
+  - file: microns-em/em-dash-apps.md
+  - file: microns-em/em-querying-tables.md
+  - file: microns-em/em-skeletons.md
+  - file: microns-em/em-meshes.md
+  - file: microns-em/em-functional_data.md
+  - file: microns-em/em-volume-data.md
+  - file: microns-em/em-ultrastructure.md
 - file: visual-coding-np/vcnp
 - file: visual-behavior/vb-background
   sections:

@@ -209,6 +209,15 @@ for c,stim_name in enumerate(stim_epoch.stimulus.unique()):
         plt.axvspan(xmin=stim.start.iloc[j], xmax=stim.end.iloc[j], color=colors[c], alpha=0.1)
 ```
 
+## Eyetracking
+Not all experiments have eye tracking data associated with them. For a few, the eye tracking is in the nwb file and can be found using `data_set.get_pupil_location()` and `data_set.get_pupil_area()`. For more experiments, the eye tracking was done at a later date and is not stored in the NWB file and is available using `boc.get_eye_tracking()`. This returns an array containing both pupil area and location that is temporally aligned with the fluorescence traces.
+
+```{code-cell} ipython3
+eye = boc.get_eye_tracking(ophys_experiment_id=session_id)
+```
+
+The five columns of this array are: index, pupil area, eye area, x-position (in degrees), y-position (in degrees).
+
 ## Stimulus Table and Template
 Each stimulus that is shown has a <b>stimulus table</b> that details what each trial is and when it is presented. Additionally, the <b>natural scenes</b>, <b>natural movies</b>, and <b>locally sparse noise</b> stimuli have a <b>stimulus template</b> that shows the exact image that is presented to the mouse. We detail how to access and use these items in [Visual stimuli](vc2p-stimuli.md).
 
