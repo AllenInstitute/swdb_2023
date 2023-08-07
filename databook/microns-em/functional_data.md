@@ -47,6 +47,7 @@ In the fully automatic approach, blood vessels were segmented in both 2p and EM 
 More details can be found in the [MICrONS dataset preprint](https://www.biorxiv.org/content/10.1101/2021.07.28.454025v3).
 
 ### Metrics
+
 ```{figure} img/coreg-metrics.png
 ---
 align: center
@@ -62,6 +63,7 @@ Larger values indicate fewer potential matches and therefore a more confident ma
 
 When using the automated coregistration, it is important to filter the data based on assignment confidence.
 A guide for this can be found by comparing the subset of cells matched by both the automated and manual coregistration methods.
+
 ```{figure} img/coreg-agreement.png
 ---
 align: center

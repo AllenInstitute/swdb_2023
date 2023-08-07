@@ -7,6 +7,9 @@ Action potential
 Cre line
   definition
 
+CSV
+  Shorthand for "comma separated values", a common file format for storing tabular data where each row is a line and each column is separated by a comma.
+
 Ephys
   Shorthand for electrophysiology.
 
