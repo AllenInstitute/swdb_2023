@@ -18,18 +18,6 @@ chapters:
   - file: visual-coding-2p/vc2p-stimuli
   - file: visual-coding-2p/vc2p-evoked-response
   - file: visual-coding-2p/vc2p-cross-session-data
-- file: microns-em/em-background
-  sections:
-  - file: microns-em/em-structural-data.md
-  - file: microns-em/em-caveclient-setup.md
-  - file: microns-em/em-neuroglancer.md
-  - file: microns-em/em-dash-apps.md
-  - file: microns-em/em-querying-tables.md
-  - file: microns-em/em-skeletons.md
-  - file: microns-em/em-meshes.md
-  - file: microns-em/em-functional_data.md
-  - file: microns-em/em-volume-data.md
-  - file: microns-em/em-ultrastructure.md
 - file: visual-coding-np/vcnp
 - file: visual-behavior/vb-background
   sections:
@@ -53,5 +41,17 @@ chapters:
       title: Tutorial Aligning Neural Data to Stimuli
     - file: visual-behavior/VBN-Tutorial-Aligning_Behavior_Data_to_Task_Events.ipynb
       title: Tutorial Aligning Behavioral Data to Task Events
+- file: microns-em/em-background
+  sections:
+  - file: microns-em/em-structural-data.md
+  - file: microns-em/em-caveclient-setup.md
+  - file: microns-em/em-neuroglancer.md
+  - file: microns-em/em-dash-apps.md
+  - file: microns-em/em-querying-tables.md
+  - file: microns-em/em-skeletons.md
+  - file: microns-em/em-meshes.md
+  - file: microns-em/em-functional_data.md
+  - file: microns-em/em-volume-data.md
+  - file: microns-em/em-ultrastructure.md
 - file: glossary
 - file: bibliography
