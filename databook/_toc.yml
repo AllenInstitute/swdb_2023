@@ -20,15 +20,16 @@ chapters:
 - file: microns-em/em-background
   sections:
   - file: microns-em/structural-data.md
-  - file: microns-em/caveclient-setup.md
+  - file: microns-em/proofreading.md
   - file: microns-em/neuroglancer.md
   - file: microns-em/dash-apps.md
+  - file: microns-em/caveclient-setup.md
   - file: microns-em/querying-tables.md
   - file: microns-em/key-tables.md
+  - file: microns-em/volume-data.md
   - file: microns-em/skeletons.md
   - file: microns-em/meshes.md
   - file: microns-em/functional_data.md
-  - file: microns-em/volume-data.md
   - file: microns-em/ultrastructure.md
 - file: visual-coding-np/vcnp
 - file: glossary
