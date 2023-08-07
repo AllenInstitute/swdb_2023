@@ -83,4 +83,46 @@ Full column definitions can be [found on Annotation Tables page](em:functional-c
 
 ## Functional data
 
-TDB when more info is clear.
+A collection of *in silico* model responses of neurons to a variety of visual stimuli has been precomputed.
+The data can be found in a collection of files:
+
+:::{list-table}
+:header-rows: 1
+* - Filename
+  - Format
+  - Info
+* - `nat_movie.npy`
+  - `numpy.ndarray`
+  - dimensions=`[clip, frame, height, width]`
+* - `nat_resp.npy`
+  - `numpy.ndarray`
+  - dimensions=`[unit, bin]`
+* - `nat_unit.csv`
+  - importable into `pandas.DataFrame`
+  - columns=`[animal_id, scan_session, scan_idx, unit_id, row_idx]`
+* - `monet_resp.npy`
+  - `numpy.ndarray`
+  - dimensions=`[unit, direction, trial]`
+* - `monet_dir.npy`
+  - `numpy.ndarray`
+  - dimensions=`[direction]`
+* - `monet_unit.csv`
+  - importable into `pandas.DataFrame`
+  - columns=`[animal_id, scan_session, scan_idx, unit_id]`
+:::
+
+The model response data is organized into two sets of files, one for natural movies and one for Monet stimuli, a type of parametric stimulus that measures orientation tuning.
+
+The natural movie data is organized into three files:
+
+* `nat_movie` contains 250 10-sec clips of natural movies. Movies were shown to the model at a resolution of 72 * 128 pixels at 30 hz. This is downsampled from the *in vivo* presentation resolution of 144 * 256 pixels.
+* `nat_resp` contains 104,171 units' binned responses to natural movies. Responses were binned into 500 msec non-overlapping bins. This results in 250 clips * 10 sec / 500 msec = 5000 bins, with every binned response corresponding to 15 frames of natural movies.
+* `nat_unit` contains the mapping from rows in nat_resp to functional unit keys. Since there is only a single animal for the EM data, use the session, scan, and unit id values to match to the EM data via one of the coregistration tables described above.
+
+The Monet stimulus data is similarly organized into three files:
+
+* `monet_resp` contains 104,171 units' mean responses to Monet stimuli. 120 trials of 16-direction Monet stimuli were shown to the model. The 120 trials were generated with different random seeds.
+
+* `monet_dir` contains the direction (in units of degrees) for the Monet stimulus shown to the model. The order of directions matches the order in the direction dimension of monet_resp. Here, 0 degrees is vertical feature moving leftwards, with degrees increases in the anti-clockwise direction.
+
+* `monet_unit` contains the functional unit keys of the 104,171 units. The order of the unit keys matches the order in the unit dimension of `monet_resp`.  Since there is only a single animal for the EM data, use the session, scan, and unit id values to match to the EM data via one of the coregistration tables described above.
