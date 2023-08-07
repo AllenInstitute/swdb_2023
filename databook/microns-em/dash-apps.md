@@ -129,7 +129,7 @@ The synapse annotations are also associated with the synaptic partners, making i
 
 The table below shows a table of all synaptic partners.
 
-```{figure} img/connectivity-viewer-table-view.png}
+```{figure} img/connectivity-viewer-table-view.png
 ---
 align: center
 ---

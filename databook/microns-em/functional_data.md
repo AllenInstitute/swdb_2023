@@ -46,7 +46,7 @@ This transform was then applied to the functional data to identify a location in
 In the fully automatic approach, blood vessels were segmented in both 2p and EM volumes, and a transform was generated based on matching this 3d structure.
 More details can be found in the [MICrONS dataset preprint](https://www.biorxiv.org/content/10.1101/2021.07.28.454025v3).
 
-### Metrics
+### Coregistration Quality Metrics
 
 ```{figure} img/coreg-metrics.png
 ---
