@@ -112,6 +112,14 @@ The data can be found in a collection of files:
 :::
 
 The model response data is organized into two sets of files, one for natural movies and one for Monet stimuli, a type of parametric stimulus that measures orientation tuning.
+The `.npy` files can be read with the numpy function `np.load` and the `.csv` files with the pandas function `pd.read_csv`.
+
+```{figure} img/function-stimulus.png
+---
+align: center
+---
+Example images from a variety fo the stimuli used to probe functional responses. Natural movies include scenes from cinema, POV nature videos, and rendered 3d scenes. Monet stimuli are a parametic textured stimulus that varies in orientation and spatial frequency of correlated motion.
+```
 
 The natural movie data is organized into three files:
 

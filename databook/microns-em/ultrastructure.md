@@ -14,6 +14,13 @@ kernelspec:
 
 # Ultrastructure Resources
 
+```{figure} img/ultrastructure.png
+---
+scale: 33%
+align: center
+---
+```
+
 Electron microscopy allows one to see very high resolution features called the "ultrastructure" of the cell, such as organelles and microtubules.
 However, when first seeing EM images, it can be difficult to know the biological meaning of what you are looking at.
 Here are a couple of resources with several examples of particular structures imaged with EM:

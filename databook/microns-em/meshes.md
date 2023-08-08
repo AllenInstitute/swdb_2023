@@ -12,6 +12,7 @@ kernelspec:
   name: python3
 ---
 
+(em:meshes)=
 # Meshes
 
 When trying to understand the fine 3d morphology of a neuron (e.g. features under 1 micron in scale), meshes are a particularly useful representation.

@@ -54,13 +54,15 @@ The main three properties of the meshwork object are:
 * nrn.anno : A table of annotation dataframes and associated metadata that links them to specific vertices in the mesh and skeleton.
 
 ## Meshwork nrn.mesh vs nrn.skeleton
-Skeletons are "tree-like", where every vertex (except the root vertex) has a single parent that is closer to the root than it, and any number of child vertices. Because of this, for a skeleton there are well-defined directions "away from root" and "towards root". A few types of vertices have special names:
+Skeletons are "tree-like", where every vertex (except the root vertex) has a single parent that is closer to the root than it, and any number of child vertices. Because of this, for a skeleton there are well-defined directions "away from root" and "towards root" and few types of vertices have special names:
 
 Branch point: vertices with two or more children, where a neuronal process splits.
 End point: vertices with no childen, where a neuronal process ends.
 Root point: The one vertex with no parent node. By convention, we typically set the root vertex at the cell body, so these are equivalent to "away from soma" and "towards soma".
 Segment: A collection of vertices along an unbranched region, between one branch point and the next end point or branch point downstream.
 Meshes are arbitrary collections of vertices and edges, but do not have a notion of "parent" or "child" "branch point" or "end point". Here, this means the "mesh" used here includes a vertex for every level 2 chunk, even where it is thick like at a cell body or very thick dendrite. However, by default this means that there is not always a well-defined notion of parent or child nodes, or towards or away from root.
+
+In contrast "Meshes" (really, graphs of connected vertices) do not have a unique "inward" and "outward" direction. For the sake of rapid skeletonization, the "meshes" we use here are really the graph of level 2 vertices as described above. These aren't a mesh in the visualization sense of the section on [downloading Meshes](em:meshes), but have the same data representation.
 
 To handle this, the meshwork object associates each mesh vertices with a single nearby skeleton vertex, and each skeleton vertex is associated with one or more mesh vertices. By representing data this way, annotations like synapses can be directly associated with a mesh vertex (because synapses can be anywhere on the object) and then mapped to the skeleton in order to enjoy the topological benefits of the skeleton representation.
 
@@ -198,7 +200,7 @@ While `mask_context` acts to mask the skeleton and then unmasks it at the end of
 In that case, use the `nrn.apply_mask` function.
 
 :::{important}
-Do not use the `nrn.mesh.apply_mask` or `nrn.skeleton.apply_mask`` functions, which will not synchronize the mask across the mesh, skeleton, and annotations.
+Do not use the `nrn.mesh.apply_mask` or `nrn.skeleton.apply_mask` functions, which will not synchronize the mask across the mesh, skeleton, and annotations.
 :::
 
 :::{figure} img/branch_plot.png
@@ -206,17 +208,32 @@ Do not use the `nrn.mesh.apply_mask` or `nrn.skeleton.apply_mask`` functions, wh
 
 ## Annotations
 
-`nrn.anno` has set of dataframes containing some additional information for analysis. To find out what information it contains, look at the `table_names` attribute.
-
+`nrn.anno` has set of annotation tables containing some additional information for analysis.
+Each annotation table has both a Pandas DataFrame object storing data and additional information that allow the rows of the DataFrame to be mapped to mesh and skeleton vertices.
 For the neurons that have been pre-computed, there is a consisent set of annotation tables:
 
-* apical_mesh_labels: List of vertices that have been labeled as part of the apical dendrite
-* basal_mesh_labels: List of vertices that have been labeled as part of the basal dendrite
-* is_axon: List of vertices that have been labeled as part of the true axon
-* lvl2_ids: Gives the PCG level 2 id for each mesh vertex
-* post_syn: Gives the postsynaptic sites (inputs) for the cell, including the full dataframe as well as which mesh vertex each synapse is associated with
-* pre_syn: Gives the presynaptic sites (outputs) for the cell, including the full dataframe as well as which mesh vertex each synapse is associated with
-* remaining_axon: For neurons with automated proofreading to remove axons, this contains vertices that were not removed but still labeled as axon
-* segment_properties: For each vertex, information about the approximate radius, surface area, volume, and length of the segment it is on.
-* soma_row: Information about the soma location and nucleus id of the neuron.
-* vol_prop: For every vertex, the information about the volume and surface area of the level 2 id it is associated with.
+* `post_syn`: Postsynaptic sites (inputs) for the cell
+* `pre_syn`: Presynaptic sites (outputs) for the cell
+* `is_axon`: List of vertices that have been labeled as part of the axon
+* `lvl2_ids`: Gives the PCG level 2 id for each mesh vertex, largely for book-keeping reasons.
+* `segment_properties`: For each vertex, information about the approximate radius, surface area, volume, and length of the segment it is on.
+* `vol_prop`: For every vertex, information about the volume and surface area of the level 2 id it is associated with.
+
+To access one of the DataFrames, use the name of the table as an attribute of the `anno` object and then get the `.df` property. For example, to get the postsynaptic sites, we can do:
+
+```{code-cell}
+from meshparty import meshwork
+nrn = meshwork.load_meshwork('data/864691134940133219_skel.h5')
+nrn.anno.post_syn.df.head()
+```
+
+However, in addition to these rows, you can also easily get the mesh vertex index or skeleton vertex index that a row corresponds to with `nrn.anno.post_syn.mesh_index` or `nrn.anno.post_syn.skel_index` respectively.
+This seems small, but it allows you to integrate skeleton-like measurements with annotations trivially.
+
+For example, to get the distance from the cell body for each postsynaptic site, we can do:
+
+```{code-cell}
+nrn.distance_to_root(nrn.anno.post_syn.mesh_index)
+```
+
+Note that the `nrn.distance_to_root` function, like takes either a mesh vertex index or a skeleton vertex index, so we can use the `nrn.anno.post_syn.skel_index` to get the distance to root for each postsynaptic site.
