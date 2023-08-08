@@ -56,10 +56,11 @@ The main three properties of the meshwork object are:
 ## Meshwork nrn.mesh vs nrn.skeleton
 Skeletons are "tree-like", where every vertex (except the root vertex) has a single parent that is closer to the root than it, and any number of child vertices. Because of this, for a skeleton there are well-defined directions "away from root" and "towards root" and few types of vertices have special names:
 
-Branch point: vertices with two or more children, where a neuronal process splits.
-End point: vertices with no childen, where a neuronal process ends.
-Root point: The one vertex with no parent node. By convention, we typically set the root vertex at the cell body, so these are equivalent to "away from soma" and "towards soma".
-Segment: A collection of vertices along an unbranched region, between one branch point and the next end point or branch point downstream.
+* Branch point: vertices with two or more children, where a neuronal process splits.
+* End point: vertices with no childen, where a neuronal process ends.
+* Root point: The one vertex with no parent node. By convention, we typically set the root vertex at the cell body, so these are equivalent to "away from soma" and "towards soma".
+* Segment: A collection of vertices along an unbranched region, between one branch point and the next end point or branch point downstream.
+
 Meshes are arbitrary collections of vertices and edges, but do not have a notion of "parent" or "child" "branch point" or "end point". Here, this means the "mesh" used here includes a vertex for every level 2 chunk, even where it is thick like at a cell body or very thick dendrite. However, by default this means that there is not always a well-defined notion of parent or child nodes, or towards or away from root.
 
 In contrast "Meshes" (really, graphs of connected vertices) do not have a unique "inward" and "outward" direction. For the sake of rapid skeletonization, the "meshes" we use here are really the graph of level 2 vertices as described above. These aren't a mesh in the visualization sense of the section on [downloading Meshes](em:meshes), but have the same data representation.
@@ -236,4 +237,63 @@ For example, to get the distance from the cell body for each postsynaptic site, 
 nrn.distance_to_root(nrn.anno.post_syn.mesh_index)
 ```
 
-Note that the `nrn.distance_to_root` function, like takes either a mesh vertex index or a skeleton vertex index, so we can use the `nrn.anno.post_syn.skel_index` to get the distance to root for each postsynaptic site.
+```{important}
+Note that the `nrn.distance_to_root`, like all basic meshwork object functions, expects a mesh vertex index rather than a skeleton vertex index.
+```
+
+A common pattern is to copy a synapse dataframe and then add columns to it.
+For example, to add the distance to root to the postsynaptic sites, we can do:
+
+```{code-cell}
+syn_df = nrn.anno.pre_syn.df.copy()
+syn_df['dist_to_root'] = nrn.distance_to_root(nrn.anno.pre_syn.mesh_index)
+```
+
+### Filtering Annotations by Skeleton Arbor
+
+Each annotation table has a 'filter_query' method that takes a boolean mesh mask and returns only those rows of the dataframe associated with those particular locations on the mesh. Let's use what we learned above in two examples: first, getting all input synapses within 50 microns of the root and second, getting all input synapses on one particular branch off of the soma.
+
+```{code-cell}
+dtr = nrn.distance_to_root() / 1_000   # Convert from nanometers to microns
+nrn.anno.post_syn.filter_query( dtr < 50).df
+```
+
+We can also use one set of annotations as an input to filter query from another set of annotations. For example, due to errors in segmentation or mistakes in synapse detection, there can be synaptic outputs on the dendrite. However, if we have an `is_axon` annotation that simply contains a collection of vertices that correspond to the cell's axon. We can use this annotation to create a mask and filter out all of the synapses that are not on the axon.
+
+```{code-cell}
+axon_mask = nrn.anno.is_axon.mesh_mask
+nrn.anno.pre_syn.filter_query(~axon_mask).df # The "~" is a logical not operation that flips True and False
+```
+
+As a sanity check, we can use `nglui` to see if these synapses we have labeled as being on the axon are all where we expect.
+
+```{code-cell}
+from caveclient import CAVEclient
+from nglui.statebuilder.helpers import make_synapse_neuroglancer_link
+
+client = CAVEclient('minnie65_public')
+
+make_synapse_neuroglancer_link(
+    nrn.anno.pre_syn.filter_query(axon_mask).df,
+    client,
+    return_as="html"
+)
+```
+
+(Click one of the synapse annotations to load the neuron mesh).
+
+Another common example might be to pick one of the child nodes of the soma and get all of the synapses on that branch. We can do this by using the `nrn.skeleton.get_child_nodes` function to get the skeleton vertex indices of the child nodes and then use that to filter the synapses.
+
+```{code-cell}
+
+branch_index = 0 # Let's just use the first child vertex of the root node, which is at the soma by default.
+branch_inds = nrn.downstream_of(nrn.child_index(nrn.root)[branch_index])
+branch_mask = branch_inds.to_mesh_mask
+
+make_synapse_neuroglancer_link(
+    nrn.anno.post_syn.filter_query(branch_mask).df,
+    client,
+    return_as="html"
+)
+```
+

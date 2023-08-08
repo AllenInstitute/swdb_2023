@@ -19,6 +19,8 @@ kernelspec:
 scale: 33%
 align: center
 ---
+
+An EM cutout showing numerous biological structures such as mitochondria, synapses, myelin, nuclei, and endoplasmic reticulum.
 ```
 
 Electron microscopy allows one to see very high resolution features called the "ultrastructure" of the cell, such as organelles and microtubules.
