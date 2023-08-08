@@ -14,6 +14,7 @@ kernelspec:
 ```{code-cell} ipython3
 import numpy as np
 import matplotlib.pyplot as plt
+%matplotlib inline
 ```
 ```{code-cell} ipython3
 from allensdk.core.brain_observatory_cache import BrainObservatoryCache
