@@ -36,10 +36,10 @@ What brain regions were recorded across the dataset? To determine this we use a 
 boc.get_all_targeted_structures()
 ```
 
-We see that data was collected in six different visual areas. VISp is the primary visual cortex, also known as V1. The others are higher visual areas that surround VISp. See [visual cortical areas](../background/anatomy.md) to learn more about these areas and how we map them.
+We see that data was collected in six different visual areas. VISp is the primary visual cortex, also known as V1. The others are higher visual areas that surround VISp. You can learn more about these areas and how we map them [here](../background/Mouse-visual_system.md).
 
 ## Cre lines and reporters
-We used Cre lines to drive the expression of GCaMP6 in specific populations of neurons. We can find a list of all the cre lines used in this dataset with a similar function
+We used Cre lines to drive the expression of GCaMP6 in specific populations of neurons. We can find a list of all the cre lines used in this dataset with a similar function 
 
 ```{code-cell} ipython3
 boc.get_all_cre_lines()
@@ -151,11 +151,20 @@ Let's look at all of the sessions in a single experiment container.
 ```{code-cell} ipython3
 experiment_container_id = 511510736
 sessions = boc.get_ophys_experiments(experiment_container_ids=[experiment_container_id])
+```
+
+```{note}
+Much like get_experiment_containers, `get_ophys_experiments` returns all experiment sessions that meet the conditions we have specified. The parameters that we could pass this function include targeted_structures, imaging_depths, cre_lines, reporter_lines, stimuli, session_types, experiment-container_id, and cell_specimen_ids. If we don't pass any parameters, it returns all experiment sessions.
+```
+
+Let's look at a DataFrame of the results
+
+```{code-cell} ipython3
 pd.DataFrame(sessions)
 ```
 
 id
-: The <b>session id</b> for the session. 
+: The <b>session id</b> for the session. This is the id that is used to access data for that session.
 
 imaging_depth
 : The [imaging depth](imaging_depths) that data was acquired at, in um from the surface of cortex.
@@ -189,14 +198,14 @@ fail_eye_tracking
 
 When looking at all of the sessions in a single experiment container, as we have done above, you will notice that the experiment container id, cre line, reporter line, donor name, specimen name, imaging depth, targeted structure are all the same while the id, acquisition age, and session type must be different.
 
-As you see, each experiment container has three different session types. For the data published in June 2016 and October 2016, the last session is <b>three_session_C</b<> while the data published after this were collected using <b>three_session_C2</b>. The key difference between these sessions is a change in the [locally sparse noise](locally_sparse_noise) stimulus.
+As you see, each experiment container has three different session types. For the data published in June 2016 and October 2016, the last session is <b>three_session_C</b<> while the data published after this were collected using <b>three_session_C2</b>. The key difference between these sessions is a change in the [locally sparse noise](locally_sparse_noise) stimulus. This is described more [here](locally_sparse_noise).
 
 ![containers](/images/VC2p-sessions.png)
 
 ## Cell specimen ids
-During data processing, we matched identified {term}`ROI`s (REFERENCE) across each of the sessions within experiment containers. Approximately one third of the neurons in the dataset were matched across all three sessions, one third were matched in two of the three session, and one third were only found in one session. Neurons have unique ids, called <b>cell_specimen_ids</b>, that are shared across the sessions they are found in.
+During data processing, we matched identified {term}`ROI`s across each of the sessions within experiment containers. Approximately one third of the neurons in the dataset were matched across all three sessions, one third were matched in two of the three session, and one third were only found in one session. Neurons have unique ids, called <b>cell_specimen_ids</b>, that are shared across the sessions they are found in.
 
-```{admonition} Why do we not match ROIs across all three session for all neurons? 
+```{admonition} How come we don't always match ROIs across all three session for all neurons? 
 :class: tip
 There are a few factors that could explain why we don't always match ROIs across all sessions that include biological, experimental, and analytical reasons. Biologically, a neuron must be active within a session to be identifiable during segmentation. For various reasons, a neuron might not be active during some sessions while it is active during others. Experimentally, there are challenges to returning to the precise same field of view. Being at a slightly different depth, or having just a bit of tilt in the imaging plane, might result in some neurons that were in view during one session not being in view during another. Analytically, the method for identifying {term}`ROI`s as well as for matching ROIs from multiple sessions can make mistakes.
 ```

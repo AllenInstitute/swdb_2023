@@ -24,7 +24,7 @@ boc = BrainObservatoryCache(manifest_file=manifest_file)
 
 # Getting data from a session
 
-We're going to examine the data available for a single session. First, let's identify the session from the experiment container we explored in vc2p-dataset in which that "natural scenes" stimulus was presented.
+We're going to examine the data available for a single session. To access the data, we need the experiment session id for the specific session we are interested in. First, let's identify the session from the experiment container we explored in vc2p-dataset in which that "natural scenes" stimulus was presented.
 
 ```{code-cell} ipython3
 experiment_container_id = 511510736
@@ -36,6 +36,8 @@ We can use this session_id to get all the data contained in the NWB for this ses
 ```{code-cell} ipython3
 data_set = boc.get_ophys_experiment_data(ophys_experiment_id=session_id)
 ```
+
+This `data_set` object gives us access to a lot of data! Let's explore:
 
 (maximum_projection)=
 ## Maximum projection
@@ -241,4 +243,11 @@ data_set.get_cell_specimen_indices([517473110])
 As neurons are often matched across sessions, that neuron will have the same cell specimen id in all said sessions, but it will have a different cell specimen index in each session. This is explored in [Cross session data](vc2p-cross-session-data.md).
 ```
 
+## Session metadata
+Each file contains some metadata about that session including fields such as the mouse genotype, sex, and age, the session type, the targeted structure and imaging depth, when the data was acquired, and information about the instrument used to collect the data. This complements metadata used in the `boc` to identify sessions.
+
+```{code-cell} ipython3
+md = data_set.get_metadata()
+md
+```
 
