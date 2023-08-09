@@ -17,6 +17,14 @@ kernelspec:
 Neuroglancer works best in Chrome and Firefox but does not always work as expected in Safari.
 ```
 
+```{figure} img/neuroglancer.png
+---
+align: center
+---
+
+Neuroglancer can show multiple layers of data, including imagery, segmentation, and more.
+```
+
 [Neuroglancer](https://github.com/google/neuroglancer) is a WebGL-based viewer developed by Jeremy Maitin-Shephard at the Google Connectomics team to visualize very large volumetric data, designed in large part for connectomics.
 We often use Neuroglancer to quickly explore data, visualize results in context, and share data.
 
