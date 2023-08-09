@@ -19,6 +19,10 @@ The CAVEclient is the main way to programmatically access the MICrONS data using
 The Connectome Annotation Versioning Engine (CAVE) is a suite of tools developed at the Allen Institute and Seung Lab to manage large connectomics data.
 In particular, the CAVEclient provides an interface to query the CAVE database for annotations such as synapses, as well as to get a variety of other kinds of information.
 
+:::{important}
+This process only needs to happen once per computer
+:::
+
 ## Installation
 
 To install caveclient, use pip: `pip install caveclient`.
@@ -26,9 +30,6 @@ To install caveclient, use pip: `pip install caveclient`.
 Once you have installed caveclient, to use it you need to set up your user token in one of two ways:
 
 ## Setting up credentials 
-:::{note}
-This only needs to happen once per computer
-:::
 
 To access the data programmatically, you need to set up a user token.
 This token is assigned by the server and functions as a both a username and password to access any aspect of the data.

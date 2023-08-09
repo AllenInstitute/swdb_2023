@@ -9,9 +9,10 @@ jupytext:
 kernelspec:
   display_name: Python 3
   language: python
-  name: swdb2023
+  name: swdb2023-em
 ---
 
+(em:query-tables-section)=
 # Programmatic Access
 
 ```{important}
@@ -21,6 +22,7 @@ Before using any programmatic access to the data, [you first need to set up your
 ## CAVEclient
 
 Most programmatic access to the CAVE services occurs through CAVEclient, a Python client to access various types of data from the online services.
+
 Full documentation for CAVEclient [is available here](http://caveclient.readthedocs.io).
 
 To initialize a caveclient, we give it a **datastack**, which is a name that defines a particular combination of imagery, segmentation, and annotation database.
@@ -54,7 +56,9 @@ client.materialize.get_table_metadata('nucleus_detection_v0')
 
 You get a dictionary of values. Two fields are particularly important: the `description`, which offers a text description of the contents of the table and `voxel_resolution` which defines how the coordinates in the table are defined, in nm/voxel.
 
+(em:query-tables)=
 ## Querying Tables
+
 
 To get the contents of a table, use the `query_table` function.
 This will return the whole contents of a table without any filtering, up to for a maximum limit of 200,000 rows.
@@ -83,12 +87,68 @@ If you are just testing out a query or trying to inspect the kind of data within
 Note that this will show a warning so that you don't accidentally limit your query when you don't mean to.
 
 For example, using all of these together:
+
 ```{code-cell}
 cell_type_df = client.materialize.query_table('nucleus_detection_v0', split_positions=True, desired_resolution=[1,1,1], select_columns=['pt_position', 'pt_root_id'], limit=10)
 cell_type_df
 ```
 
-## Key Tables 
+## Filtering Queries
+
+Filtering tables so that you only get data about certain rows back is a very common operation.
+While there are filtering options in the `query_table` function ([see documentation for more details](https://caveclient.readthedocs.io/en/latest/guide/materialization.html)), a more
+unified filter interface is available through a "table manager" interface.
+Rather than passing a table name to the `query_table` function, `client.materialize.tables` has a subproperty for each table in the database that can be used to filter that table.
+The general pattern for usage is
+
+``` python
+client.materialize.tables.{table_name}({filter options}).query({format and timestamp options})
+```
+
+where `{table_name}` is the name of the table you want to filter, `{filter options}` is a collection of arguments for filtering the query, and `{format and timestamp options}` are those parameters controlling the format and timestamp of the query.
+
+For example, let's look at the table `aibs_soma_nuc_metamodel_preds_v117`, which has cell type predictions across the dataset.
+We can get the whole table as a DataFrame:
+
+```{code-cell}
+:tags: [remove-stderr]
+
+cell_type_df = client.materialize.tables.aibs_soma_nuc_metamodel_preds_v117().query()
+cell_type_df.head()
+```
+
+and we can add similar formatting options as in the last section to the query function:
+
+```{code-cell}
+:tags: [remove-stderr]
+
+cell_type_df = client.materialize.tables.aibs_soma_nuc_metamodel_preds_v117().query(split_positions=True, desired_resolution=[1,1,1], select_columns=['pt_position', 'pt_root_id', 'cell_type'], limit=10)
+cell_type_df
+```
+
+However, now we can also filter the table to get only cells that are predicted to have cell type `"BC"` (for "basket cell").
+
+```{code-cell}
+:tags: [remove-stderr]
+
+my_cell_type = "BC"
+client.materialize.tables.aibs_soma_nuc_metamodel_preds_v117(cell_type=my_cell_type).query()
+```
+
+or maybe we just want the cell types for a particular collection of root ids:
+
+```{code-cell}
+:tags: [remove-stderr]
+
+my_root_ids = [864691135771677771, 864691135560505569, 864691136723556861]
+client.materialize.tables.aibs_soma_nuc_metamodel_preds_v117(pt_root_id=my_root_ids).query()
+```
+
+You can get a list of all parameters than be used for querying with the standard IPython/Jupyter docstring functionality, e.g. `client.materialize.tables.aibs_soma_nuc_metamodel_preds_v117`.
+
+```{note}
+Use of this functionality will show a brief warning that the interface is experimental. This is because the interface is still being developed and may change in the near future in response to user feedback.
+```
 
 ## Querying Synapses
 
@@ -98,39 +158,14 @@ In particular, the `pre_ids` and `post_ids` let you specify which root id (or co
 Using both `pre_ids` and `post_ids` in one call is effectively a logical AND, returning only those synapses from neurons in the list of `pre_ids` that target neurons in the list of `post_ids`.
 Let's look at one particular example.
   
-  ```{code-cell}
+```{code-cell}
+:tags: [remove-stderr]
+
 my_root_id = 864691135808473885
 syn_df = client.materialize.synapse_query(pre_ids=my_root_id)
 print(f"Total number of output synapses for {my_root_id}: {len(syn_df)}")
 syn_df.head()
 ```
-
-The columns from a synapse query are:
-```{list-table}
-:header-rows: 1
-
-* - Column
-  - Description
-* - `id`
-  - A unique ID specific to the synapse annotation
-* - `pre_pt_position`
-  - The position of the presynaptic side of the synapse. 
-* - `pre_pt_supervoxel_id`
-  - A bookkeeping column for the presynaptic side
-* - `pre_pt_root_id`
-  - The root id of the presynaptic neuron
-* - `post_pt_position`
-  - The position of the postsynaptic side of the synapse
-* - `post_pt_supervoxel_id`
-  - A bookkeeping column for the postsynaptic side
-* - `post_pt_root_id`
-  - The root id of the postsynaptic neuron
-* - `size`
-  - The size of the synapse in voxels. This correlates well, but not perfectly, with the surface area of synapse.
-* - `ctr_pt_position`
-  - The position of the center of the synapse. This is usually closest to the surface (and thus mesh) of both neurons.
-```
-Unless otherwise specificied (i.e. via `desired_resolution`), positions are in units of 4,4,40 nm/voxel resolution.
 
 Note that synapse queries always return the list of every synapse between the neurons in the query, even if there are multiple synapses between the same pair of neurons.
 
@@ -140,11 +175,12 @@ For example, to get the number of synapses from this neuron onto every other neu
 ```{code-cell}
 syn_df.groupby(
   ['pre_pt_root_id', 'post_pt_root_id']
-).count()[['id']].sort_values(
-  by='id',
+).count()[['id']].rename(
+  columns={'id': 'syn_count'}
+).sort_values(
+  by='syn_count',
   ascending=False,
 )
-# Note that the [['id']] part here is just a way to quickly extract one column.
-# This could be any of the remaining column names.
-
+# Note that the 'id' part here is just a way to quickly extract one column.
+# This could be any of the remaining column names, but `id` is often convenient because it is common to all tables.
 ```
