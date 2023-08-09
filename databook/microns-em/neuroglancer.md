@@ -9,7 +9,7 @@ jupytext:
 kernelspec:
   display_name: Python 3
   language: python
-  name: python3
+  name: swdb2023-em
 ---
 
 # Neuroglancer
@@ -103,4 +103,115 @@ The number at the end of the URL is used to uniquely identify the state and can 
 ```{warning}
 If a URL contains `?local_id=` instead of `?json_url`, that means that it cannot be viewed by anyone else or even in another browser on your own computer.
 ```
+
+## Navigating Annotations
+
+Annotations in an annotation layer can be right-clicked on to jump to them, but can also be navigated as a list.
+
+To see the list of annotations, select the annotation layer (right click on the tab).
+Each annotation is listed as its location in Neuroglance voxel coordinates.
+Clicking on an row in this annotation list will not only jump to it in the view, but also select it.
+You can see the information about the selected neuron in the lower right corner.
+Once an annotation is selected, any associated root ids are loaded.
+The keys `[` and `]` will jump to the previous and next annotations in the list, respectively.
+
+Each annotation can have a full-text description associated with it for adding notes.
+This can be added in the lower right corner.
+
+```{figure} img/neuroglancer_tags.png
+---
+align: center
+---
+
+Annotation tags after populating them manually.
+```
+
+However, the most convenient way to label data quickly is through Tags.
+To add tags, click on the `Shortcuts` tab within the Annotation widget on the right, and then click on the `+` button to add a new tag.
+Each tag gets a text label and a key command to activate or deactivate it for a given annotation.
+By default, the first tag is activated by pressing `shift-q`, the second by pressing `shift-w`, and so on down the qwerty line.
+
+```{figure} img/neuroglancer_tags_example.png
+---
+align: center
+---
+
+Annotation tags applied to annotations. The labels with with the `#` symbol indicate a tag is present.
+```
+
+Now when you select an annotation, you can press the key command to attach that tag to it.
+Pressing the same key command will remove the tag.
+Any number of tags can be added to each annotation.
+Together with the `[` and `]` keys to navigate the list, this allows you to quickly label a large number of annotations.
+
+## Programmatic Interaction with Neuroglancer States
+
+Visualizing data in Neuroglancer is one of the easiest ways to explore it in its full context.
+The python package `nglui` was made to make it easy to generate Neuroglancer states from data, particularly pandas dataframes, in a progammatic manner.
+The package can be installed with `pip install nglui`.
+
+:::{important}
+The `nglui` package interacts prominantly with `caveclient` and annotations queried from the database.
+See the section on [querying the database](em:query-tables-section) to learn more.
+:::
+
+### Parsing Neuroglancer states
+
+The `nglui.parser` package can be used to parse Neuroglancer states.
+
+The simplest way to parse the annotations in a Neuroglancer state is to first save the state using the Share button, and then copy the state id (the last number in the URL).
+For example, for the share URL `https://neuroglancer.neuvue.io/?json_url=https://global.daf-apis.com/nglstate/api/v1/5560000195854336`, the state id is `5560000195854336`
+
+You can then download the json and then use the `annotation_dataframe` function to generate a comprehensive dataframe of all the annotations in the state.
+
+```{code-cell}
+from caveclient import CAVEclient
+from nglui import parser
+
+client = CAVEclient('minnie65_public')
+
+state_id = 5560000195854336
+state = client.state.get_state_json(state_id)
+parser.annotation_dataframe(state)
+```
+
+Note that tags in the dataframe are stored as a list of integers, with each integer corresponding to one of the tags in the list.
+To get the mapping between the tag index and the tag name for each layer, you can use the `tag_dictionary` function.
+
+```{code-cell}
+parser.tag_dictionary(state, layer_name='syns_out')
+```
+
+
+### Generating Neuroglancer States from Data
+
+The `nglui.statebuilder` package is used to build Neuroglancer states that express arbitrary data.
+The general pattern is that one makes a "StateBuilder" object that has rules for how to build a Neuroglancer state layer by layer, including selecting certain neurons, and populate layers of annotations.
+You then pass a DataFrame to the StateBuiler, and the rules tell it how to render the DataFrame into a Neuroglancer link.
+The same set of rules can be used on similar dataframes but with different data, such as synapses from different neurons.
+To understand the detailed use of the package, please see the [tutorial](https://github.com/seung-lab/NeuroglancerAnnotationUI/blob/master/examples/statebuilder_examples.ipynb).
+
+However, a number of basic helper functions allow `nglui` to be used for common functions in just a few lines.
+
+For example, to generate a Neuroglancer state that shows a neuron and its synaptic inputs and outputs, we can use the `make_neuron_neuroglancer_link` helper function.
+
+```{code-cell}
+from nglui.statebuilder import helpers
+
+helpers.make_neuron_neuroglancer_link(
+    client,
+    864691135122603047,
+    show_inputs=True,
+    show_outputs=True,
+)
+```
+
+The main helper functions are:
+
+* `make_neuron_neuroglancer_link` - Shows one or more neurons and, optionally, synaptic inputs and/or outputs.
+* `make_synapse_neuroglancer_link` - Using a pre-downloaded synapse table, make a link that shows the synapse and the listed synaptic partners.
+* `make_point_statebuilder` - Generate a statebuilder that to map a dataframe containing points (by default, formatted like a cell types table) to a Neuroglancer link.
+
+In all cases, please look at the docstrings for more information on how to use the functions.
+
 

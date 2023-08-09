@@ -12,6 +12,7 @@ kernelspec:
   name: swdb2023-em
 ---
 
+(em:query-tables-section)=
 # Programmatic Access
 
 ```{important}
