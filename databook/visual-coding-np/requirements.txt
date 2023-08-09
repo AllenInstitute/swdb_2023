@@ -1,5 +1,0 @@
-allensdk
-jupyter-book
-matplotlib
-numpy
-jupytext
