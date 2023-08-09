@@ -13,6 +13,14 @@ kernelspec:
 ---
 
 # EM Connectomics
+
+:::{figure} img/minnie-3d-cells.png
+---
+align: center
+---
+A 3D rendering of cells in the MICrONs dataset.
+:::
+
 ## Background
 The function of the nervous system arises out of a combination of the properties of individual neurons and the properties of how they are connected into a larger network.
 The central goal of connectomics is to produce *complete maps* of the *connectivity* of the nervous system with *synaptic resolution* and analyze them to better understand the organization, development, and function of the nervous system.

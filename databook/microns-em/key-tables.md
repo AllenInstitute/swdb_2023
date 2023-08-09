@@ -110,6 +110,7 @@ The key columns of `nucleus_ref_neuron_svm` are:
 
 Note that the `id` column is the same as the nucleus id.
 
+(em:cell-type-tables)=
 ## Cell Type Tables
 
 There are several tables that contain information about the cell type of neurons in the dataset, with each table representing a different method of doing the classificaiton.
@@ -321,6 +322,7 @@ The key columns are:
 
 ---
 
+(em:proofreading-tables)=
 ## Proofreading Tables
 
 Table name: `proofreading_status_public_release`
