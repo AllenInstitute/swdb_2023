@@ -29,9 +29,9 @@ with open(subject_json, 'r', ) as f:
 subject_data['genotype']
 ```
 The genotype for these experiments can be one of several:
-* Drd1a-Cre: This driver line expresses in striatal direct pathway neurons (D1)
-* Adora2a-Cre: This driver line expresses in striatal indirect pathway neurons (D2)
-* Chat-IRES-Cre-neo: This driver line expresses in cholinergic neurons
+* Drd1a-Cre: This driver line drives expression of Cre in striatal direct pathway neurons (D1)
+* Adora2a-Cre: This driver line drives expression of Cre in striatal indirect pathway neurons (D2)
+* Chat-IRES-Cre-neo: This driver line drives expression of Cre in cholinergic neurons
 
 # Enhancer viruses
 
