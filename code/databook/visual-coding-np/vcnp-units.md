@@ -8,7 +8,7 @@ jupytext:
 kernelspec:
   display_name: allensdk
   language: python
-  name: allensdk
+  name: python3
 ---
 
 # Units
