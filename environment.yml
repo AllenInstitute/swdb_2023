@@ -1,0 +1,32 @@
+# the conda packages that you need installed in your environment.
+name: swdb2023
+
+channels:
+  - conda-forge
+
+dependencies:
+  - jupyterlab==3.6.1
+  - jupyter_contrib_nbextensions==0.5.1
+  - python==3.8.17
+  - numpy
+  - matplotlib
+  - ipympl
+  - pandas
+  - scikit-learn
+  - pykdtree
+  - scikit-build
+  - seaborn
+  - ipykernel
+  - pynwb
+  - anaconda::scipy
+  - pip
+  - pip:
+      - allensdk==2.15.2
+      - caveclient==5.10.1
+      - nglui==2.14.3
+      - meshparty==1.16.14
+      - pcg-skel==0.3.4
+      - skeleton-plot==0.0.7
+      - imageryclient
+
+
