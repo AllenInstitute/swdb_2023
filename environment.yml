@@ -28,5 +28,7 @@ dependencies:
       - pcg-skel==0.3.4
       - skeleton-plot==0.0.7
       - imageryclient
+      - standard-transform==1.4.0
+
 
 
